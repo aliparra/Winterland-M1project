@@ -12,6 +12,7 @@ class Game{
 
         //Background instance
         this.background = new Background(this.ctx)
+        this.snowfall = new Snowfall(this.ctx)
     }
 
     //Start method
@@ -20,6 +21,7 @@ class Game{
             this.drawInterval = setInterval(()=>{
                 this.clear()
                 this.draw()
+                this.move()
 
             }, this.fps)
         }
@@ -30,8 +32,14 @@ class Game{
     clear(){
       this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)  
     }
-    
+
     draw(){
         this.background.draw()
+        this.snowfall.draw()
+    }
+
+    move(){
+        this.background.move()
+        this.snowfall.move()
     }
 }
