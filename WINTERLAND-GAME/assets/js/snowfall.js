@@ -8,10 +8,10 @@ class Snowfall{
         this.width= this.ctx.canvas.width
         this.height= this.ctx.canvas.height
 
-        this.vx = 1
+        this.vy = 0.3
 
         this.img = new Image()
-        this.img.src = './assets/img/Background_02.png'
+        this.img.src = './assets/img/snowflakes.png'
         this.ready=false;
         this.img.onload = () => {
             this.img.ready = true
@@ -26,11 +26,14 @@ class Snowfall{
     draw(){
         if(this.isReady()){
             this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height) //Draw first image
-            this.ctx.drawImage(this.img,this.x + this.width, this.y, this.width,this.height) //Draw second image 
+            this.ctx.drawImage(this.img,this.x , this.y - this.height, this.width,this.height) //Draw second image 
         }
     }
 
     move(){
-        this.x+=this.vx;
+        this.y+=this.vy;
+        if(this.y  >= this.height){
+            this.y=0
+        }
     }
 }
