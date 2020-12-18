@@ -13,6 +13,7 @@ class Game{
         //Background instance
         this.background = new Background(this.ctx)
         this.snowfall = new Snowfall(this.ctx)
+        this.mainSprite = new MainSprite(this.ctx,10,this.canvas.height-100)
     }
 
     //Start method
@@ -36,10 +37,16 @@ class Game{
     draw(){
         this.background.draw()
         this.snowfall.draw()
+        this.mainSprite.draw()
     }
 
     move(){
         this.background.move()
         this.snowfall.move()
+        this.mainSprite.move()
+    }
+
+    onKeyEvent(event){
+        this.mainSprite.onKeyEvent(event)
     }
 }
