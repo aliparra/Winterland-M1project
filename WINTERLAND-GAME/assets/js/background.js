@@ -25,7 +25,7 @@ class Background{
             left:false
         }
 
-        //Background position counter to know in which x position of the game am I.
+        //Background position counter
         this.xPositionCounter=0;
     }
 
@@ -43,9 +43,9 @@ class Background{
     }
 
     move(){
-        console.log(`x position is ${this.x} and counterPosition is ${this.xPositionCounter}`)
+        
         if(this.x + this.width<=0){
-            this.xPositionCounter++;
+            this.xPositionCounter++
             this.x=0
         }
        //Moving based on keypress
@@ -59,8 +59,7 @@ class Background{
             if(this.x >=0){
                 this.x=0
             }else{
-                this.x -=this.vx
-                
+                this.x -=this.vx   
             }
         }
 

@@ -10,10 +10,16 @@ class Game{
         this.drawInterval = undefined
         this.fps= 1000/60
 
-        //Background instance
+        //Instances
         this.background = new Background(this.ctx)
         this.snowfall = new Snowfall(this.ctx)
-        this.mainSprite = new MainSprite(this.ctx,10,this.canvas.height-100)
+        this.mainSprite = new MainSprite(this.ctx,10,650)
+        this.platformsArr= [
+            new BasicPlatform(this.ctx,800,670,200,30),
+            
+            
+        ]
+        
     }
 
     //Start method
@@ -23,6 +29,7 @@ class Game{
                 this.clear()
                 this.draw()
                 this.move()
+                this.checkCollisions()
 
             }, this.fps)
         }
@@ -38,6 +45,7 @@ class Game{
         this.background.draw()
         this.snowfall.draw()
         this.mainSprite.draw()
+        this.platformsArr.forEach((platform) =>  platform.draw())
     }
 
     move(){
@@ -50,4 +58,9 @@ class Game{
         this.mainSprite.onKeyEvent(event)
         this.background.onKeyEvent(event)
     }
+
+    checkCollisions(){
+        this.platformsArr.forEach((platform) =>  this.mainSprite.collideswith(platform))
+        }
+        
 }

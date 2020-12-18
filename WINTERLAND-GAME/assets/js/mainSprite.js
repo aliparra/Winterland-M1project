@@ -2,8 +2,8 @@ class MainSprite{
 
     constructor(ctx,x,y){
         this.ctx=ctx
-        this.width=100
-        this.height=20
+        this.width=50
+        this.height=70
 
         //x properties
         this.x=x
@@ -24,12 +24,16 @@ class MainSprite{
         }
 
         this.isJumping = false;
+
+        //possible collisions
+        this.collisionStatus = false
     }
 
     draw(){
         this.ctx.save()
         this.ctx.fillStyle = 'red'
         this.ctx.fillRect(this.x,this.y,this.width,this.height)
+        this.ctx.restore()
     }
 
     //Make true or false every movement if the proper key was pressed
@@ -41,21 +45,24 @@ class MainSprite{
                 break;
             case KEY_RIGHT:
                 this.movements.right = status
-                console.log(status)
                 break;
             case KEY_LEFT:
                 this.movements.left = status
                 break;
         
-        default:
-            break;
+            default:
+                break;
         }
     }
 
     move(){
+        //
+        this.vy += GRAVITY
+        if(this.vy>=20){
+            this.vy=20
+        }
         //Left-right movements
         if(this.movements.right){
-            console.log()
            this.vx=SPEED
         }else if(this.movements.left){
             this.vx =-SPEED
@@ -64,21 +71,21 @@ class MainSprite{
         }
 
         //Jump movement
-        if(this.movements.up &&!this.isJumping){
-            console.log('hi')
+        if(this.movements.up && !this.isJumping){
             this.isJumping = true
-            this.vy+= -10
-        }else if(this.isJumping){
-            this.vy += GRAVITY
-        }else{
-            this.vy=0
+            this.vy = -10
         }
 
-        //Moving x and y postion adding speed
-        this.x +=this.vx
-        this.y +=this.vy
+        if(this.collisionStatus){
+            this.isJumping = false
+        }
+        
 
-        //Don't move over the limits
+        //Moving x and y postion adding speed
+        this.x += this.vx
+        this.y += this.vy
+
+        //Don't move over the limits SIDE COLLISIONS
         if(this.x>= this.maxX){
             this.x=this.maxX
         }else if(this.x<=this.minX){
@@ -92,9 +99,21 @@ class MainSprite{
         }
         
 
+
     }
 
-    borderCollision(){
+    collideswith(element){
+        if( this.x < element.x + element.width &&
+              this.x + this.width > element.x &&
+              this.y < element.y + element.height &&
+              this.y + this.height > element.y){
+                
+                  this.y=element.y- this.height
+                  this.collisionStatus = true
+                  return true
+              }
+              this.collisionStatus = false
+              return false 
+        }
         
-    }
 }
