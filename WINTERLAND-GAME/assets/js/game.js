@@ -48,5 +48,6 @@ class Game{
 
     onKeyEvent(event){
         this.mainSprite.onKeyEvent(event)
+        this.background.onKeyEvent(event)
     }
 }
