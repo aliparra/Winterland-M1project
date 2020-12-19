@@ -21,7 +21,7 @@ class Game{
             new BasicPlatform(this.ctx,300,400,128,128),
             new BasicPlatform(this.ctx,800,610,128,128),
             new BasicPlatform(this.ctx,900,410,128,128),
-            new BasicPlatform(this.ctx,900,410,128,128)
+            new BasicPlatform(this.ctx,800,390,128,128)
         ]
         
     }

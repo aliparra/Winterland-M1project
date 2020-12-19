@@ -127,7 +127,7 @@ class MainSprite{
                 this.x= element.x + element.width + 1
                 this.collisions.right = true
 
-        }else if(
+        }else if( //TOP COLLISION
 
             this.x + this.width >= element.x &&
             this.x <= element.x + element.width &&
@@ -135,10 +135,22 @@ class MainSprite{
             this.y + this.height < element.y + element.height
 
         ){
-             this.y=element.y- this.height 
+            this.y=element.y- this.height 
             this.isJumping = false 
             this.collisions.top = true
         }
+        
+        else if(
+            this.x + this.width >= element.x &&
+            this.x <= element.x + element.width &&
+            this.y <= element.y + element.height &&
+            this.y > element.y
+        ){
+            this.y = element.y + element.height 
+            this.collisions.bottom = true
+        }
+
+        
               
     }
         
