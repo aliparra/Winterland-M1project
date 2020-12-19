@@ -5,4 +5,5 @@ const KEY_FIRE = 32
 
 const MOVEMENT_FRAMES = 10
 const SPEED = 4
+const LOWSPEED = 2
 const GRAVITY = 0.4

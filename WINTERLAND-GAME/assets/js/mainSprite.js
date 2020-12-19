@@ -32,8 +32,11 @@ class MainSprite{
 
         this.isJumping = false;
 
-        //possible collisions
-        this.collisionStatus = false
+        //Character status
+
+        this.health = 100
+
+
     }
 
     draw(){
@@ -152,6 +155,10 @@ class MainSprite{
 
         
               
+    }
+
+    death(){
+           this.x=undefined
     }
         
 }

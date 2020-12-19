@@ -13,16 +13,15 @@ class Game{
         //Instances
         this.background = new Background(this.ctx)
         this.snowfall = new Snowfall(this.ctx)
-        this.mainSprite = new MainSprite(this.ctx,10,650)
+        this.mainSprite = new MainSprite(this.ctx,200,650)
         this.platformsArr= [
-            new BasicPlatform(this.ctx,0,610,128,128),
+           /*   new BasicPlatform(this.ctx,0,610,128,128),
             new BasicPlatform(this.ctx,127,610,128,128),
-            new BasicPlatform(this.ctx,254,610,128,128),
-            new BasicPlatform(this.ctx,500,520,128,128),
-            new BasicPlatform(this.ctx,800,610,128,128)
-            
-           
+            new BasicPlatform(this.ctx,254,490,128,128),
+            new BasicPlatform(this.ctx,381,610,128,128),
+            new BasicPlatform(this.ctx,508,480,128,128),  */
         ]
+        this.enemy1= new BasicEnemy(this.ctx,0,this.canvas.height-50,300)
         
     }
 
@@ -51,6 +50,7 @@ class Game{
         this.snowfall.draw()
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
+        this.enemy1.draw()
     }
 
     move(){
@@ -64,6 +64,7 @@ class Game{
         }
         this.snowfall.move()
         this.mainSprite.move()
+        this.enemy1.move()
         /* this.platformsArr.forEach((platform) =>  platform.move()) */
     }
 
@@ -75,6 +76,20 @@ class Game{
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
+        this.enemyCollisions()
         
+    }
+
+    enemyCollisions(){
+        this.mainSprite.collidesWith(this.enemy1)
+        if(this.mainSprite.collisions.top ){
+            this.enemy1.death()
+            
+        }else if(this.mainSprite.collisions.left || this.mainSprite.collisions.right || this.mainSprite.collisions.bottom){
+            this.mainSprite.health -=10
+            if(this.mainSprite.health<=0){
+                this.mainSprite.death()
+            }
+        }
     }
 }
