@@ -4,6 +4,8 @@ class Background{
         //Background x and y position
         this.x= 0
         this.y=0
+        
+
 
         //Canvas dimensions
         this.width = this.ctx.canvas.width
@@ -11,6 +13,7 @@ class Background{
 
         //Background movement speed
         this.vx= -SPEED
+        
 
         //Background image
         this.img = new Image()
@@ -38,34 +41,34 @@ class Background{
         
             this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height) //Draw first image
             this.ctx.drawImage(this.img,this.x + this.width, this.y, this.width,this.height) //Draw second image 
+            this.ctx.drawImage(this.img,this.x-this.width,this.y,this.width,this.height)
             
         }
     }
 
+  
+
     move(){
         
-        if(this.x + this.width<=0){
-            this.xPositionCounter++
-            this.x=0
-        }
-       //Moving based on keypress
         if(this.movements.right){
-            this.x +=this.vx
-        }
+            this.x += this.vx
 
-        if(this.movements.left){
-            
-            if(this.x >=0){
-                this.x=0
-            }else{
-                this.x -=this.vx   
+            if(this.x + this.width <= 0){
+                this.x = 0
             }
         }
 
-       /*  console.log(`counter: ${this.xPositionCounter} and x: ${this.x}`) */
+    }
 
-        
+    moveReverse(){
 
+        if(this.movements.left){
+            this.x -= this.vx
+
+            if(this.x > this.width){
+                this.x = 0
+            }
+        }
     }
 
     onKeyEvent(event){

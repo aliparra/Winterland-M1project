@@ -43,18 +43,16 @@ class BasicPlatform{
 
     move(){
  
-        if(this.x + this.width<=0){
-            this.x=this.x
-        }
+        
        //Moving based on keypress
         if(this.movements.right){
             this.x +=this.vx
-            ;
+            
         }
 
         if(this.movements.left){
-            this.x -=SPEED
-            ;
+            this.x -=this.vx
+            
         }
 
 
@@ -67,6 +65,10 @@ class BasicPlatform{
 
         if(event.keyCode===KEY_RIGHT){
             this.movements.right = status  
+        }
+
+        if(event.keyCode===KEY_LEFT){
+            this.movements.left = status  
         }
     }
     
