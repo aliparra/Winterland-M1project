@@ -51,7 +51,6 @@ class Background{
        //Moving based on keypress
         if(this.movements.right){
             this.x +=this.vx
-            ;
         }
 
         if(this.movements.left){
@@ -62,6 +61,8 @@ class Background{
                 this.x -=this.vx   
             }
         }
+
+       /*  console.log(`counter: ${this.xPositionCounter} and x: ${this.x}`) */
 
         
 

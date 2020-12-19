@@ -15,9 +15,13 @@ class Game{
         this.snowfall = new Snowfall(this.ctx)
         this.mainSprite = new MainSprite(this.ctx,10,650)
         this.platformsArr= [
-            new BasicPlatform(this.ctx,800,670,200,30),
-            
-            
+            new BasicPlatform(this.ctx,0,610,128,128),
+            new BasicPlatform(this.ctx,127,610,128,128),
+            new BasicPlatform(this.ctx,254,610,128,128),
+            new BasicPlatform(this.ctx,300,400,128,128),
+            new BasicPlatform(this.ctx,800,610,128,128),
+            new BasicPlatform(this.ctx,900,410,128,128),
+            new BasicPlatform(this.ctx,900,410,128,128)
         ]
         
     }
@@ -52,15 +56,17 @@ class Game{
         this.background.move()
         this.snowfall.move()
         this.mainSprite.move()
+        this.platformsArr.forEach((platform) =>  platform.move())
     }
 
     onKeyEvent(event){
         this.mainSprite.onKeyEvent(event)
         this.background.onKeyEvent(event)
+        this.platformsArr.forEach((platform) =>  platform.onKeyEvent(event))
     }
 
     checkCollisions(){
-        this.platformsArr.forEach((platform) =>  this.mainSprite.collideswith(platform))
+        this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
         }
         
 }

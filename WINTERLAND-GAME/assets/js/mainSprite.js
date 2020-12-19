@@ -7,7 +7,7 @@ class MainSprite{
 
         //x properties
         this.x=x
-        this.minX=0
+        this.minX=100
         this.maxX = this.ctx.canvas.width /2 
         this.vx= 0
 
@@ -21,6 +21,13 @@ class MainSprite{
             right: false,
             left: false,
             up: false
+        }
+
+        this.collisions ={
+            top: false,
+            bottom: false,
+            left: false,
+            right: false
         }
 
         this.isJumping = false;
@@ -76,9 +83,6 @@ class MainSprite{
             this.vy = -10
         }
 
-        if(this.collisionStatus){
-            this.isJumping = false
-        }
         
 
         //Moving x and y postion adding speed
@@ -102,18 +106,41 @@ class MainSprite{
 
     }
 
-    collideswith(element){
-        if( this.x < element.x + element.width &&
-              this.x + this.width > element.x &&
-              this.y < element.y + element.height &&
-              this.y + this.height > element.y){
+    collidesWith(element){
+        //LEFT COLLISION
+        if( this.x +this.width >= element.x &&
+              this.x < element.x &&
+              this.y <= element.y + element.height &&
+              this.y + this.height >= element.y){
                 
-                  this.y=element.y- this.height
-                  this.collisionStatus = true
-                  return true
-              }
-              this.collisionStatus = false
-              return false 
+                  this.vx=0
+                  this.x=element.x-this.width - 1
+                  this.collisions.left = true
+       
+        }else if( //RIGHT COLLISION
+                this.x<=element.x+element.width &&
+                this.x + this.width > element.x + element.width &&
+                this.y <= element.y + element.height &&
+                this.y + this.height >= element.y){
+
+                this.vx=0
+                this.x= element.x + element.width + 1
+                this.collisions.right = true
+
+        }else if(
+
+            this.x + this.width >= element.x &&
+            this.x <= element.x + element.width &&
+            this.y + this.height >= element.y &&
+            this.y + this.height < element.y + element.height
+
+        ){
+             this.y=element.y- this.height 
+            this.isJumping = false 
+            this.collisions.top = true
         }
+              
+    }
         
 }
+
