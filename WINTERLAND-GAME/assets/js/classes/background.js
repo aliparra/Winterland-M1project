@@ -17,7 +17,7 @@ class Background{
 
         //Background image
         this.img = new Image()
-        this.img.src = './assets/img/Background_01.png'
+        this.img.src = './assets/img/Background/Background_01.png'
         this.ready=false;
         this.img.onload = () => {
             this.img.ready = true

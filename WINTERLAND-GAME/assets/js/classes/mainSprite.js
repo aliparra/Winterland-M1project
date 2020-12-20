@@ -75,6 +75,7 @@ class MainSprite{
         if(this.vy>=MAXGRAVITY){
             this.vy=MAXGRAVITY
         }
+        
         //MOVEMENTS
 
         //RIGHT-LEFT
@@ -99,9 +100,6 @@ class MainSprite{
         }else{
             this.isRunning = false
         }
-
-
-
         
 
         //Moving x and y postion adding speed
@@ -113,12 +111,6 @@ class MainSprite{
             this.x=this.maxX
         }else if(this.x<=this.minX){
             this.x=this.minX
-        }
-
-        if(this.y>this.maxY){
-            this.isJumping=false
-            this.y= this.maxY
-            this.vy=0
         }
         
 
@@ -167,9 +159,7 @@ class MainSprite{
         ){
             this.y = element.y + element.height 
             this.collisions.bottom = true
-        }
-
-        
+        }    
               
     }
 

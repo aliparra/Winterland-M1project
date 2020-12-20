@@ -13,15 +13,17 @@ class Game{
         //Instances
         this.background = new Background(this.ctx)
         this.snowfall = new Snowfall(this.ctx)
-        this.mainSprite = new MainSprite(this.ctx,200,650)
+        this.mainSprite = new MainSprite(this.ctx,200,200)
+        this.enemy1= new BasicEnemy(this.ctx,300,570,600)
         this.platformsArr= [
-           /*   new BasicPlatform(this.ctx,0,610,128,128),
-            new BasicPlatform(this.ctx,127,610,128,128),
-            new BasicPlatform(this.ctx,254,490,128,128),
-            new BasicPlatform(this.ctx,381,610,128,128),
-            new BasicPlatform(this.ctx,508,480,128,128),  */
+            new BasicPlatform(this.ctx,0,620,128,128),
+            new BasicPlatform(this.ctx,127,620,128,128),
+            new BasicPlatform(this.ctx,254,620,128,128),
+            new BasicPlatform(this.ctx,381,620,128,128),
+            new BasicPlatform(this.ctx,508,620,128,128),
+            new BasicPlatform(this.ctx,635,620,128,128),
+            new BasicPlatform(this.ctx,762,620,128,128)    
         ]
-        this.enemy1= new BasicEnemy(this.ctx,300,this.canvas.height-50,100)
         
     }
 
@@ -56,7 +58,6 @@ class Game{
     move(){
         if(this.mainSprite.x === this.mainSprite.maxX  ) {
             if(this.mainSprite.isRunning){
-                console.log(this.mainSprite.isRunning)
                 this.background.quickMove()
                 this.platformsArr.forEach((platform) => platform.quickMove())
             }else{
@@ -71,7 +72,7 @@ class Game{
         this.snowfall.move()
         this.mainSprite.move()
         this.enemy1.move()
-        /* this.platformsArr.forEach((platform) =>  platform.move()) */
+
     }
 
     onKeyEvent(event){
@@ -82,20 +83,9 @@ class Game{
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-        this.enemyCollisions()
+        this.enemy1.enemyCollision(this.mainSprite)
         
     }
 
-    enemyCollisions(){
-        this.mainSprite.collidesWith(this.enemy1)
-        if(this.mainSprite.collisions.top ){
-            this.enemy1.death()
-            
-        }else if(this.mainSprite.collisions.left || this.mainSprite.collisions.right || this.mainSprite.collisions.bottom){
-            this.mainSprite.health -=10
-            if(this.mainSprite.health<=0){
-                this.mainSprite.death()
-            }
-        }
-    }
+   
 }

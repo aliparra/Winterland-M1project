@@ -11,7 +11,7 @@ class Snowfall{
         this.vy = 0.3
 
         this.img = new Image()
-        this.img.src = './assets/img/snowflakes.png'
+        this.img.src = './assets/img/Background/snowflakes.png'
         this.ready=false;
         this.img.onload = () => {
             this.img.ready = true
