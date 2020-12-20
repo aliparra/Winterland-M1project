@@ -87,7 +87,7 @@ class BasicEnemy{
         //console.log(this.collisionStatus.top)
         //console.log(this.collisionStatus.right)
         //console.log(this.collisionStatus.bottom)
-        console.log(this.collisionStatus.left)
+        //console.log(this.collisionStatus.left)
               
     }
 

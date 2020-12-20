@@ -24,6 +24,13 @@ class MainSprite{
             run: false
         }
 
+        this.jumpProperties = {
+            isJumping: false,
+            jumpMax: -15,
+            jumpChrono: 0,
+            jumpInterval: undefined
+        }
+
         //POSSIBLE COLLISIONS
         this.collisions ={
             top: false,
@@ -33,8 +40,8 @@ class MainSprite{
         }
 
         //AUXILIAR PROPERTIES
-        this.isJumping = false;
-        this.isRunning = false;
+        
+        
 
         //SPRITE STATUS
         this.health = 100
@@ -78,28 +85,32 @@ class MainSprite{
         
         //MOVEMENTS
 
-        //RIGHT-LEFT
+        //RIGHT-LEFT WALK AND RUN
         if(this.movements.right){
-           this.vx=SPEED
+           this.movements.run ? this.vx = SPEED*2 : this.vx = SPEED
         }else if(this.movements.left){
-            this.vx =-SPEED
+            
+            this.movements.run ? this.vx = -SPEED*2 : this.vx = -SPEED 
         }else{
             this.vx=0
         }
 
         //JUMP
-        if(this.movements.up && !this.isJumping){
-            this.isJumping = true
-            this.vy = -10
-        }
+        if(this.movements.up && !this.jumpProperties.isJumping){
+            this.jumpProperties.isJumping = true
+            this.vy = this.jumpProperties.jumpMax
 
-        //RUN
-        if(this.movements.run){
-            this.isRunning = true
-            this.vx = SPEED*2
-        }else{
-            this.isRunning = false
+            this.jumpProperties.jumpInterval = setInterval(() => {
+                this.jumpProperties.jumpChrono++
+            },10) 
+
+        }else if(this.jumpProperties.isJumping && !this.movements.up && this.jumpProperties.jumpChrono >= 115){
+            this.jumpProperties.isJumping = false
+            clearInterval(this.jumpProperties.jumpInterval)
+            this.jumpProperties.jumpChrono = 0
         }
+        
+        
         
 
         //Moving x and y postion adding speed
@@ -107,10 +118,12 @@ class MainSprite{
         this.y += this.vy
 
         //Don't move over the limits SIDE COLLISIONS
-        if(this.x>= this.maxX){
-            this.x=this.maxX
-        }else if(this.x<=this.minX){
+        if(this.x<=this.minX){
             this.x=this.minX
+        }
+
+        if(this.y >= this.ctx.canvas.height-this.height){
+            this.y = this.ctx.canvas.height-this.height
         }
         
 

@@ -1,11 +1,11 @@
 class Background{
     constructor(ctx){
+
         this.ctx=ctx
+
         //Background x and y position
         this.x= 0
         this.y=0
-        
-
 
         //Canvas dimensions
         this.width = this.ctx.canvas.width
@@ -14,7 +14,6 @@ class Background{
         //Background movement speed
         this.vx= -SPEED
         
-
         //Background image
         this.img = new Image()
         this.img.src = './assets/img/Background/Background_01.png'
@@ -22,14 +21,7 @@ class Background{
         this.img.onload = () => {
             this.img.ready = true
         }
-        //Background movement controls
-        this.movements = {
-            right: false,
-            left:false
-        }
-
-        //Background position counter
-        this.xPositionCounter=0;
+  
     }
 
     isReady(){
@@ -46,23 +38,28 @@ class Background{
         }
     }
 
-  
-
-    move(){
+    move(character){
         
-        if(this.movements.right){
-            this.x += this.vx
-
+        //RIGHT MOVEMENT
+        if(character.movements.right && character.x >= character.maxX){
+            
+            character.movements.run ? this.x += this.vx*2 : this.x += this.vx
             if(this.x + this.width <= 0){
                 this.x = 0
             }
-        }
+        //LEFT MOVEMENT
+        }else if(character.movements.left && character.x>100){
+            character.movements.run ? this.x -= this.vx*2 : this.x -= this.vx
 
+            if(this.x > this.width){
+                this.x = 0
+            }
+        }
     }
 
     quickMove(){
         
-        if(this.movements.right){
+        if(character.movements.right){
             this.x += this.vx*2
 
             if(this.x + this.width <= 0){
@@ -72,29 +69,5 @@ class Background{
 
     }
 
-    moveReverse(){
 
-        if(this.movements.left){
-            this.x -= this.vx
-
-            if(this.x > this.width){
-                this.x = 0
-            }
-        }
-    }
-
-    onKeyEvent(event){
-        const status = event.type === 'keydown'
-
-        switch(event.keyCode){
-            case KEY_RIGHT:
-                this.movements.right = status
-                break;
-            case KEY_LEFT:
-            this.movements.left = status
-            break;
-            default:
-                break;
-        }
-    }
 }
