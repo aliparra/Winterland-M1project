@@ -21,7 +21,7 @@ class Game{
             new BasicPlatform(this.ctx,381,610,128,128),
             new BasicPlatform(this.ctx,508,480,128,128),  */
         ]
-        this.enemy1= new BasicEnemy(this.ctx,0,this.canvas.height-50,300)
+        this.enemy1= new BasicEnemy(this.ctx,300,this.canvas.height-50,100)
         
     }
 
@@ -55,8 +55,14 @@ class Game{
 
     move(){
         if(this.mainSprite.x === this.mainSprite.maxX  ) {
+            if(this.mainSprite.isRunning){
+                console.log(this.mainSprite.isRunning)
+                this.background.quickMove()
+                this.platformsArr.forEach((platform) => platform.quickMove())
+            }else{
             this.background.move()
             this.platformsArr.forEach((platform) =>  platform.move())
+            }   
         }
         if(this.mainSprite.x === this.mainSprite.minX){
             this.background.moveReverse()

@@ -60,6 +60,18 @@ class Background{
 
     }
 
+    quickMove(){
+        
+        if(this.movements.right){
+            this.x += this.vx*2
+
+            if(this.x + this.width <= 0){
+                this.x = 0
+            }
+        }
+
+    }
+
     moveReverse(){
 
         if(this.movements.left){

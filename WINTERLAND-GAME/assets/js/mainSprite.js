@@ -16,13 +16,15 @@ class MainSprite{
         this.maxY= y
         this.vy=0
 
-        //posible movements
+        //SPRITE MOVEMENTS
         this.movements = {
             right: false,
             left: false,
-            up: false
+            up: false,
+            run: false
         }
 
+        //POSSIBLE COLLISIONS
         this.collisions ={
             top: false,
             bottom: false,
@@ -30,10 +32,11 @@ class MainSprite{
             right: false
         }
 
+        //AUXILIAR PROPERTIES
         this.isJumping = false;
+        this.isRunning = false;
 
-        //Character status
-
+        //SPRITE STATUS
         this.health = 100
 
 
@@ -59,19 +62,22 @@ class MainSprite{
             case KEY_LEFT:
                 this.movements.left = status
                 break;
-        
+            case KEY_RUN:
+                this.movements.run = status
             default:
                 break;
         }
     }
 
     move(){
-        //
+        //GRAVITY AND GRAVITY LIMITS
         this.vy += GRAVITY
-        if(this.vy>=20){
-            this.vy=20
+        if(this.vy>=MAXGRAVITY){
+            this.vy=MAXGRAVITY
         }
-        //Left-right movements
+        //MOVEMENTS
+
+        //RIGHT-LEFT
         if(this.movements.right){
            this.vx=SPEED
         }else if(this.movements.left){
@@ -80,11 +86,21 @@ class MainSprite{
             this.vx=0
         }
 
-        //Jump movement
+        //JUMP
         if(this.movements.up && !this.isJumping){
             this.isJumping = true
             this.vy = -10
         }
+
+        //RUN
+        if(this.movements.run){
+            this.isRunning = true
+            this.vx = SPEED*2
+        }else{
+            this.isRunning = false
+        }
+
+
 
         
 
