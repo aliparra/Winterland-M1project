@@ -41,10 +41,6 @@ class BasicPlatform{
         }
     }
 
-    generate(element){
-       
-    }
-
 
     onKeyEvent(event){
         const status = event.type === 'keydown'

@@ -14,7 +14,7 @@ class Game{
         //Instances
 
         //Backgrounds
-        this.background = new Background(this.ctx)
+        /* this.background = new Background(this.ctx) */
         this.snowfall = new Snowfall(this.ctx)
 
         //Characters
@@ -22,16 +22,8 @@ class Game{
         this.enemy1= new BasicEnemy(this.ctx,300,570,600)
 
         //Enviroment
-        this.platformsArr= [
-            /* new BasicPlatform(this.ctx,0,620,100,100),
-            new BasicPlatform(this.ctx,100,620,100,100),
-            new BasicPlatform(this.ctx,200,620,100,100),
-            new BasicPlatform(this.ctx,300,620,100,100),
-            new BasicPlatform(this.ctx,400,620,100,100),
-            new BasicPlatform(this.ctx,500,620,100,100),
-            new BasicPlatform(this.ctx,600,620,100,100), */
-                
-        ]  
+        this.platformsArr = []  
+        this.backgroundArr = []
         
     }
 
@@ -64,7 +56,7 @@ class Game{
                 this.ctx.translate(this.mainSprite.maxX - this.mainSprite.x, 0)
             }
         }
-        this.background.draw()
+        this.backgroundArr.forEach((background) =>  background.draw())
         this.snowfall.draw()
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
@@ -83,10 +75,19 @@ class Game{
     }
 
     generateObject(){
+
+        for(let i=0; this.backgroundArr.length<= NUMBACKGROUND; i+=this.ctx.canvas.width){
+            let auxBackground = new Background(this.ctx,i)
+            this.backgroundArr.push(auxBackground)
+         }
+
+
         for(let i=0; this.platformsArr.length<= NUMFLOOR; i+=100){
             let auxPlatform = new BasicPlatform(this.ctx,i,620,100,100)
             this.platformsArr.push(auxPlatform)
          }
+
+
     }
 
     onKeyEvent(event){
