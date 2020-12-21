@@ -23,14 +23,14 @@ class Game{
 
         //Enviroment
         this.platformsArr= [
-            /* new BasicPlatform(this.ctx,0,620,128,128),
+            new BasicPlatform(this.ctx,0,620,128,128),
             new BasicPlatform(this.ctx,127,620,128,128),
-            new BasicPlatform(this.ctx,254,620,128,128),
-            new BasicPlatform(this.ctx,381,620,128,128),
-            new BasicPlatform(this.ctx,508,620,128,128),
+            new BasicPlatform(this.ctx,254,520,128,128),
+            new BasicPlatform(this.ctx,381,420,128,128),
+            new BasicPlatform(this.ctx,508,320,128,128),
             new BasicPlatform(this.ctx,635,620,128,128),
-            new BasicPlatform(this.ctx,762,620,128,128)  */   
-        ] 
+            new BasicPlatform(this.ctx,762,620,128,128)    
+        ]  
         
     }
 

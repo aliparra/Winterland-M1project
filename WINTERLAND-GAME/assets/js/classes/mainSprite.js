@@ -2,19 +2,24 @@ class MainSprite{
 
     constructor(ctx,x,y){
         this.ctx=ctx
+
         this.width=50
         this.height=70
 
         //x properties
-        this.x=x
-        this.minX=100
+        this.x = x
+        this.previousX = this.x
+        this.minX = 100
         this.maxX = this.ctx.canvas.width /2 
-        this.vx= 0
+        this.vx = 0
+
 
         //y properties
-        this.y=y
-        this.maxY= y
-        this.vy=0
+        this.y = y
+        this.previousY = this.y
+        this.maxY = y
+        this.vy = 0
+
 
         //SPRITE MOVEMENTS
         this.movements = {
@@ -32,17 +37,13 @@ class MainSprite{
         }
 
         //POSSIBLE COLLISIONS
-        this.collisions ={
+        this.collisions = {
             top: false,
             bottom: false,
             left: false,
             right: false
         }
-
-        //AUXILIAR PROPERTIES
         
-        
-
         //SPRITE STATUS
         this.health = 100
 
@@ -84,6 +85,9 @@ class MainSprite{
         }
         
         //MOVEMENTS
+
+        this.previousX = this.x
+        this.previousY = this.y
 
         //RIGHT-LEFT WALK AND RUN
         if(this.movements.right){
@@ -132,48 +136,68 @@ class MainSprite{
 
     collidesWith(element){
         //LEFT COLLISION
-        if( this.x +this.width >= element.x &&
-              this.x < element.x &&
-              this.y <= element.y + element.height &&
-              this.y + this.height >= element.y){
-                
-                  this.vx=0
-                  this.x=element.x-this.width - 1
-                  this.collisions.left = true
-       
-        }else if( //RIGHT COLLISION
-                this.x<=element.x+element.width &&
-                this.x + this.width > element.x + element.width &&
-                this.y <= element.y + element.height &&
-                this.y + this.height >= element.y){
-
-                this.vx=0
-                this.x= element.x + element.width + 1
-                this.collisions.right = true
-
-        }else if( //TOP COLLISION
-
-            this.x + this.width >= element.x &&
-            this.x <= element.x + element.width &&
-            this.y + this.height >= element.y &&
-            this.y + this.height < element.y + element.height
-
-        ){
-            this.y=element.y- this.height 
-            this.isJumping = false 
-            this.collisions.top = true
-        }
-        
-        else if(
-            this.x + this.width >= element.x &&
-            this.x <= element.x + element.width &&
+        if( this.y + this.height >= element.y &&
             this.y <= element.y + element.height &&
-            this.y > element.y
-        ){
-            this.y = element.y + element.height 
-            this.collisions.bottom = true
-        }    
-              
+            this.x + this.width >= element.x &&
+            this.x < element.x && 
+            this.previousX +  this.width < element.x)
+            {
+                //console.log('left')
+                this.x = element.x - this.width - 1
+                this.vx = 0
+                this.x = element.x - this.width - 1
+                this.collisions.left = true
+       
+            }
+        //RIGHT COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x <= element.x + element.width &&
+            this.x + this.width > element.x + element.width &&
+            this.previousX > element.x + element.width)
+            {
+                console.log('right')
+                this.x  = element.x + element.width + 1
+                this.vx = 0
+                this.collisions.right = true
+        }
+        //TOP COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y + this.height <= element.y + element.height &&
+            this.x + this.width >= element.x &&
+            this.x <= element.x + element.width &&
+            this.y < element.y && 
+            this.previousY + this.height < element.y) 
+            {
+                //console.log('up')
+                this.y  = element.y - this.height - 1
+                this.vy = 0
+                this.vx = 0
+                this.collisions.top = true
+        }
+         //BOTTOM COLLISION
+        else if(
+            this.y <= element.y + element.height && 
+            this.y >= element.y && 
+            this.x + this.width >= element.x && 
+            this.x <= element.x + element.width &&
+            this.y + this.height > element.y + element.height &&
+            this.previousY > element.y + element.height)
+            {
+                console.log('down')
+                this.y = element.y + element.height + 1
+                this.collisions.bottom = true
+                this.vy = 0   
+                this.vx = 0
+            }  
+        else{
+            this.collisions.top = false
+            this.collisions.bottom = false
+            this.collisions.left = false
+            this.collisions.right = false
+            } 
     }
 
     death(){
@@ -181,4 +205,3 @@ class MainSprite{
     }
         
 }
-
