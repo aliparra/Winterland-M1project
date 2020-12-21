@@ -12,7 +12,7 @@ class Background{
         this.height= this.ctx.canvas.height
 
         //Background movement speed
-        this.vx= -SPEED
+        this.vx= -0.5
         
         //Background image
         this.img = new Image()

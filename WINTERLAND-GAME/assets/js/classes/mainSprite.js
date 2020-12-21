@@ -7,17 +7,17 @@ class MainSprite{
         this.height=70
 
         //x properties
+        this.maxX = 0
         this.x = x
         this.previousX = this.x
         this.minX = 100
-        this.maxX = this.ctx.canvas.width /2 
+        
         this.vx = 0
 
 
         //y properties
         this.y = y
         this.previousY = this.y
-        this.maxY = y
         this.vy = 0
 
 
@@ -78,6 +78,7 @@ class MainSprite{
     }
 
     move(){
+        
         //GRAVITY AND GRAVITY LIMITS
         this.vy += GRAVITY
         if(this.vy>=MAXGRAVITY){
@@ -88,6 +89,10 @@ class MainSprite{
 
         this.previousX = this.x
         this.previousY = this.y
+
+        if(this.maxX < this.previousX || this.maxX < this.previousX){
+            this.previousX > this.x ? this.maxX = this.previousX : this.maxX = this.x
+        }
 
         //RIGHT-LEFT WALK AND RUN
         if(this.movements.right){
@@ -100,6 +105,7 @@ class MainSprite{
         }
 
         //JUMP
+        console.log(this.jumpProperties.isJumping)
         if(this.movements.up && !this.jumpProperties.isJumping){
             this.jumpProperties.isJumping = true
             this.vy = this.jumpProperties.jumpMax
@@ -108,7 +114,7 @@ class MainSprite{
                 this.jumpProperties.jumpChrono++
             },10) 
 
-        }else if(this.jumpProperties.isJumping && !this.movements.up && this.jumpProperties.jumpChrono >= 115){
+        }else if(this.jumpProperties.isJumping && !this.movements.up && this.jumpProperties.jumpChrono >= 120 || this.collisions.up ){
             this.jumpProperties.isJumping = false
             clearInterval(this.jumpProperties.jumpInterval)
             this.jumpProperties.jumpChrono = 0
@@ -157,9 +163,10 @@ class MainSprite{
             this.x + this.width > element.x + element.width &&
             this.previousX > element.x + element.width)
             {
-                console.log('right')
+                //console.log('right')
                 this.x  = element.x + element.width + 1
                 this.vx = 0
+                this.vy = 0
                 this.collisions.right = true
         }
         //TOP COLLISION
@@ -171,7 +178,7 @@ class MainSprite{
             this.y < element.y && 
             this.previousY + this.height < element.y) 
             {
-                //console.log('up')
+                //console.log('top')
                 this.y  = element.y - this.height - 1
                 this.vy = 0
                 this.vx = 0
@@ -186,7 +193,7 @@ class MainSprite{
             this.y + this.height > element.y + element.height &&
             this.previousY > element.y + element.height)
             {
-                console.log('down')
+                //console.log('bottom')
                 this.y = element.y + element.height + 1
                 this.collisions.bottom = true
                 this.vy = 0   

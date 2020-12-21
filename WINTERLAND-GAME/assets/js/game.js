@@ -18,18 +18,19 @@ class Game{
         this.snowfall = new Snowfall(this.ctx)
 
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,200,200)
+        this.mainSprite = new MainSprite(this.ctx,0,0)
         this.enemy1= new BasicEnemy(this.ctx,300,570,600)
 
         //Enviroment
         this.platformsArr= [
-            new BasicPlatform(this.ctx,0,620,128,128),
-            new BasicPlatform(this.ctx,127,620,128,128),
-            new BasicPlatform(this.ctx,254,520,128,128),
-            new BasicPlatform(this.ctx,381,420,128,128),
-            new BasicPlatform(this.ctx,508,320,128,128),
-            new BasicPlatform(this.ctx,635,620,128,128),
-            new BasicPlatform(this.ctx,762,620,128,128)    
+            new BasicPlatform(this.ctx,0,620,100,100),
+            new BasicPlatform(this.ctx,100,620,100,100),
+            new BasicPlatform(this.ctx,200,620,100,100),
+            new BasicPlatform(this.ctx,300,620,100,100),
+            new BasicPlatform(this.ctx,400,620,100,100),
+            new BasicPlatform(this.ctx,500,620,100,100),
+            new BasicPlatform(this.ctx,600,620,100,100),
+            ``    
         ]  
         
     }
@@ -54,17 +55,24 @@ class Game{
     }
 
     draw(){
-        
+        this.ctx.save();
+        if(this.mainSprite.x > this.canvas.width/2){ //At init mainSprite starts on left side
+            this.ctx.translate(-this.mainSprite.maxX + this.canvas.width / 2, 0)
+            if(this.mainSprite.maxX - this.mainSprite.x >= this.canvas.width / 2){
+                this.ctx.translate(this.mainSprite.maxX - this.mainSprite.x, 0)
+            }
+        }
         this.background.draw()
         this.snowfall.draw()
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.enemy1.draw()
+        this.ctx.restore();
     }
 
     move(){
        
-        this.background.move(this.mainSprite)
+        //this.background.move(this.mainSprite)
         this.snowfall.move()
         this.mainSprite.move()
         this.enemy1.move()
