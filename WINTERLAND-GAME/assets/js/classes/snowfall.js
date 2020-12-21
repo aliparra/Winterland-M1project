@@ -1,8 +1,8 @@
 class Snowfall{
-    constructor(ctx){
+    constructor(ctx,x){
         this.ctx=ctx
 
-        this.x=0
+        this.x=x
         this.y=0
 
         this.width= this.ctx.canvas.width

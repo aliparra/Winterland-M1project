@@ -12,10 +12,8 @@ class Game{
         
 
         //Instances
-
-        //Backgrounds
-        /* this.background = new Background(this.ctx) */
-        this.snowfall = new Snowfall(this.ctx)
+        
+        /* this.snowfall = new Snowfall(this.ctx) */
 
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
@@ -24,6 +22,7 @@ class Game{
         //Enviroment
         this.platformsArr = []  
         this.backgroundArr = []
+        this.snowfallArr = []
         
     }
 
@@ -57,7 +56,7 @@ class Game{
             }
         }
         this.backgroundArr.forEach((background) =>  background.draw())
-        this.snowfall.draw()
+        this.snowfallArr.forEach((snowfall) =>  snowfall.draw())
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.enemy1.draw()
@@ -67,7 +66,7 @@ class Game{
     move(){
        
         
-        this.snowfall.move()
+        this.snowfallArr.forEach((snowfall) =>  snowfall.move())
         this.mainSprite.move()
         this.enemy1.move()
         
@@ -79,6 +78,11 @@ class Game{
         for(let i=0; this.backgroundArr.length<= NUMBACKGROUND; i+=this.ctx.canvas.width){
             let auxBackground = new Background(this.ctx,i)
             this.backgroundArr.push(auxBackground)
+         }
+
+         for(let i=0; this.snowfallArr.length<= NUMBACKGROUND; i+=this.ctx.canvas.width){
+            let auxSnowfall = new Snowfall(this.ctx,i)
+            this.snowfallArr.push(auxSnowfall)
          }
 
 
