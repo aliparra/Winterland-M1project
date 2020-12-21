@@ -10,7 +10,7 @@ class MainSprite{
         this.maxX = 0
         this.x = x
         this.previousX = this.x
-        this.minX = 100
+        
         
         this.vx = 0
 
@@ -127,8 +127,11 @@ class MainSprite{
         this.y += this.vy
 
         //Don't move over the limits SIDE COLLISIONS
-        if(this.x<=this.minX){
-            this.x=this.minX
+        if(this.x <= WORLDSTART){
+            this.x = WORLDSTART
+        }
+        if(this.x >= WORLDEND){
+            this.x = WORLDEND 
         }
 
         if(this.y >= this.ctx.canvas.height-this.height){

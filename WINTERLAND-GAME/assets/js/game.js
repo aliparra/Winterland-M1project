@@ -55,6 +55,7 @@ class Game{
                 this.ctx.translate(this.mainSprite.maxX - this.mainSprite.x, 0)
             }
         }
+        
         this.backgroundArr.forEach((background) =>  background.draw())
         this.snowfallArr.forEach((snowfall) =>  snowfall.draw())
         this.mainSprite.draw()
@@ -101,7 +102,7 @@ class Game{
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-        this.enemy1.enemyCollision(this.mainSprite)
+        this.enemy1.collidesWith(this.mainSprite)
         
     }
 
