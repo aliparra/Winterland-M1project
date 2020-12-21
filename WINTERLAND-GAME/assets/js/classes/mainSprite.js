@@ -105,7 +105,6 @@ class MainSprite{
         }
 
         //JUMP
-        console.log(this.jumpProperties.isJumping)
         if(this.movements.up && !this.jumpProperties.isJumping){
             this.jumpProperties.isJumping = true
             this.vy = this.jumpProperties.jumpMax

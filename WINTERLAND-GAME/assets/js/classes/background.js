@@ -38,36 +38,7 @@ class Background{
         }
     }
 
-    move(character){
-        
-        //RIGHT MOVEMENT
-        if(character.movements.right && character.x >= character.maxX){
-            
-            character.movements.run ? this.x += this.vx*2 : this.x += this.vx
-            if(this.x + this.width <= 0){
-                this.x = 0
-            }
-        //LEFT MOVEMENT
-        }else if(character.movements.left && character.x>100){
-            character.movements.run ? this.x -= this.vx*2 : this.x -= this.vx
 
-            if(this.x > this.width){
-                this.x = 0
-            }
-        }
-    }
-
-    quickMove(){
-        
-        if(character.movements.right){
-            this.x += this.vx*2
-
-            if(this.x + this.width <= 0){
-                this.x = 0
-            }
-        }
-
-    }
 
 
 }

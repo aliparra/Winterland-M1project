@@ -14,3 +14,7 @@ const SPEED = 4
 const LOWSPEED = 2
 const GRAVITY = 0.4
 const MAXGRAVITY = 20
+
+//WORLD ELEMENTS
+
+const NUMFLOOR = 100 //100 BLOCKS OF FLOOR 

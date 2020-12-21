@@ -41,29 +41,10 @@ class BasicPlatform{
         }
     }
 
-    move(){
-      
-       //Moving based on keypress
-        if(this.movements.right){
-            this.x +=this.vx
-            
-        }
-        if(this.movements.left){
-            this.x -=this.vx
-            
-        }
+    generate(element){
+       
     }
 
-    quickMove(){
-        if(this.movements.right){
-            this.x +=this.vx*2
-            
-        }
-        if(this.movements.left){
-            this.x -=this.vx
-            
-        }
-    }
 
     onKeyEvent(event){
         const status = event.type === 'keydown'

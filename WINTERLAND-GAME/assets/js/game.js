@@ -23,18 +23,19 @@ class Game{
 
         //Enviroment
         this.platformsArr= [
-            new BasicPlatform(this.ctx,0,620,100,100),
+            /* new BasicPlatform(this.ctx,0,620,100,100),
             new BasicPlatform(this.ctx,100,620,100,100),
             new BasicPlatform(this.ctx,200,620,100,100),
             new BasicPlatform(this.ctx,300,620,100,100),
             new BasicPlatform(this.ctx,400,620,100,100),
             new BasicPlatform(this.ctx,500,620,100,100),
-            new BasicPlatform(this.ctx,600,620,100,100),
-            ``    
+            new BasicPlatform(this.ctx,600,620,100,100), */
+                
         ]  
         
     }
 
+    
     //Start method
     start(){
         if(!this.drawInterval){ 
@@ -43,6 +44,7 @@ class Game{
                 this.draw()
                 this.move()
                 this.checkCollisions()
+                this.generateObject()
 
             }, FPS)
         }
@@ -72,11 +74,19 @@ class Game{
 
     move(){
        
-        //this.background.move(this.mainSprite)
+        
         this.snowfall.move()
         this.mainSprite.move()
         this.enemy1.move()
+        
 
+    }
+
+    generateObject(){
+        for(let i=0; this.platformsArr.length<= NUMFLOOR; i+=100){
+            let auxPlatform = new BasicPlatform(this.ctx,i,620,100,100)
+            this.platformsArr.push(auxPlatform)
+         }
     }
 
     onKeyEvent(event){
