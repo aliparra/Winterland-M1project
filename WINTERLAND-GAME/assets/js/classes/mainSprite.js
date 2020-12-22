@@ -44,10 +44,13 @@ class MainSprite{
             right: false
         }
         
-        //SPRITE STATUS
-        this.health = 100
+         //ATTACK
+         this.attack = 100
 
+        //HEALTH
+         this.health = 100
 
+       
     }
 
     draw(){
@@ -142,6 +145,7 @@ class MainSprite{
 
     }
 
+    //PLATFORMS COLLISIONS
     collidesWith(element){
         //LEFT COLLISION
         if( this.y + this.height >= element.y &&
@@ -200,6 +204,76 @@ class MainSprite{
                 this.collisions.bottom = true
                 this.vy = 0   
                 this.vx = 0
+            }  
+        else{
+            this.collisions.top = false
+            this.collisions.bottom = false
+            this.collisions.left = false
+            this.collisions.right = false
+            } 
+    }
+
+    //ENEMIES COLLISIONS
+
+    collisionEnemy(element){
+        //LEFT COLLISION
+        if( this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x + this.width >= element.x &&
+            this.x < element.x && 
+            this.previousX +  this.width < element.x)
+            {
+                console.log('left')
+                this.health -=element.attack
+                if(this.health<=0){
+                    this.death()
+                }
+       
+            }
+        //RIGHT COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x <= element.x + element.width &&
+            this.x + this.width > element.x + element.width &&
+            this.previousX > element.x + element.width)
+            {
+                console.log('right')
+                this.health -=element.attack
+                if(this.health<=0){
+                    this.death()
+                }
+        }
+        //TOP COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y + this.height <= element.y + element.height &&
+            this.x + this.width >= element.x &&
+            this.x <= element.x + element.width &&
+            this.y < element.y && 
+            this.previousY + this.height < element.y) 
+            {
+                console.log('top')
+                element.health-=this.attack
+                if(element.health<=0){
+                    element.death()
+                }
+                
+        }
+         //BOTTOM COLLISION
+        else if(
+            this.y <= element.y + element.height && 
+            this.y >= element.y && 
+            this.x + this.width >= element.x && 
+            this.x <= element.x + element.width &&
+            this.y + this.height > element.y + element.height &&
+            this.previousY > element.y + element.height)
+            {
+                console.log('bottom')
+                this.health -=element.attack
+                if(this.health<=0){
+                    this.death()
+                }
             }  
         else{
             this.collisions.top = false

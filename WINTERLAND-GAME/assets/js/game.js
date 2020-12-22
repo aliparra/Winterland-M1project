@@ -18,6 +18,7 @@ class Game{
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
         this.enemy1= new BasicEnemy(this.ctx,300,570,600)
+        this.coin= new Coin(this.ctx,300,550)
 
         //Enviroment
         this.platformsArr = []  
@@ -61,6 +62,7 @@ class Game{
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.enemy1.draw()
+        this.coin.draw()
         this.ctx.restore();
     }
 
@@ -102,7 +104,8 @@ class Game{
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-        this.enemy1.collidesWith(this.mainSprite)
+        this.mainSprite.collisionEnemy(this.enemy1)
+        this.coin.collision(this.mainSprite)
         
     }
 

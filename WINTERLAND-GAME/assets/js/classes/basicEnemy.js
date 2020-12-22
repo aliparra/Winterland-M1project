@@ -33,6 +33,13 @@ class BasicEnemy{
             right: false,
             
         }
+
+        //ATTACK
+        this.attack = 100
+
+        //HEALTH
+
+        this.health= 100
     }
 
     draw(){
@@ -71,73 +78,9 @@ class BasicEnemy{
         this.y += this.vy
         
     }
-
-    collidesWith(element){
-    
-        //RIGHT COLLISION
-        if( this.y + this.height >= element.y &&
-            this.y <= element.y + element.height &&
-            this.x + this.width >= element.x &&
-            this.x < element.x && 
-            this.previousX +  this.width < element.x)
-            {
-                console.log('right')
-                
-                this.collisions.right = true
-        
-            }
-        //LEFT COLLISION
-        else if( 
-            this.y + this.height >= element.y &&
-            this.y <= element.y + element.height &&
-            this.x <= element.x + element.width &&
-            this.x + this.width > element.x + element.width &&
-            this.previousX > element.x + element.width)
-            {
-                console.log('left')
-                
-                this.collisions.left = true
-        }
-        //BOTTOM COLLISION
-        else if( 
-            this.y + this.height >= element.y &&
-            this.y + this.height <= element.y + element.height &&
-            this.x + this.width >= element.x &&
-            this.x <= element.x + element.width &&
-            this.y < element.y && 
-            this.previousY + this.height < element.y) 
-            {
-                console.log('bottom')
-                
-                this.collisions.bottom = true
-        }
-            //TOP COLLISION
-        else if(
-            this.y <= element.y + element.height && 
-            this.y >= element.y && 
-            this.x + this.width >= element.x && 
-            this.x <= element.x + element.width &&
-            this.y + this.height > element.y + element.height &&
-            this.previousY > element.y + element.height)
-            {
-                console.log('top')
-                
-                this.collisions.top = true
-                
-            }  
-        else{
-            this.collisions.top = false
-            this.collisions.bottom = false
-            this.collisions.left = false
-            this.collisions.right = false
-            } 
-    
+  
+    death(){
+        this.x = undefined
     }
-
-   
-
-    
-
-    
     
 }
