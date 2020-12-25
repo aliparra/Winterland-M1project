@@ -42,16 +42,6 @@ class BasicPlatform{
     }
 
 
-    onKeyEvent(event){
-        const status = event.type === 'keydown'
-
-        if(event.keyCode===KEY_RIGHT){
-            this.movements.right = status  
-        }
-
-        if(event.keyCode===KEY_LEFT){
-            this.movements.left = status  
-        }
-    }
+   
     
 }

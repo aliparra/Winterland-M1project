@@ -17,13 +17,14 @@ class Game{
 
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
-        this.enemy1= new BasicEnemy(this.ctx,300,570,600)
+        this.enemy1= new BasicEnemy(this.ctx,300,570,300)
         this.coin= new Coin(this.ctx,300,550)
 
         //Enviroment
         this.platformsArr = []  
         this.backgroundArr = []
         this.snowfallArr = []
+        
         
     }
 
@@ -99,12 +100,12 @@ class Game{
 
     onKeyEvent(event){
         this.mainSprite.onKeyEvent(event)
-        this.platformsArr.forEach((platform) =>  platform.onKeyEvent(event))
+    
     }
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-        this.mainSprite.collisionEnemy(this.enemy1)
+        this.enemy1.collisionEnemy(this.mainSprite)
         this.coin.collision(this.mainSprite)
         
     }
