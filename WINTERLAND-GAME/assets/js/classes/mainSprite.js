@@ -45,10 +45,10 @@ class MainSprite{
         }
         
          //ATTACK
-         this.attack = 50
-         this.attackCounter= 0
+         this.attack = MAINATTACK
+         this.attackCounter= 0 //Controls the number of collisions
         //HEALTH
-         this.health = 100
+         this.health = MAINHEALTH
 
        
     }

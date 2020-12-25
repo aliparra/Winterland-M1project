@@ -17,7 +17,7 @@ class Game{
 
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
-        this.enemy1= new BasicEnemy(this.ctx,300,570,300)
+        this.enemy1= new BasicEnemy(this.ctx,300,300,300)
         this.coin= new Coin(this.ctx,300,550)
 
         //Enviroment
@@ -105,6 +105,7 @@ class Game{
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
+        this.platformsArr.forEach((platform) =>  this.enemy1.collidesWith(platform))
         this.enemy1.collisionEnemy(this.mainSprite)
         this.coin.collision(this.mainSprite)
         

@@ -35,11 +35,11 @@ class BasicEnemy{
         }
 
         //ATTACK
-        this.attack = 100
+        this.attack = MAINATTACK
 
         //HEALTH
 
-        this.health= 100
+        this.health= MAINHEALTH
     }
 
     draw(){
@@ -50,12 +50,13 @@ class BasicEnemy{
     }
 
     move(){
-       /*  this.vy += GRAVITY
+
+        //GRAVITY 
+
+        this.vy += GRAVITY
         if(this.vy>=MAXGRAVITY){
             this.vy=MAXGRAVITY
-        } */
-        
-       
+        } 
         
         //MOVEMENTS
 
@@ -79,6 +80,76 @@ class BasicEnemy{
         this.y += this.vy
         
     }
+
+    //PLATFORMS ENEMY COLLISIONS
+    collidesWith(element){
+        //LEFT COLLISION
+        if( this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x + this.width >= element.x &&
+            this.x < element.x && 
+            this.previousX +  this.width < element.x)
+            {
+                //console.log('left')
+                this.x = element.x - this.width - 1
+                this.vx = 0
+                this.x = element.x - this.width - 1
+                this.collisions.left = true
+       
+            }
+        //RIGHT COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x <= element.x + element.width &&
+            this.x + this.width > element.x + element.width &&
+            this.previousX > element.x + element.width)
+            {
+                //console.log('right')
+                this.x  = element.x + element.width + 1
+                this.vx = 0
+                this.vy = 0
+                this.collisions.right = true
+        }
+        //TOP COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y + this.height <= element.y + element.height &&
+            this.x + this.width >= element.x &&
+            this.x <= element.x + element.width &&
+            this.y < element.y && 
+            this.previousY + this.height < element.y) 
+            {
+                //console.log('top')
+                this.y  = element.y - this.height - 1
+                this.vy = 0
+                this.collisions.top = true
+                this.attackCounter = 0
+        }
+         //BOTTOM COLLISION
+        else if(
+            this.y <= element.y + element.height && 
+            this.y >= element.y && 
+            this.x + this.width >= element.x && 
+            this.x <= element.x + element.width &&
+            this.y + this.height > element.y + element.height &&
+            this.previousY > element.y + element.height)
+            {
+                //console.log('bottom')
+                this.y = element.y + element.height + 1
+                this.collisions.bottom = true
+                this.vy = 0   
+                this.vx = 0
+            }  
+        else{
+            this.collisions.top = false
+            this.collisions.bottom = false
+            this.collisions.left = false
+            this.collisions.right = false
+            } 
+    }
+
+    //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
         console.log(`enemy: ${this.x} sprite: ${element.x}`)
