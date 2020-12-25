@@ -1,6 +1,6 @@
 class GenericClass{
 
-    constructor (ctx, x, y,){
+    constructor (ctx, x, y){
         this.ctx = ctx
 
         this.x = x

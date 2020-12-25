@@ -13,17 +13,25 @@ class Game{
 
         //Instances
         
-        /* this.snowfall = new Snowfall(this.ctx) */
+
 
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
-        this.enemy1= new BasicEnemy(this.ctx,300,300,300)
-        this.coin= new Coin(this.ctx,300,550)
+        this.worldConstructor = new worldConstructor (this.ctx)
 
         //Enviroment
+        this.basicEnemyArr = [
+            new BasicEnemy(this.ctx,300,300,300), 
+            new BasicEnemy(this.ctx,600,300,100), 
+            new BasicEnemy(this.ctx,900,300,200),
+            new BasicEnemy(this.ctx,1200,300,100),
+            new BasicEnemy(this.ctx,1500,300,100),
+        ]
         this.platformsArr = []  
         this.backgroundArr = []
         this.snowfallArr = []
+        this.coinsArr = []
+        
         
         
     }
@@ -34,10 +42,11 @@ class Game{
         if(!this.drawInterval){ 
             this.drawInterval = setInterval(()=>{
                 this.clear()
+                this.generateObject()
                 this.draw()
                 this.move()
                 this.checkCollisions()
-                this.generateObject()
+                
 
             }, FPS)
         }
@@ -62,8 +71,9 @@ class Game{
         this.snowfallArr.forEach((snowfall) =>  snowfall.draw())
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
-        this.enemy1.draw()
-        this.coin.draw()
+        this.coinsArr.forEach((coin) =>  coin.draw())
+        this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
+
         this.ctx.restore();
     }
 
@@ -72,7 +82,7 @@ class Game{
         
         this.snowfallArr.forEach((snowfall) =>  snowfall.move())
         this.mainSprite.move()
-        this.enemy1.move()
+        this.basicEnemyArr.forEach((enemy) =>  enemy.move())
         
 
     }
@@ -95,9 +105,14 @@ class Game{
             this.platformsArr.push(auxPlatform)
          }
 
+         
+         this.worldConstructor.addCoin(this.coinsArr)
+         
+         
 
     }
 
+    
     onKeyEvent(event){
         this.mainSprite.onKeyEvent(event)
     
@@ -105,9 +120,13 @@ class Game{
 
     checkCollisions(){
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-        this.platformsArr.forEach((platform) =>  this.enemy1.collidesWith(platform))
-        this.enemy1.collisionEnemy(this.mainSprite)
-        this.coin.collision(this.mainSprite)
+        //this.platformsArr.forEach((platform) =>  this.basicEnemyArr[0].collidesWith(platform))
+         this.platformsArr.forEach((platform) => {
+            this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
+        ) 
+        this.coinsArr.forEach((coin) =>  coin.collision(this.mainSprite))
+        this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
+        
         
     }
 

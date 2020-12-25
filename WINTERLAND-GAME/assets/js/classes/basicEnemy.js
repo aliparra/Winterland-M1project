@@ -53,10 +53,10 @@ class BasicEnemy{
 
         //GRAVITY 
 
-        this.vy += GRAVITY
+         this.vy += GRAVITY
         if(this.vy>=MAXGRAVITY){
             this.vy=MAXGRAVITY
-        } 
+        }  
         
         //MOVEMENTS
 
@@ -83,6 +83,7 @@ class BasicEnemy{
 
     //PLATFORMS ENEMY COLLISIONS
     collidesWith(element){
+
         //LEFT COLLISION
         if( this.y + this.height >= element.y &&
             this.y <= element.y + element.height &&
@@ -152,7 +153,7 @@ class BasicEnemy{
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
-        console.log(`enemy: ${this.x} sprite: ${element.x}`)
+        
         //LEFT COLLISION
         if( element.y + element.height >= this.y &&
             element.y <= this.y + this.height &&
