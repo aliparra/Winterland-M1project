@@ -25,32 +25,36 @@ class Game{
 
         //Enemies
         this.basicEnemyArr = [
-             new BasicEnemy(this.ctx,300,300,300), 
-            new BasicEnemy(this.ctx,600,300,100), 
-            new BasicEnemy(this.ctx,900,300,200),
-            new BasicEnemy(this.ctx,1200,300,100),
+            new BasicEnemy(this.ctx,200,300,100), 
+            new BasicEnemy(this.ctx,400,300,100), 
+            new BasicEnemy(this.ctx,1200,300,50),
             new BasicEnemy(this.ctx,1500,300,100)  
         ]
         //Collectable Objects
 
         this.coinsArr = [
-            new Coin(this.ctx,300,500),
-            new Coin(this.ctx,400,500),
-            new Coin(this.ctx,500,500),
-            new Coin(this.ctx,700,500),
-            new Coin(this.ctx,900,500),
-            new Coin(this.ctx,1100,500)
+            
+            new Coin(this.ctx,500,350),
+            new Coin(this.ctx,550,350),
+            new Coin(this.ctx,650,100),
+            new Coin(this.ctx,720,100),
+            new Coin(this.ctx,800,100),
+            new Coin(this.ctx,950,350),
         ]
 
         //World tiles
-        this.worldConstructor = new worldConstructor (this.ctx)
-        
+        //this.worldConstructor = new worldConstructor (this.ctx)
+        this.airPlatformsArr = [
+            new AirPlatform(this.ctx,400,400),
+            new AirPlatform(this.ctx,600,250),
+            new AirPlatform(this.ctx,800,400)
+        ]
 
         //COUNTERS
 
         //Coin counter
         this.coinsCounter = 0 
-        this.pointsCoin = new Coin(this.ctx, this.mainSprite.maxX, 20)
+        this.pointsCoin = new Coin(this.ctx, this.mainSprite.x, 20)
         
         //Health counter
 
@@ -93,6 +97,7 @@ class Game{
         this.snowfallArr.forEach((snowfall) =>  snowfall.draw())
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
+        this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
@@ -117,6 +122,7 @@ class Game{
             let auxBackground = new Background(this.ctx,i)
             this.backgroundArr.push(auxBackground)
          }
+        
 
          for(let i=0; this.snowfallArr.length<= NUMBACKGROUND; i+=this.ctx.canvas.width){
             let auxSnowfall = new Snowfall(this.ctx,i)
@@ -126,8 +132,12 @@ class Game{
 
         for(let i=0; this.platformsArr.length<= NUMFLOOR; i+=100){
             let auxPlatform = new BasicPlatform(this.ctx,i,545,100,100)
-            this.platformsArr.push(auxPlatform)
-         }
+            this.platformsArr.push(auxPlatform)}
+            
+            //Base platforms deleted
+            this.deletePlatforms(4,10,this.platformsArr)
+            this.deletePlatforms(20,25,this.platformsArr)
+
 
          /* this.worldConstructor.addCoin(this.coinsArr) */
          
@@ -135,6 +145,12 @@ class Game{
 
     }
     
+    deletePlatforms(init,end,arr){
+        for(let i=init; i<= end; i++){
+            delete arr[i]
+         }
+    }
+
     onKeyEvent(event){
         this.mainSprite.onKeyEvent(event)
     
@@ -143,8 +159,26 @@ class Game{
     checkCollisions(){
         //Sprite-platforms
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
+        //Sprite-air platforms
+        this.airPlatformsArr.forEach((platform) =>  this.mainSprite.collidesWithAp(platform,platform.x))
+        this.airPlatformsArr.forEach((platform) =>  this.mainSprite.collidesWithAp(platform,platform.x1))
+        this.airPlatformsArr.forEach((platform) =>  this.mainSprite.collidesWithAp(platform,platform.x2))
         //Enemy-platforms
          this.platformsArr.forEach((platform) => {
+            this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
+        ) 
+        //Enemy-air platforms
+        this.airPlatformsArr.forEach((platform) => {
+            this.basicEnemyArr.forEach((enemy) => enemy.collidesWithAp(platform,platform.x))}
+        ) 
+        this.airPlatformsArr.forEach((platform) => {
+            this.basicEnemyArr.forEach((enemy) => enemy.collidesWithAp(platform,platform.x1))}
+        ) 
+        this.airPlatformsArr.forEach((platform) => {
+            this.basicEnemyArr.forEach((enemy) => enemy.collidesWithAp(platform,platform.x2))}
+        ) 
+        //Enemy- air platforms
+        this.airPlatformsArr.forEach((platform) => {
             this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
         ) 
         //Sprite-coins

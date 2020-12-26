@@ -10,8 +10,6 @@ class BasicPlatform{
         this.width= width
         this.height=height
 
-        //Platform movement speed
-        this.vx= -SPEED
         
         //Platform image
         this.img = new Image()
@@ -21,11 +19,7 @@ class BasicPlatform{
             this.img.ready = true
         }
 
-        //Platform movement controls
-        this.movements = {
-            right: false,
-            left:false
-        }
+
 
     }
 

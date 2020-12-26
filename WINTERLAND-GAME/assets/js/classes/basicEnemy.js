@@ -150,6 +150,77 @@ class BasicEnemy{
             } 
     }
 
+    //ENEMY - AIR PLATFORMS COLLISION
+
+    collidesWithAp(element,elementx){
+
+        //LEFT COLLISION
+        if( this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x + this.width >= elementx &&
+            this.x < elementx && 
+            this.previousX +  this.width < elementx)
+            {
+                //console.log('left')
+                this.x = elementx - this.width - 1
+                this.vx = 0
+                this.x = elementx - this.width - 1
+                this.collisions.left = true
+       
+            }
+        //RIGHT COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y <= element.y + element.height &&
+            this.x <= elementx + element.width &&
+            this.x + this.width > elementx + element.width &&
+            this.previousX > elementx + element.width)
+            {
+                //console.log('right')
+                this.x  = elementx + element.width + 1
+                this.vx = 0
+                this.vy = 0
+                this.collisions.right = true
+        }
+        //TOP COLLISION
+        else if( 
+            this.y + this.height >= element.y &&
+            this.y + this.height <= element.y + element.height &&
+            this.x + this.width >= elementx &&
+            this.x <= elementx + element.width &&
+            this.y < element.y && 
+            this.previousY + this.height < element.y) 
+            {
+                //console.log('top')
+                this.y  = element.y - this.height - 1
+                this.vy = 0
+                this.collisions.top = true
+                this.attackCounter = 0
+        }
+         //BOTTOM COLLISION
+        else if(
+            this.y <= element.y + element.height && 
+            this.y >= element.y && 
+            this.x + this.width >= element.x && 
+            this.x <= elementx + element.width &&
+            this.y + this.height > element.y + element.height &&
+            this.previousY > element.y + element.height)
+            {
+                //console.log('bottom')
+                this.y = element.y + element.height + 1
+                this.collisions.bottom = true
+                this.vy = 0   
+                this.vx = 0
+            }  
+        else{
+            this.collisions.top = false
+            this.collisions.bottom = false
+            this.collisions.left = false
+            this.collisions.right = false
+            } 
+    }
+
+
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
