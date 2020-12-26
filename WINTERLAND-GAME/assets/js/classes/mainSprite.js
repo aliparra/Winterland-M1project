@@ -26,7 +26,7 @@ class MainSprite{
             right: false,
             left: false,
             up: false,
-            run: false
+            run: false,
         }
 
         this.jumpProperties = {
@@ -45,8 +45,14 @@ class MainSprite{
         }
         
          //ATTACK
-         this.attack = MAINATTACK
-         this.attackCounter= 0 //Controls the number of collisions
+         //Jumpattack
+         this.jumpAttack = MAINATTACK
+         this.jumpAttackCounter= 0 //Controls the number of collisions
+
+         //Snowball attack
+         this.snowballs = []
+         this.canFire = true
+
         //HEALTH
          this.health = MAINHEALTH
 
@@ -57,6 +63,7 @@ class MainSprite{
         this.ctx.save()
         this.ctx.fillStyle = 'red'
         this.ctx.fillRect(this.x,this.y,this.width,this.height)
+        this.snowballs.forEach(snowball => snowball.draw())
         this.ctx.restore()
     }
 
@@ -75,6 +82,16 @@ class MainSprite{
                 break;
             case KEY_RUN:
                 this.movements.run = status
+                break;
+            case KEY_ATTACK:
+                if(this.canFire){
+                this.snowballs.push(
+                    new Snowball(this.ctx, this.x + this.width, this.y))
+                    this.canFire = false
+                    setTimeout(()=> { this.canFire = true}, 1000)
+                }
+                
+
             default:
                 break;
         }
@@ -121,9 +138,6 @@ class MainSprite{
             clearInterval(this.jumpProperties.jumpInterval)
             this.jumpProperties.jumpChrono = 0
         }
-        
-        
-        
 
         //Moving x and y postion adding speed
         this.x += this.vx
@@ -140,6 +154,11 @@ class MainSprite{
         if(this.y >= this.ctx.canvas.height-this.height){
             this.y = this.ctx.canvas.height-this.height
         }
+
+        //ATTACK
+
+        
+        this.snowballs.forEach(snowball => snowball.move())
         
 
 
@@ -189,7 +208,7 @@ class MainSprite{
                 this.vy = 0
                 this.vx = 0
                 this.collisions.top = true
-                this.attackCounter = 0
+                this.jumpattackCounter = 0
         }
          //BOTTOM COLLISION
         else if(

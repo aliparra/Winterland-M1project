@@ -6,8 +6,9 @@ const FPS = 1000/60
 const KEY_UP = 38
 const KEY_RIGHT = 39
 const KEY_LEFT = 37
-const KEY_RUN= 68
-//const KEY_BRAKE= 65
+const KEY_RUN = 68
+const KEY_ATTACK = 32
+
 
 //PHYSICS
 const SPEED = 4

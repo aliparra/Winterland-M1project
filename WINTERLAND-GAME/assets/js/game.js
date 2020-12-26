@@ -6,7 +6,7 @@ class Game{
         this.ctx= this.canvas.getContext('2d')
 
         this.canvas.width= 1200
-        this.canvas.height= 650
+        this.canvas.height= 640
 
         this.drawInterval = undefined
         
@@ -15,7 +15,7 @@ class Game{
         
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
-        
+        this.snowball = new Snowball(this.ctx, this.x + this.width, this.y)
 
         //Enviroment
         
@@ -29,17 +29,17 @@ class Game{
             new BasicEnemy(this.ctx,600,300,100), 
             new BasicEnemy(this.ctx,900,300,200),
             new BasicEnemy(this.ctx,1200,300,100),
-            new BasicEnemy(this.ctx,1500,300,100) 
+            new BasicEnemy(this.ctx,1500,300,100)  
         ]
         //Collectable Objects
 
         this.coinsArr = [
-            new Coin(this.ctx,300,550),
-            new Coin(this.ctx,400,550),
-            new Coin(this.ctx,500,550),
-            new Coin(this.ctx,700,550),
-            new Coin(this.ctx,900,550),
-            new Coin(this.ctx,1100,550)
+            new Coin(this.ctx,300,500),
+            new Coin(this.ctx,400,500),
+            new Coin(this.ctx,500,500),
+            new Coin(this.ctx,700,500),
+            new Coin(this.ctx,900,500),
+            new Coin(this.ctx,1100,500)
         ]
 
         //World tiles
@@ -125,7 +125,7 @@ class Game{
 
 
         for(let i=0; this.platformsArr.length<= NUMFLOOR; i+=100){
-            let auxPlatform = new BasicPlatform(this.ctx,i,620,100,100)
+            let auxPlatform = new BasicPlatform(this.ctx,i,545,100,100)
             this.platformsArr.push(auxPlatform)
          }
 
@@ -141,16 +141,23 @@ class Game{
     }
 
     checkCollisions(){
+        //Sprite-platforms
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-        //this.platformsArr.forEach((platform) =>  this.basicEnemyArr[0].collidesWith(platform))
+        //Enemy-platforms
          this.platformsArr.forEach((platform) => {
             this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
         ) 
-        //this.coinsArr.forEach((coin) =>  coin.collision(this.mainSprite))
+        //Sprite-coins
         this.coinsArr.forEach((coin) =>  this.mainSprite.collision(coin))
+        //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
         
-        
+        //Enemy-snowballs
+
+        this.basicEnemyArr.forEach((enemy) => {
+            this.mainSprite.snowballs.forEach((snowball) => enemy.collision(snowball))}
+        ) 
+       
     }
 
     coinsCount(){

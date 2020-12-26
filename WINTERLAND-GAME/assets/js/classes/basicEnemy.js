@@ -195,11 +195,11 @@ class BasicEnemy{
             {
                 console.log('top')
                 element.vy = -5
-                element.attackCounter++
-                if(element.attackCounter === 1){
-                    this.health -= element.attack 
+                element.jumpAttackCounter++
+                if(element.jumpAttackCounter === 1){
+                    this.health -= element.jumpAttack 
                 }
-                element.attackCounter = 0
+                element.jumpAttackCounter = 0
                 if(this.health<=0){
                     this.death()
                 }
@@ -226,6 +226,23 @@ class BasicEnemy{
             element.collisions.left = false
             element.collisions.right = false
             } 
+    }
+
+    //ENEMY-SNOWBALLS COLLISIONS
+
+    collision(element){
+        if(this.x < element.x + element.width &&
+            this.x + this.width > element.x &&
+            this.y < element.y + element.height &&
+            this.y + this.height > element.y){
+
+            //console.log('enemy was attacked')
+            this.health -= element.attack
+            if(this.health<=0){
+                this.death()
+            }
+            }
+        
     }
 
     death(){
