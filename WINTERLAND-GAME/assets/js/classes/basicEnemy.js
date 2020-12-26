@@ -17,7 +17,7 @@ class BasicEnemy{
         this.distance = distance + this.x
         
         this.height = 50
-        this.width = 130
+        this.width = 50
 
         
         
@@ -199,6 +199,7 @@ class BasicEnemy{
                 if(element.attackCounter === 1){
                     this.health -= element.attack 
                 }
+                element.attackCounter = 0
                 if(this.health<=0){
                     this.death()
                 }

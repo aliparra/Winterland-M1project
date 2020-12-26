@@ -5,34 +5,55 @@ class Game{
         this.canvas = document.getElementById(canvasId)
         this.ctx= this.canvas.getContext('2d')
 
-        this.canvas.width= 1280
-        this.canvas.height= 720
+        this.canvas.width= 1200
+        this.canvas.height= 650
 
         this.drawInterval = undefined
         
 
-        //Instances
+        //INSTANCES
         
-
-
         //Characters
         this.mainSprite = new MainSprite(this.ctx,0,0)
-        this.worldConstructor = new worldConstructor (this.ctx)
+        
 
         //Enviroment
-        this.basicEnemyArr = [
-            new BasicEnemy(this.ctx,300,300,300), 
-            new BasicEnemy(this.ctx,600,300,100), 
-            new BasicEnemy(this.ctx,900,300,200),
-            new BasicEnemy(this.ctx,1200,300,100),
-            new BasicEnemy(this.ctx,1500,300,100),
-        ]
+        
         this.platformsArr = []  
         this.backgroundArr = []
         this.snowfallArr = []
-        this.coinsArr = []
+
+        //Enemies
+        this.basicEnemyArr = [
+             new BasicEnemy(this.ctx,300,300,300), 
+            new BasicEnemy(this.ctx,600,300,100), 
+            new BasicEnemy(this.ctx,900,300,200),
+            new BasicEnemy(this.ctx,1200,300,100),
+            new BasicEnemy(this.ctx,1500,300,100) 
+        ]
+        //Collectable Objects
+
+        this.coinsArr = [
+            new Coin(this.ctx,300,550),
+            new Coin(this.ctx,400,550),
+            new Coin(this.ctx,500,550),
+            new Coin(this.ctx,700,550),
+            new Coin(this.ctx,900,550),
+            new Coin(this.ctx,1100,550)
+        ]
+
+        //World tiles
+        this.worldConstructor = new worldConstructor (this.ctx)
         
+
+        //COUNTERS
+
+        //Coin counter
+        this.coinsCounter = 0 
+        this.pointsCoin = new Coin(this.ctx, this.mainSprite.maxX, 20)
         
+        //Health counter
+
         
     }
 
@@ -46,6 +67,7 @@ class Game{
                 this.draw()
                 this.move()
                 this.checkCollisions()
+                this.coinsCount()
                 
 
             }, FPS)
@@ -72,19 +94,21 @@ class Game{
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
+        this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
 
+        
+
+       
         this.ctx.restore();
     }
 
     move(){
        
-        
         this.snowfallArr.forEach((snowfall) =>  snowfall.move())
         this.mainSprite.move()
         this.basicEnemyArr.forEach((enemy) =>  enemy.move())
         
-
     }
 
     generateObject(){
@@ -105,13 +129,11 @@ class Game{
             this.platformsArr.push(auxPlatform)
          }
 
-         
-         this.worldConstructor.addCoin(this.coinsArr)
+         /* this.worldConstructor.addCoin(this.coinsArr) */
          
          
 
     }
-
     
     onKeyEvent(event){
         this.mainSprite.onKeyEvent(event)
@@ -124,11 +146,22 @@ class Game{
          this.platformsArr.forEach((platform) => {
             this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
         ) 
-        this.coinsArr.forEach((coin) =>  coin.collision(this.mainSprite))
+        //this.coinsArr.forEach((coin) =>  coin.collision(this.mainSprite))
+        this.coinsArr.forEach((coin) =>  this.mainSprite.collision(coin))
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
         
         
     }
+
+    coinsCount(){
+
+        const restCoins = this.coinsArr.filter( coin => !this.mainSprite.collision(coin))
+        const newPoints = this.coinsArr.length - restCoins.length
+        this.coinsCounter += newPoints
+
+        this.coinsArr = restCoins
+
+    } 
 
    
 }

@@ -214,10 +214,21 @@ class MainSprite{
             } 
     }
 
-    //ENEMIES COLLISIONS
+    //GENERIC COLLISION
+
+    collision(element){
+        if(this.x < element.x + element.width &&
+            this.x + this.width > element.x &&
+            this.y < element.y + element.height &&
+            this.y + this.height > element.y){
+
+                return true
+            }
+        return false
+    }
 
    
-
+    //DEATH
     death(){
            this.x=undefined
     }

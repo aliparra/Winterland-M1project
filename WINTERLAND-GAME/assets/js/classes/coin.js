@@ -25,16 +25,25 @@ class Coin extends GenericClass{
     
 
     draw(){
-        this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height)
+        this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height)   
     }
 
-    collision(element){
-        this.collisionStatus = super.collision(element)
-        if(this.collisionStatus){
-            this.coinsCounter++
-            this.x = undefined
+   counterDraw(sprite, counter){
+       if(sprite.x <=600){
+        this.ctx.drawImage(this.img, this.ctx.canvas.width - 200 ,this.y,this.width,this.height)
+        this.ctx.save()
+        this.ctx.font = '18px Arial'
+        this.ctx.fillText(` ${counter}`, this.ctx.canvas.width - 170, this.y + 20)
+        
+        }else{
+        this.ctx.drawImage(this.img, sprite.x + 400 ,this.y,this.width,this.height )
+        this.ctx.font = '18px Arial'
+        this.ctx.fillText(` ${counter}`, sprite.x + 430, this.y + 20)
         }
     }
 
+  
+
+ 
     
 }
