@@ -60,11 +60,11 @@ class MainSprite{
 
         //SPRITE SHEET
         this.sprite = new Image()
-        this.sprite.src = './assets/img/mainsprite/main_sprite_right.png'
+        this.sprite.src = './assets/img/mainsprite/main_sprite.png'
         this.sprite.isReady = false
 
         this.sprite.horizontalFrames = 10
-        this.sprite.verticalFrames = 7
+        this.sprite.verticalFrames = 10
 
         this.sprite.horizontalFrameIndex = 0
         this.sprite.verticalFrameIndex = 0
@@ -115,29 +115,39 @@ class MainSprite{
 
     animate(){
         if(this.movements.run && this.movements.right){
-            this.animateSpriteRunR()
+            this.animateRunR()  
+        }else if(this.movements.run && this.movements.left){
+            this.animateRunL()
+        }
+        else if(this.movements.right && this.jumpProperties.isJumping ){
+            this.animateJumpR()
             
         }
-        else if(this.movements.right && this.jumpProperties.isJumping){
-            this.animateJump()
+        else if(this.movements.left && this.jumpProperties.isJumping ){
+            this.animateJumpL()
             
-        }else if(this.movements.right){
-            this.animateSpriteR()
+        }
+        else if(this.movements.right ){
+            this.animateWalkR()
+        }
+        else if(this.movements.left ){
+            this.animateWalkL()
         }
         else if(this.jumpProperties.isJumping){
-            this.animateJump()
+            this.animateJumpR()
             
         }else{
-            this.resetAnimation()
-            
+            this.resetAnimation()  
         }
+
+
         
     }
 
     resetAnimation(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 5
+            this.sprite.verticalFrameIndex = 8
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -146,20 +156,41 @@ class MainSprite{
         }
     }
 
-    animateSpriteR(){
+    animateWalkR(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+        this.sprite.verticalFrameIndex = 5
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0  
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+    animateWalkL(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
         this.sprite.verticalFrameIndex = 0
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
-                console.log('stop')
             }else{
-                console.log('go')
                 this.sprite.horizontalFrameIndex++
             }
         }
     }
 
-     animateSpriteRunR(){
+     animateRunR(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+        this.sprite.verticalFrameIndex = 6
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    
+    }
+
+    animateRunL(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
         this.sprite.verticalFrameIndex = 1
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
@@ -171,9 +202,21 @@ class MainSprite{
     
     }
 
-    animateJump(){
+    animateJumpR(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
-            console.log(this.sprite.drawCount)
+            
+            this.sprite.verticalFrameIndex = 7
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    } 
+
+    animateJumpL(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
             this.sprite.verticalFrameIndex = 2
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
