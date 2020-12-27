@@ -16,7 +16,7 @@ class BasicEnemy{
 
         this.distance = distance + this.x
         
-        this.height = 50
+        this.height = 100
         this.width = 50
 
         
@@ -264,7 +264,7 @@ class BasicEnemy{
             element.y < this.y && 
             element.previousY + element.height < this.y) 
             {
-                console.log('top')
+                
                 element.vy = -5
                 element.jumpAttackCounter++
                 if(element.jumpAttackCounter === 1){

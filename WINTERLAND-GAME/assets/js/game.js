@@ -14,7 +14,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,0,0)
+        this.mainSprite = new MainSprite(this.ctx,500,0)
         this.snowball = new Snowball(this.ctx, this.x + this.width, this.y)
 
         //Enviroment
@@ -114,6 +114,10 @@ class Game{
         this.mainSprite.move()
         this.basicEnemyArr.forEach((enemy) =>  enemy.move())
         
+    }
+
+    animate(){
+        this.mainSprite.animate
     }
 
     generateObject(){

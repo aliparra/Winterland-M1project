@@ -3,8 +3,8 @@ class MainSprite{
     constructor(ctx,x,y){
         this.ctx=ctx
 
-        this.width=50
-        this.height=70
+        this.width=0
+        this.height=0
 
         //x properties
         this.maxX = 0
@@ -56,16 +56,134 @@ class MainSprite{
         //HEALTH
          this.health = MAINHEALTH
 
+        //SPRITE IMAGES
+
+        //SPRITE SHEET
+        this.sprite = new Image()
+        this.sprite.src = './assets/img/mainsprite/main_sprite_right.png'
+        this.sprite.isReady = false
+
+        this.sprite.horizontalFrames = 10
+        this.sprite.verticalFrames = 7
+
+        this.sprite.horizontalFrameIndex = 0
+        this.sprite.verticalFrameIndex = 0
+
+        this.sprite.drawCount = 0
+
+        this.sprite.onload = () => {
+            this.sprite.isReady = true
+
+            this.sprite.frameWidth = this.sprite.width / this.sprite.horizontalFrames //To know the widht of every frame
+            this.sprite.frameHeight = this.sprite.height / this.sprite.verticalFrames //To know the height of every frame
+
+            this.width = this.sprite.frameWidth
+            this.height = this.sprite.frameHeight // This give me the option of multiplying the value if I want 
+        }
+
        
     }
 
-    draw(){
-        this.ctx.save()
-        this.ctx.fillStyle = 'red'
-        this.ctx.fillRect(this.x,this.y,this.width,this.height)
-        this.snowballs.forEach(snowball => snowball.draw())
-        this.ctx.restore()
+    isReady(){
+        return this.sprite.isReady
     }
+
+    draw(){
+        if(this.isReady()){
+            this.ctx.drawImage(
+                this.sprite,
+                this.sprite.horizontalFrameIndex * this.sprite.frameWidth,
+                this.sprite.verticalFrameIndex * this.sprite.frameHeight,
+                this.sprite.frameWidth,
+                this.sprite.frameHeight,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+
+            )
+        }
+
+         //Let me paint less times than original frames
+         this.sprite.drawCount++
+        this.animate()
+        
+        //Snowballs
+        this.snowballs.forEach(snowball => snowball.draw())   
+
+    }
+
+    animate(){
+        if(this.movements.run && this.movements.right){
+            this.animateSpriteRunR()
+            
+        }
+        else if(this.movements.right && this.jumpProperties.isJumping){
+            this.animateJump()
+            
+        }else if(this.movements.right){
+            this.animateSpriteR()
+        }
+        else if(this.jumpProperties.isJumping){
+            this.animateJump()
+            
+        }else{
+            this.resetAnimation()
+            
+        }
+        
+    }
+
+    resetAnimation(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 5
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+    animateSpriteR(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+        this.sprite.verticalFrameIndex = 0
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+                console.log('stop')
+            }else{
+                console.log('go')
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+     animateSpriteRunR(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+        this.sprite.verticalFrameIndex = 1
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    
+    }
+
+    animateJump(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            console.log(this.sprite.drawCount)
+            this.sprite.verticalFrameIndex = 2
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    } 
+
+
 
     //Make true or false every movement if the proper key was pressed
     onKeyEvent(event){
