@@ -15,11 +15,7 @@ class Coin extends GenericClass{
             this.img.ready = true
         }
 
-        //Status
-        this.collisionStatus = false
-
-        //Points
-        this.coinsCounter = 0
+       
     }
 
     isReady(){

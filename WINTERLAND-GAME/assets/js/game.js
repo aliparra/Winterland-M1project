@@ -23,6 +23,8 @@ class Game{
         this.backgroundArr = []
         this.snowfallArr = []
 
+        
+
         //Enemies
         this.basicEnemyArr = [
             new BasicEnemy(this.ctx,200,300,100), 
@@ -40,6 +42,16 @@ class Game{
             new Coin(this.ctx,720,100),
             new Coin(this.ctx,800,100),
             new Coin(this.ctx,950,350),
+            new Coin(this.ctx,1300,250),
+        ]
+
+        this.prize = new Coin(this.ctx,1300,250) 
+        /* this.misteryPrizes = [
+            new Coin(this.ctx,1300,250)  
+        ] */
+
+        this.mysteryBoxArr = [
+            new MisteryBox(this.ctx, 1300, 250)
         ]
 
         //World tiles
@@ -99,6 +111,7 @@ class Game{
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
+        this.mysteryBoxArr.forEach((box) =>  box.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
 
@@ -190,6 +203,9 @@ class Game{
         //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
         
+        //Sprite-Mistery Box
+
+        this.mysteryBoxArr.forEach((box) =>  this.mainSprite.boxCollision(box,this.prize))
         //Enemy-snowballs
 
         this.basicEnemyArr.forEach((enemy) => {
