@@ -140,7 +140,6 @@ class MainSprite{
             this.resetAnimation()  
         }
 
-
         
     }
 
@@ -228,7 +227,7 @@ class MainSprite{
 
 
 
-    //Make true or false every movement if the proper key was pressed
+    //KEY EVENTS - MOVEMENTS
     onKeyEvent(event){
         const status= event.type === 'keydown'
         switch(event.keyCode){
@@ -312,9 +311,9 @@ class MainSprite{
             this.x = WORLDEND 
         }
 
-        if(this.y >= this.ctx.canvas.height-this.height){
-            this.y = this.ctx.canvas.height-this.height
-        }
+         if(this.y >= this.ctx.canvas.height-this.height){
+            this.death()
+        } 
 
         //ATTACK
 
@@ -481,6 +480,14 @@ class MainSprite{
     //DEATH
     death(){
            this.x=undefined
+           setTimeout(()=> 
+           this.save(),
+           this.ctx.fillStyle = 'rgba(120, 120, 120, 0.5)',
+           this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
+           this.ctx.fillStyle = "rgb(0,0,0)",
+           this.ctx.font = '100px Arial bold',
+           this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500), 2000 )
+           
     }
         
 }
