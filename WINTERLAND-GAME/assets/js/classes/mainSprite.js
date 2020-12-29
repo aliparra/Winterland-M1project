@@ -548,13 +548,14 @@ class MainSprite{
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
 
-                this.width*= 1.5
-                this.height*= 1.5
+                
                 console.log(this.health)
-                /* if(this.health<=MAINHEALTH){
-                    
-                    this.health+= 100
-                } */
+                 if(this.health<=MAINHEALTH){
+                    this.health+= MAINHEALTH
+                    this.height*=BEBIG
+                    this.width*=BEBIG
+                } 
+                element.x = undefined
                 
             }
         

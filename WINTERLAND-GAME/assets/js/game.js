@@ -27,10 +27,10 @@ class Game{
 
         //Enemies
         this.basicEnemyArr = [
-            /* new BasicEnemy(this.ctx,200,300,100), 
+            new BasicEnemy(this.ctx,600,300,100), 
             new BasicEnemy(this.ctx,450,200,100), 
             new BasicEnemy(this.ctx,1200,300,30),
-            new BasicEnemy(this.ctx,1500,300,100)  */ 
+            new BasicEnemy(this.ctx,1500,300,100)   
         ]
         //Collectable Objects
 
@@ -45,7 +45,7 @@ class Game{
         ]
 
         this.heartsArr = [
-            new Heart(this.ctx,700,200)
+            new Heart(this.ctx,100,300)
         ]
 
         this.mysteryBoxArr = [

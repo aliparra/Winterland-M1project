@@ -36,7 +36,8 @@ class BasicEnemy{
             bottom: false, 
             left: false,
             right: false,
-            active: true
+            active: true,
+            canCollision: true
             
         }
 
@@ -322,6 +323,10 @@ class BasicEnemy{
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
+        console.log(element.health)
+    setTimeout(() => {
+        this.collisions.canCollision = true 
+    }, 500);
        if(this.collisions.active){
             //LEFT COLLISION
             if( element.y + element.height >= this.y &&
@@ -330,11 +335,19 @@ class BasicEnemy{
                 element.x < this.x && 
                 element.previousX +  element.width <= this.x)
                 {
+
                     console.log('left')
                     element.health -=this.attack
+                    if(element.width>=1 && element.height >=1){
+                        element.width /= BEBIG
+                        element.height /= BEBIG
+                    }
                     if(element.health<=0){
                         element.death()
                     }
+                    this.collisions.canCollision = false 
+
+                    
                     
         
                 }
@@ -348,10 +361,16 @@ class BasicEnemy{
                 {
                     console.log('right')
                     element.health -= this.attack
+                    if(element.width>=1 && element.height >=1){
+                        element.width /= BEBIG
+                        element.height /= BEBIG
+                    }
         
                     if(element.health <= 0){
                         element.death()
                     }
+                    this.collisions.canCollision = false
+                    
             }
             //TOP COLLISION
             else if( 
@@ -388,6 +407,8 @@ class BasicEnemy{
                     if(element.health<=0){
                         element.death()
                     }
+
+                    this.collisions.canCollision = false  
                 }  
             else{
                 element.collisions.top = false
@@ -395,6 +416,7 @@ class BasicEnemy{
                 element.collisions.left = false
                 element.collisions.right = false
                 } 
+
         }
     }
 
