@@ -16,14 +16,19 @@ class BasicEnemy{
 
         this.distance = distance + this.x
         
-        this.height = 100
-        this.width = 50
+        this.height = 0
+        this.width = 0
 
         
         
         //Auxiliar properties to move from one side to another
         this.init =this.x
         this.changeDir = undefined
+        this.status = {
+            left: false,
+            right: true,
+            death: false
+        }
 
         //COLLISION 
         this.collisions = {
@@ -31,6 +36,7 @@ class BasicEnemy{
             bottom: false, 
             left: false,
             right: false,
+            active: true
             
         }
 
@@ -40,15 +46,114 @@ class BasicEnemy{
         //HEALTH
 
         this.health= MAINHEALTH
+
+        //SPRITE SHEET
+        this.sprite = new Image()
+        this.sprite.src = './assets/img/enemySprite/enemy_sprite.png'
+        this.sprite.isReady = false
+
+        this.sprite.horizontalFrames = 12
+        this.sprite.verticalFrames = 4
+
+        this.sprite.horizontalFrameIndex = 0
+        this.sprite.verticalFrameIndex = 0
+
+        this.sprite.drawCount = 0
+
+        this.sprite.onload = () => {
+            this.sprite.isReady = true
+
+            this.sprite.frameWidth = this.sprite.width / this.sprite.horizontalFrames //To know the widht of every frame
+            this.sprite.frameHeight = this.sprite.height / this.sprite.verticalFrames //To know the height of every frame
+
+            this.width = this.sprite.frameWidth
+            this.height = this.sprite.frameHeight // This give me the option of multiplying the value if I want 
+        }
+    }
+
+    isReady(){
+        return this.sprite.isReady
     }
 
     draw(){
-        this.ctx.save()
-        this.ctx.fillStyle = 'blue'
-        this.ctx.fillRect(this.x,this.y,this.width,this.height)
-        this.ctx.restore()
+        if(this.isReady()){
+            this.ctx.drawImage(
+                this.sprite,
+                this.sprite.horizontalFrameIndex * this.sprite.frameWidth,
+                this.sprite.verticalFrameIndex * this.sprite.frameHeight,
+                this.sprite.frameWidth,
+                this.sprite.frameHeight,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+
+            ) 
+        }
+        this.sprite.drawCount++
+        this.animate()
     }
 
+    animate(){
+        if(this.status.right && this.status.death){
+            this.animateDeathR()
+        }else if(this.status.left && this.status.death){
+            this.animateDeathL()
+        }else if(this.status.right){
+            this.animateWalkR()
+        }else if(this.status.left){
+            this.animateWalkL()
+        }
+    }
+
+    animateWalkR(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 2
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+    animateWalkL(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 0
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+    animateDeathR(){
+        if(this.sprite.drawCount % SLOW_MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 3
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+    animateDeathL(){
+        if(this.sprite.drawCount % SLOW_MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 1
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+        
+    }
     move(){
 
         //GRAVITY 
@@ -66,8 +171,12 @@ class BasicEnemy{
         //Moving from one side to another from initial position to provided distance
         if(this.x === this.distance ){
             this.changeDir = false
+            this.status.right = false
+            this.status.left = true
         }else if (this.x === this.init ){
             this.changeDir = true
+            this.status.right = true
+            this.status.left = false
         }
         //CHANGE X POSITION
         if(this.changeDir){
@@ -79,6 +188,8 @@ class BasicEnemy{
         //CHANGE Y POSITION
         this.y += this.vy
         
+        console.log(this.status.right)
+        console.log(this.status.left)
     }
 
     //PLATFORMS ENEMY COLLISIONS
@@ -92,9 +203,6 @@ class BasicEnemy{
             this.previousX +  this.width < element.x)
             {
                 //console.log('left')
-                this.x = element.x - this.width - 1
-                this.vx = 0
-                this.x = element.x - this.width - 1
                 this.collisions.left = true
        
             }
@@ -107,9 +215,6 @@ class BasicEnemy{
             this.previousX > element.x + element.width)
             {
                 //console.log('right')
-                this.x  = element.x + element.width + 1
-                this.vx = 0
-                this.vy = 0
                 this.collisions.right = true
         }
         //TOP COLLISION
@@ -162,9 +267,6 @@ class BasicEnemy{
             this.previousX +  this.width < elementx)
             {
                 //console.log('left')
-                this.x = elementx - this.width - 1
-                this.vx = 0
-                this.x = elementx - this.width - 1
                 this.collisions.left = true
        
             }
@@ -177,9 +279,6 @@ class BasicEnemy{
             this.previousX > elementx + element.width)
             {
                 //console.log('right')
-                this.x  = elementx + element.width + 1
-                this.vx = 0
-                this.vy = 0
                 this.collisions.right = true
         }
         //TOP COLLISION
@@ -224,79 +323,80 @@ class BasicEnemy{
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
+       if(this.collisions.active){
+            //LEFT COLLISION
+            if( element.y + element.height >= this.y &&
+                element.y <= this.y + this.height &&
+                element.x + element.width >= this.x &&
+                element.x < this.x && 
+                element.previousX +  element.width <= this.x)
+                {
+                    console.log('left')
+                    element.health -=this.attack
+                    if(element.health<=0){
+                        element.death()
+                    }
+                    
         
-        //LEFT COLLISION
-        if( element.y + element.height >= this.y &&
-            element.y <= this.y + this.height &&
-            element.x + element.width >= this.x &&
-            element.x < this.x && 
-            element.previousX +  element.width <= this.x)
-            {
-                console.log('left')
-                element.health -=this.attack
-                if(element.health<=0){
-                    element.death()
                 }
-                
-       
+            //RIGHT COLLISION
+            else if( 
+                element.y + element.height >= this.y &&
+                element.y <= this.y + this.height &&
+                element.x <= this.x + this.width &&
+                element.x + element.width > this.x + this.width &&
+                element.previousX >= this.x + this.width)
+                {
+                    console.log('right')
+                    element.health -= this.attack
+        
+                    if(element.health <= 0){
+                        element.death()
+                    }
             }
-        //RIGHT COLLISION
-        else if( 
-            element.y + element.height >= this.y &&
-            element.y <= this.y + this.height &&
-            element.x <= this.x + this.width &&
-            element.x + element.width > this.x + this.width &&
-            element.previousX >= this.x + this.width)
-            {
-                console.log('right')
-                element.health -= this.attack
-    
-                if(element.health <= 0){
-                    element.death()
-                }
+            //TOP COLLISION
+            else if( 
+                element.y + element.height >= this.y &&
+                element.y + element.height <= this.y + this.height &&
+                element.x + element.width >= this.x &&
+                element.x <= this.x + this.width &&
+                element.y < this.y && 
+                element.previousY + element.height < this.y) 
+                {
+                    
+                    element.vy = -5
+                    element.jumpAttackCounter++
+                    if(element.jumpAttackCounter === 1){
+                        this.health -= element.jumpAttack 
+                    }
+                    element.jumpAttackCounter = 0
+                    if(this.health<=0){
+                        this.death()
+                    }
+                    
+            }
+            //BOTTOM COLLISION
+            else if(
+                element.y <= this.y + this.height && 
+                element.y >= this.y && 
+                element.x + element.width >= this.x && 
+                element.x <= this.x + this.width &&
+                element.y + element.height > this.y + this.height &&
+                element.previousY > this.y + this.height)
+                {
+                    console.log('bottom')
+                    element.health -=this.attack
+                    if(element.health<=0){
+                        element.death()
+                    }
+                }  
+            else{
+                element.collisions.top = false
+                element.collisions.bottom = false
+                element.collisions.left = false
+                element.collisions.right = false
+                } 
         }
-        //TOP COLLISION
-        else if( 
-            element.y + element.height >= this.y &&
-            element.y + element.height <= this.y + this.height &&
-            element.x + element.width >= this.x &&
-            element.x <= this.x + this.width &&
-            element.y < this.y && 
-            element.previousY + element.height < this.y) 
-            {
-                
-                element.vy = -5
-                element.jumpAttackCounter++
-                if(element.jumpAttackCounter === 1){
-                    this.health -= element.jumpAttack 
-                }
-                element.jumpAttackCounter = 0
-                if(this.health<=0){
-                    this.death()
-                }
-                
-        }
-         //BOTTOM COLLISION
-        else if(
-            element.y <= this.y + this.height && 
-            element.y >= this.y && 
-            element.x + element.width >= this.x && 
-            element.x <= this.x + this.width &&
-            element.y + element.height > this.y + this.height &&
-            element.previousY > this.y + this.height)
-            {
-                console.log('bottom')
-                element.health -=this.attack
-                if(element.health<=0){
-                    element.death()
-                }
-            }  
-        else{
-            element.collisions.top = false
-            element.collisions.bottom = false
-            element.collisions.left = false
-            element.collisions.right = false
-            } 
     }
 
     //ENEMY-SNOWBALLS COLLISIONS
@@ -317,7 +417,12 @@ class BasicEnemy{
     }
 
     death(){
-        this.x = undefined
+        this.status.death = true
+        this.collisions.active = false
+        this.vx=0
+        setTimeout(() => {
+            this.x= undefined
+        }, 1000);
     }
     
 }

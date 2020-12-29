@@ -4,8 +4,8 @@ class AirPlatform {
     constructor(ctx,x,y){
         this.ctx= ctx
 
-        this.width = 100
-        this.height = 100
+        this.width = 50
+        this.height = 50
 
         this.x = x
         this.x1 = this.x + this.width

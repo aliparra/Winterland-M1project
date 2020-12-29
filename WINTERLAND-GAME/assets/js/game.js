@@ -28,8 +28,8 @@ class Game{
         //Enemies
         this.basicEnemyArr = [
             new BasicEnemy(this.ctx,200,300,100), 
-            new BasicEnemy(this.ctx,450,200,50), 
-            new BasicEnemy(this.ctx,1200,300,50),
+            new BasicEnemy(this.ctx,450,200,100), 
+            new BasicEnemy(this.ctx,1200,300,30),
             new BasicEnemy(this.ctx,1500,300,100)  
         ]
         //Collectable Objects
@@ -41,8 +41,7 @@ class Game{
             new Coin(this.ctx,650,100),
             new Coin(this.ctx,720,100),
             new Coin(this.ctx,800,100),
-            new Coin(this.ctx,950,350),
-            new Coin(this.ctx,1300,250),
+            new Coin(this.ctx,950,350)
         ]
 
         this.prize = new Coin(this.ctx,1300,250) 
