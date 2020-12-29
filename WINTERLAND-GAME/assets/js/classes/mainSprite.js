@@ -588,9 +588,12 @@ class MainSprite{
     }
 
     spritePosition(){
-
+        this.ctx.save()
+        this.fillStyle= 'red'
         this.ctx.font = '18px Arial'
-        this.ctx.fillText(` ${this.x}`,this.x, this.y + 20) 
+        this.ctx.fillText(` ${this.x}`,this.x, this.y + 20)
+        this.ctx.restore()
+        this.ctx.fillText(` ${Math.floor(this.y)}`,this.x, this.y + 40) 
     }
         
 }

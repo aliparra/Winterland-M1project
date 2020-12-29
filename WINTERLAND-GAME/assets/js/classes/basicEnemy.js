@@ -323,10 +323,11 @@ class BasicEnemy{
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
-        console.log(element.health)
+    console.log(this.collisions.canCollision)    
     setTimeout(() => {
         this.collisions.canCollision = true 
-    }, 500);
+    }, 4000);
+     
        if(this.collisions.active){
             //LEFT COLLISION
             if( element.y + element.height >= this.y &&

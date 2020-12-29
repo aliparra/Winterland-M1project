@@ -30,7 +30,7 @@ class Snowball extends GenericClass{
 
     draw(){
         if(this.isReady()){
-            console.log('enter')
+            
         this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height)   
         }
     }
