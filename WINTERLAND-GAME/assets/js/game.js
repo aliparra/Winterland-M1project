@@ -27,10 +27,10 @@ class Game{
 
         //Enemies
         this.basicEnemyArr = [
-            new BasicEnemy(this.ctx,200,300,100), 
+            /* new BasicEnemy(this.ctx,200,300,100), 
             new BasicEnemy(this.ctx,450,200,100), 
             new BasicEnemy(this.ctx,1200,300,30),
-            new BasicEnemy(this.ctx,1500,300,100)  
+            new BasicEnemy(this.ctx,1500,300,100)  */ 
         ]
         //Collectable Objects
 
@@ -44,10 +44,9 @@ class Game{
             new Coin(this.ctx,950,350)
         ]
 
-        this.prize = new Coin(this.ctx,1300,250) 
-        /* this.misteryPrizes = [
-            new Coin(this.ctx,1300,250)  
-        ] */
+        this.heartsArr = [
+            new Heart(this.ctx,700,200)
+        ]
 
         this.mysteryBoxArr = [
             new MisteryBox(this.ctx, 1300, 250)
@@ -58,7 +57,11 @@ class Game{
         this.airPlatformsArr = [
             new AirPlatform(this.ctx,400,400),
             new AirPlatform(this.ctx,600,250),
-            new AirPlatform(this.ctx,800,400)
+            new AirPlatform(this.ctx,800,400),
+            new AirPlatform(this.ctx,2120,400),
+            
+            new AirPlatform(this.ctx,2450,250),
+
         ]
 
         //COUNTERS
@@ -110,9 +113,14 @@ class Game{
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
+        this.heartsArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
+       
+
+        //HELPERS
+        this.mainSprite.spritePosition()
 
         
 
@@ -153,6 +161,7 @@ class Game{
             //Base platforms deleted
             this.deletePlatforms(4,10,this.platformsArr)
             this.deletePlatforms(20,25,this.platformsArr)
+            
 
 
          /* this.worldConstructor.addCoin(this.coinsArr) */
@@ -205,6 +214,10 @@ class Game{
         //Sprite-Mistery Box
 
         this.mysteryBoxArr.forEach((box) =>  this.mainSprite.boxCollision(box,this.prize))
+
+        //Sprite- heart
+
+        this.heartsArr.forEach((heart) => this.mainSprite.heartCollision(heart))
         //Enemy-snowballs
 
         this.basicEnemyArr.forEach((enemy) => {
@@ -222,6 +235,8 @@ class Game{
         this.coinsArr = restCoins
 
     } 
+
+   
 
    
 }

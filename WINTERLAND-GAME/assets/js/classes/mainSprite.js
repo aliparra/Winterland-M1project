@@ -31,7 +31,7 @@ class MainSprite{
 
         this.jumpProperties = {
             isJumping: false,
-            jumpMax: -13,
+            jumpMax: -11,
             jumpChrono: 0,
             jumpInterval: undefined
         }
@@ -538,6 +538,27 @@ class MainSprite{
             this.collisions.right = false
             } 
     }
+
+
+      //HEART COLLISION
+
+      heartCollision(element){
+        if(this.x < element.x + element.width &&
+            this.x + this.width > element.x &&
+            this.y < element.y + element.height &&
+            this.y + this.height > element.y){
+
+                this.width*= 1.5
+                this.height*= 1.5
+                console.log(this.health)
+                /* if(this.health<=MAINHEALTH){
+                    
+                    this.health+= 100
+                } */
+                
+            }
+        
+    }
     //GENERIC COLLISION
 
     collision(element){
@@ -557,13 +578,18 @@ class MainSprite{
     death(){
            this.x=undefined
            setTimeout(()=> 
-           this.save(),
            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.5)',
            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
            this.ctx.fillStyle = "rgb(0,0,0)",
            this.ctx.font = '100px Arial bold',
            this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500), 2000 )
            
+    }
+
+    spritePosition(){
+
+        this.ctx.font = '18px Arial'
+        this.ctx.fillText(` ${this.x}`,this.x, this.y + 20) 
     }
         
 }

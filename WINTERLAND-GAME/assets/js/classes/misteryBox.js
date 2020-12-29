@@ -31,14 +31,14 @@ class MisteryBox extends GenericClass{
     
 
     draw(){
-        console.log(this.collisionStatus)
+        
         if(this.collisionStatus){
             this.ctx.drawImage(this.img2,this.x,this.y,this.width,this.height)
-            console.log('interrogacion')
+            
         }else if(this.collisionStatus === false && this.isReady())
         {
             this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height) 
-            console.log('sin interr')
+            
     
         }
         
