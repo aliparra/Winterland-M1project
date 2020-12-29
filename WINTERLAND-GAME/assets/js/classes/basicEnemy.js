@@ -188,8 +188,7 @@ class BasicEnemy{
         //CHANGE Y POSITION
         this.y += this.vy
         
-        console.log(this.status.right)
-        console.log(this.status.left)
+        
     }
 
     //PLATFORMS ENEMY COLLISIONS

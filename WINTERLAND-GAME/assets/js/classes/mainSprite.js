@@ -260,7 +260,7 @@ class MainSprite{
 
     move(){
         
-        console.log(this.x)
+        //console.log(this.x)
         //GRAVITY AND GRAVITY LIMITS
         this.vy += GRAVITY
         if(this.vy>=MAXGRAVITY){
@@ -509,7 +509,9 @@ class MainSprite{
                 this.vy = 0
                 this.vx = 0
                 this.collisions.top = true
+                
                 this.jumpattackCounter = 0
+                
 
         }
          //BOTTOM COLLISION
@@ -526,7 +528,8 @@ class MainSprite{
                 this.collisions.bottomBox = true
                 this.vy = 0   
                 this.vx = 0
-                element.showElement(prize)
+                element.collisionStatus = true
+                element.move()
             }  
         else{
             this.collisions.top = false
