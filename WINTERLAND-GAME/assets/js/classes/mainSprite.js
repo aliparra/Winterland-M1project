@@ -525,11 +525,11 @@ class MainSprite{
             {
                 console.log('bottom')
                 this.y = element.y + element.height + 1
-                this.collisions.bottomBox = true
                 this.vy = 0   
                 this.vx = 0
                 element.collisionStatus = true
                 element.move()
+                element.showPrize(prize)
             }  
         else{
             this.collisions.top = false

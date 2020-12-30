@@ -10,6 +10,7 @@ class MisteryBox extends GenericClass{
         this.vy = -20
         this.maxVy= 60
         this.collisionStatus = false
+        this.prizeOut = false
 
         this.img = new Image()
         this.img.src = './assets/img/Platformer/Bonus.png'
@@ -44,7 +45,7 @@ class MisteryBox extends GenericClass{
         
     }
 
-    //NEEDS TO BE FIXED NOT WORKING YET
+   
     move(){
         console.log('move!')
         if(this.vy<=this.maxVy && this.y>= this.prevY){
@@ -54,4 +55,17 @@ class MisteryBox extends GenericClass{
         }, 200);
     }
 
+    showPrize(prize){
+        if(!this.prizeOut){
+
+        if(this.vy<=this.maxVy && prize.y>= prize.prevY){
+                prize.y -=100
+                prize.y += this.vy}
+                 setTimeout(() => {
+                   prize.y=this.prevY - 50
+                }, 200); 
+        //prize.y -=100
+        this.prizeOut = true
+        }
+    }
 }

@@ -6,6 +6,9 @@ class Heart extends GenericClass{
         //Size
         this.width = 30
         this.height = 30
+        this.prevY= this.y
+
+        this.vy = -20
 
         //Image
         this.img = new Image()

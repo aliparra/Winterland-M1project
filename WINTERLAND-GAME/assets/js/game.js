@@ -44,13 +44,16 @@ class Game{
             new Coin(this.ctx,950,350)
         ]
 
-        this.heartsArr = [
-            new Heart(this.ctx,100,300),
-            new Heart(this.ctx,300,300)
+        this.prizesArr = [
+            new Heart(this.ctx,1330,250),
+            new Heart(this.ctx,1830,300),
+            new Coin(this.ctx,2530,100)
         ]
 
         this.mysteryBoxArr = [
-            new MisteryBox(this.ctx, 1300, 250)
+            new MisteryBox(this.ctx, 1300, 250),
+            new MisteryBox(this.ctx, 1800, 300),
+            new MisteryBox(this.ctx, 2500, 100)
         ]
 
         //World tiles
@@ -60,8 +63,7 @@ class Game{
             new AirPlatform(this.ctx,600,250),
             new AirPlatform(this.ctx,800,400),
             new AirPlatform(this.ctx,2120,400),
-            
-            new AirPlatform(this.ctx,2450,250),
+            new AirPlatform(this.ctx,2450,350),
 
         ]
 
@@ -114,7 +116,7 @@ class Game{
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
-        this.heartsArr.forEach((heart) =>  heart.draw())
+        this.prizesArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
@@ -214,11 +216,11 @@ class Game{
         
         //Sprite-Mistery Box
 
-        this.mysteryBoxArr.forEach((box) =>  this.mainSprite.boxCollision(box,this.prize))
+        this.mysteryBoxArr.forEach((box,i) =>  this.mainSprite.boxCollision(box,this.prizesArr[i]))
 
         //Sprite- heart
 
-        this.heartsArr.forEach((heart) => this.mainSprite.heartCollision(heart))
+        this.prizesArr.forEach((heart) => this.mainSprite.heartCollision(heart))
         //Enemy-snowballs
 
         this.basicEnemyArr.forEach((enemy) => {
