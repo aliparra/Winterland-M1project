@@ -323,7 +323,7 @@ class BasicEnemy{
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
-    console.log(this.collisions.canCollision)    
+      
     setTimeout(() => {
         this.collisions.canCollision = true 
     }, 4000);

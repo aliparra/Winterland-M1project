@@ -573,7 +573,11 @@ class MainSprite{
         return false
     }
 
-
+    healthStatus(){
+        if(this.health < 0){
+            this.death()
+        }
+    }
    
     //DEATH
     death(){

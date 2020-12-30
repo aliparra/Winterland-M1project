@@ -29,8 +29,8 @@ class Game{
         this.basicEnemyArr = [
             new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,450,200,100), 
-            new BasicEnemy(this.ctx,1200,300,30),
-            new BasicEnemy(this.ctx,1500,300,100)   
+            //new BasicEnemy(this.ctx,1200,300,30),
+            //new BasicEnemy(this.ctx,1500,300,100)   
         ]
         //Collectable Objects
 
@@ -65,6 +65,14 @@ class Game{
             new AirPlatform(this.ctx,2120,400),
             new AirPlatform(this.ctx,2450,350),
 
+        ]
+
+        this.warningSignArr = [
+            new WarningSign(this.ctx,1450,470)
+        ]
+
+        this.spikesArr = [
+            new Spike(this.ctx,1650,470)
         ]
 
         //COUNTERS
@@ -118,6 +126,8 @@ class Game{
         this.coinsArr.forEach((coin) =>  coin.draw())
         this.prizesArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
+        this.warningSignArr.forEach((sign) =>  sign.draw())
+        this.spikesArr.forEach((spike) =>  spike.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
        
@@ -221,6 +231,12 @@ class Game{
         //Sprite- heart
 
         this.prizesArr.forEach((heart) => this.mainSprite.heartCollision(heart))
+
+
+        //Sprite- spike
+        this.spikesArr.forEach((spike) => spike.appear(this.mainSprite))
+        this.spikesArr.forEach((spike) => spike.collision(this.mainSprite))
+
         //Enemy-snowballs
 
         this.basicEnemyArr.forEach((enemy) => {
