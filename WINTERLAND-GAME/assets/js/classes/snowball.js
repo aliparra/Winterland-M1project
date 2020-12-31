@@ -8,8 +8,8 @@ class Snowball extends GenericClass{
         this.width = 20
         this.height = 20
 
-        this.vx = 15
-        this.vy = 0
+        this.vx = 10
+        this.vy = -5
 
         //Image
         this.img = new Image()
@@ -35,8 +35,16 @@ class Snowball extends GenericClass{
         }
     }
 
-    move(){
+    moveR(){
         this.x += this.vx
+        this.y += this.vy
+        this.vy += GRAVITY
+        if(this.vy>=MAXGRAVITY){
+            this.vy=MAXGRAVITY
+        }
+    }
+    moveL(){
+        this.x -= this.vx
         this.y += this.vy
         this.vy += GRAVITY
         if(this.vy>=MAXGRAVITY){

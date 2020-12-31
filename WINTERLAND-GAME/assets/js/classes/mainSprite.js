@@ -56,6 +56,7 @@ class MainSprite{
 
         //HEALTH
          this.health = MAINHEALTH
+         this.isDead = false
 
         //SPRITE IMAGES
 
@@ -114,6 +115,7 @@ class MainSprite{
 
     }
 
+    //ANIMATIONS
     animate(){
         if(this.movements.run && this.movements.right){
             this.animateRunR()  
@@ -137,7 +139,13 @@ class MainSprite{
         else if(this.jumpProperties.isJumping){
             this.animateJumpR()
             
-        }else{
+        }else if(this.isDead && this.movements.left){
+            this.animateDieL()
+        }
+        else if(this.isDead){
+            this.animateDieR()
+        }
+        else{
             this.resetAnimation()  
         }
 
@@ -226,6 +234,30 @@ class MainSprite{
         }
     } 
 
+    animateDieL(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 5
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    } 
+
+    animateDieR(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 11
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    } 
+
 
 
     //KEY EVENTS - MOVEMENTS
@@ -247,7 +279,7 @@ class MainSprite{
             case KEY_ATTACK:
                 if(this.canFire){
                 this.snowballs.push(
-                    new Snowball(this.ctx, this.x + this.width, this.y))
+                    new Snowball(this.ctx, this.x + this.width/2, this.y+80))
                     this.canFire = false
                     setTimeout(()=> { this.canFire = true}, 1000)
                 }
@@ -319,8 +351,10 @@ class MainSprite{
 
         //ATTACK
 
-        
-        this.snowballs.forEach(snowball => snowball.move())
+        if(this.movements.left){
+        this.snowballs.forEach(snowball => snowball.moveL())}else{
+            this.snowballs.forEach(snowball => snowball.moveR()) 
+        }
         
 
 
@@ -575,19 +609,21 @@ class MainSprite{
 
     healthStatus(){
         if(this.health < 0){
-            this.death()
+            this.isDead = true
+            setTimeout(()=> {this.death()},1500)
+            
         }
     }
    
     //DEATH
     death(){
            this.x=undefined
-           setTimeout(()=> 
+           
            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.5)',
            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
            this.ctx.fillStyle = "rgb(0,0,0)",
            this.ctx.font = '100px Arial bold',
-           this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500), 2000 )
+           this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500)
            
     }
 

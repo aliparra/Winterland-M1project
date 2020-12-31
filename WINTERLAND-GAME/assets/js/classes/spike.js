@@ -28,8 +28,8 @@ class Spike extends GenericClass{
     }
 
     appear(element){
-        if(this.x < element.x + 200 + element.width &&
-            this.x + this.width > element.x + 200 &&
+        if(this.x < element.x + 150 + element.width &&
+            this.x + this.width > element.x + 150 &&
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
                 this.appears = true

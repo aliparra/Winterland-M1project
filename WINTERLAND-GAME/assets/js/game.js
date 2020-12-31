@@ -15,8 +15,7 @@ class Game{
         
         //Characters
         this.mainSprite = new MainSprite(this.ctx,500,0)
-        this.snowball = new Snowball(this.ctx, this.x + this.width, this.y)
-
+        
         //Enviroment
         
         this.platformsArr = []  
