@@ -31,7 +31,7 @@ class MainSprite{
 
         this.jumpProperties = {
             isJumping: false,
-            jumpMax: -11,
+            jumpMax: -12,
             jumpChrono: 0,
             jumpInterval: undefined
         }
@@ -61,11 +61,11 @@ class MainSprite{
 
         //SPRITE SHEET
         this.sprite = new Image()
-        this.sprite.src = './assets/img/mainsprite/main_sprite.png'
+        this.sprite.src = './assets/img/mainsprite/fixed_main_sprite.png'
         this.sprite.isReady = false
 
         this.sprite.horizontalFrames = 10
-        this.sprite.verticalFrames = 10
+        this.sprite.verticalFrames = 12
 
         this.sprite.horizontalFrameIndex = 0
         this.sprite.verticalFrameIndex = 0
@@ -147,7 +147,7 @@ class MainSprite{
     resetAnimation(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 8
+            this.sprite.verticalFrameIndex = 9
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -158,7 +158,7 @@ class MainSprite{
 
     animateWalkR(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
-        this.sprite.verticalFrameIndex = 5
+        this.sprite.verticalFrameIndex = 6
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0  
             }else{
@@ -180,7 +180,7 @@ class MainSprite{
 
      animateRunR(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
-        this.sprite.verticalFrameIndex = 6
+        this.sprite.verticalFrameIndex = 7
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -205,7 +205,7 @@ class MainSprite{
     animateJumpR(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 7
+            this.sprite.verticalFrameIndex = 8
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -293,7 +293,7 @@ class MainSprite{
 
             this.jumpProperties.jumpInterval = setInterval(() => {
                 this.jumpProperties.jumpChrono++
-            },10) 
+            },8) 
 
         }else if(this.jumpProperties.isJumping && !this.movements.up && this.jumpProperties.jumpChrono >= 120 || this.collisions.up ){
             this.jumpProperties.isJumping = false

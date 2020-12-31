@@ -46,13 +46,13 @@ class Game{
 
         this.prizesArr = [
             new Heart(this.ctx,1330,250),
-            new Heart(this.ctx,1830,300),
+            new Heart(this.ctx,370,100),
             new Coin(this.ctx,2530,100)
         ]
 
         this.mysteryBoxArr = [
             new MisteryBox(this.ctx, 1300, 250),
-            new MisteryBox(this.ctx, 1800, 300),
+            new MisteryBox(this.ctx, 350, 100),
             new MisteryBox(this.ctx, 2500, 100)
         ]
 
@@ -63,7 +63,7 @@ class Game{
             new AirPlatform(this.ctx,600,250),
             new AirPlatform(this.ctx,800,400),
             new AirPlatform(this.ctx,2120,400),
-            new AirPlatform(this.ctx,2450,350),
+            new AirPlatform(this.ctx,2450,380),
 
         ]
 
