@@ -3,6 +3,7 @@ class Coin extends GenericClass{
     constructor(ctx,x,y){
         super(ctx,x,y)
 
+        this.prevY= this.y
         //Size
         this.width = 30
         this.height = 30

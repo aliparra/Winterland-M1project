@@ -55,6 +55,15 @@ class Game{
             new MisteryBox(this.ctx, 2500, 100)
         ]
 
+        this.brickPrizesArr = [
+            new Coin(this.ctx,130,250)
+        ]
+
+        this.bricksArr = [
+            new Brick(this.ctx, 100, 250),
+            
+        ]
+
         //World tiles
         //this.worldConstructor = new worldConstructor (this.ctx)
         this.airPlatformsArr = [
@@ -125,6 +134,8 @@ class Game{
         this.coinsArr.forEach((coin) =>  coin.draw())
         this.prizesArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
+        this.brickPrizesArr.forEach((prize) => prize.draw())
+        this.bricksArr.forEach((brick) =>  brick.draw())
         this.warningSignArr.forEach((sign) =>  sign.draw())
         this.spikesArr.forEach((spike) =>  spike.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
@@ -220,6 +231,8 @@ class Game{
         ) 
         //Sprite-coins
         this.coinsArr.forEach((coin) =>  this.mainSprite.collision(coin))
+
+        this.brickPrizesArr.forEach((prize) => this.mainSprite.collision(prize))
         //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
         
@@ -227,6 +240,9 @@ class Game{
 
         this.mysteryBoxArr.forEach((box,i) =>  this.mainSprite.boxCollision(box,this.prizesArr[i]))
 
+        //Sprite - Brick
+
+        this.bricksArr.forEach((brick,i) =>  this.mainSprite.boxCollision(brick,this.brickPrizesArr[i]))
         //Sprite- heart
 
         this.prizesArr.forEach((heart) => this.mainSprite.heartCollision(heart))
@@ -246,11 +262,22 @@ class Game{
 
     coinsCount(){
 
+        //FREE COINS
         const restCoins = this.coinsArr.filter( coin => !this.mainSprite.collision(coin))
-        const newPoints = this.coinsArr.length - restCoins.length
-        this.coinsCounter += newPoints
+        const newPoints = this.coinsArr.length  - restCoins.length
+        
 
+        //COINS INSIDE A BRICK
+        const restCoinsBricks = this.brickPrizesArr.filter( coin => !this.mainSprite.collision(coin))
+        const newPointsBricks = this.brickPrizesArr.length  - restCoinsBricks.length
+
+        //TOTAL COINS
+        this.coinsCounter += newPoints
+        this.coinsCounter += newPointsBricks
+
+        //UPDATE COINS ARRAYS
         this.coinsArr = restCoins
+        this.brickPrizesArr = restCoinsBricks
 
     } 
 
@@ -258,3 +285,6 @@ class Game{
 
    
 }
+   
+
+   

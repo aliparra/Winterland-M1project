@@ -21,7 +21,7 @@ class Spike extends GenericClass{
 
 
     draw(){
-        console.log(this.appears)
+        
         if(this.isReady() && this.appears){
         this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height)   
         }
@@ -33,7 +33,7 @@ class Spike extends GenericClass{
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
                 this.appears = true
-                console.log('appears')
+                
             } 
     }
     collision(element){
