@@ -31,6 +31,11 @@ class Game{
             //new BasicEnemy(this.ctx,1200,300,30),
             //new BasicEnemy(this.ctx,1500,300,100)   
         ]
+
+        this.flyingEnemyArr = [
+            new FlyingEnemy(this.ctx,221,100,400), 
+              
+        ]
         //Collectable Objects
 
         this.coinsArr = [
@@ -60,7 +65,7 @@ class Game{
         ]
 
         this.bricksArr = [
-            new Brick(this.ctx, 100, 250),
+           // new Brick(this.ctx, 100, 250),
             
         ]
 
@@ -140,6 +145,7 @@ class Game{
         this.spikesArr.forEach((spike) =>  spike.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
+        this.flyingEnemyArr.forEach((enemy) =>  enemy.draw())
        
 
         //HELPERS
@@ -156,6 +162,7 @@ class Game{
         this.snowfallArr.forEach((snowfall) =>  snowfall.move())
         this.mainSprite.move()
         this.basicEnemyArr.forEach((enemy) =>  enemy.move())
+        this.flyingEnemyArr.forEach((enemy) =>  enemy.move())
         
     }
 
@@ -235,6 +242,9 @@ class Game{
         this.brickPrizesArr.forEach((prize) => this.mainSprite.collision(prize))
         //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
+
+        //Fying enemy- sprite
+        this.flyingEnemyArr.forEach((enemy) =>  enemy.spriteCollision(this.mainSprite))
         
         //Sprite-Mistery Box
 
@@ -252,11 +262,15 @@ class Game{
         this.spikesArr.forEach((spike) => spike.appear(this.mainSprite))
         this.spikesArr.forEach((spike) => spike.collision(this.mainSprite))
 
-        //Enemy-snowballs
+        // Enemy-snowballs
 
         this.basicEnemyArr.forEach((enemy) => {
             this.mainSprite.snowballs.forEach((snowball) => enemy.collision(snowball))}
         ) 
+
+        this.flyingEnemyArr.forEach((enemy) => {
+            this.mainSprite.snowballs.forEach((snowball) => enemy.snowBallCollision(snowball))}
+        )
        
     }
 

@@ -14,7 +14,6 @@ class BasicEnemy{
         this.vy = 0
         this.previousY = this.y
 
-        this.distance = distance + this.x
         
         this.height = 0
         this.width = 0
@@ -22,6 +21,7 @@ class BasicEnemy{
         
         
         //Auxiliar properties to move from one side to another
+        this.distance = distance + this.x
         this.init =this.x
         this.changeDir = undefined
         this.status = {
