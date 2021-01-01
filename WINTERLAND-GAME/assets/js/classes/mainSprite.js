@@ -66,6 +66,16 @@ class MainSprite{
          this.inventary = {
              heart: false
          }
+         //SPRITE SOUND
+         //sounds
+        this.sounds = {
+            jump: new Audio('./assets/sounds/jump.mp3'),
+            shoot: new Audio('./assets/sounds/snowballShoot.mp3')
+        } 
+
+        this.sounds.jump.volume = 0.1
+        this.sounds.shoot.volume = 0.1
+
         //SPRITE IMAGES
 
         //SPRITE SHEET
@@ -296,6 +306,7 @@ class MainSprite{
                 break;
             case KEY_ATTACK:
                 if(this.canFire){
+                this.sounds.shoot.play()
                 this.snowballs.push(
                     new Snowball(this.ctx, this.x + this.width/2, this.y+80))
                     this.canFire = false
@@ -340,6 +351,7 @@ class MainSprite{
         if(this.movements.up && !this.jumpProperties.isJumping){
             this.jumpProperties.isJumping = true
             this.vy = this.jumpProperties.jumpMax
+            this.sounds.jump.play()
 
             this.jumpProperties.jumpInterval = setInterval(() => {
                 this.jumpProperties.jumpChrono++
