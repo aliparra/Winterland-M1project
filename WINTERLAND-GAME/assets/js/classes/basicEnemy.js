@@ -36,7 +36,6 @@ class BasicEnemy{
             bottom: false, 
             left: false,
             right: false,
-            active: true,
             canCollision: true
             
         }
@@ -328,7 +327,7 @@ class BasicEnemy{
         this.collisions.canCollision = true 
     }, 4000);
      
-       if(this.collisions.active){
+       if(!this.status.death){
             //LEFT COLLISION
             if( element.y + element.height >= this.y &&
                 element.y <= this.y + this.height &&
@@ -337,20 +336,15 @@ class BasicEnemy{
                 element.previousX +  element.width <= this.x)
                 {
 
-                    console.log('left')
+                    //console.log('left')
+                    
                     element.health -=this.attack
                     if(element.width>=1 && element.height >=1){
                         element.width /= BEBIG
                         element.height /= BEBIG
                     }
-                    if(element.health<=0){
-                        element.death()
-                    }
-                    this.collisions.canCollision = false 
-
                     
-                    
-        
+                    this.collisions.canCollision = false     
                 }
             //RIGHT COLLISION
             else if( 
@@ -360,16 +354,14 @@ class BasicEnemy{
                 element.x + element.width > this.x + this.width &&
                 element.previousX >= this.x + this.width)
                 {
-                    console.log('right')
+                    //console.log('right')
                     element.health -= this.attack
                     if(element.width>=1 && element.height >=1){
                         element.width /= BEBIG
                         element.height /= BEBIG
                     }
         
-                    if(element.health <= 0){
-                        element.death()
-                    }
+                    
                     this.collisions.canCollision = false
                     
             }
@@ -390,7 +382,7 @@ class BasicEnemy{
                     }
                     element.jumpAttackCounter = 0
                     if(this.health<=0){
-                        this.death()
+                        
                     }
                     
             }
@@ -403,12 +395,9 @@ class BasicEnemy{
                 element.y + element.height > this.y + this.height &&
                 element.previousY > this.y + this.height)
                 {
-                    console.log('bottom')
+                    //console.log('bottom')
                     element.health -=this.attack
-                    if(element.health<=0){
-                        element.death()
-                    }
-
+                   
                     this.collisions.canCollision = false  
                 }  
             else{
@@ -423,7 +412,7 @@ class BasicEnemy{
 
     //ENEMY-SNOWBALLS COLLISIONS
 
-    collision(element){
+    snowBallCollision(element){
         if(this.x < element.x + element.width &&
             this.x + this.width > element.x &&
             this.y < element.y + element.height &&
@@ -431,20 +420,22 @@ class BasicEnemy{
 
             //console.log('enemy was attacked')
             this.health -= element.attack
-            if(this.health<=0){
-                this.death()
-            }
-            }
+          
+        }
         
     }
 
-    death(){
-        this.status.death = true
-        this.collisions.active = false
-        this.vx=0
-        setTimeout(() => {
-            this.x= undefined
-        }, 1000);
+    healthStatus(){
+        if(this.health <= 0){
+            this.status.death = true
+            this.vx=0
+            setTimeout(() => {
+                this.x= undefined
+            }, 1000);
+            
+        }
     }
+
+    
     
 }

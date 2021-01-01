@@ -6,6 +6,9 @@ class MainSprite{
         this.width=0
         this.height=0
 
+        this.initialWidth = this.width
+        this.initialHeight = this.height
+
         //x properties
         this.maxX = 0
         this.x = x
@@ -58,6 +61,11 @@ class MainSprite{
          this.health = MAINHEALTH
          this.isDead = false
 
+         //INVENTARY
+
+         this.inventary = {
+             heart: false
+         }
         //SPRITE IMAGES
 
         //SPRITE SHEET
@@ -583,9 +591,9 @@ class MainSprite{
             this.y + this.height > element.y){
 
                 
-                console.log(this.health)
-                 if(this.health<=MAINHEALTH){
-                    this.health+= MAINHEALTH
+                this.inventary.heart= true
+                //console.log(this.inventary.heart)
+                 if(this.inventary.heart){
                     this.height*=BEBIG
                     this.width*=BEBIG
                 } 
@@ -607,10 +615,11 @@ class MainSprite{
         return false
     }
 
+    //CHECK HEALTH 
     healthStatus(){
-        if(this.health < 0){
+        if(this.health <= 0){
             this.isDead = true
-            setTimeout(()=> {this.death()},1500)
+            this.death()
             
         }
     }

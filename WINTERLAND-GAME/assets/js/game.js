@@ -28,8 +28,8 @@ class Game{
         this.basicEnemyArr = [
             new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,450,200,100), 
-            //new BasicEnemy(this.ctx,1200,300,30),
-            //new BasicEnemy(this.ctx,1500,300,100)   
+            new BasicEnemy(this.ctx,1200,300,30),
+            new BasicEnemy(this.ctx,1500,300,100)   
         ]
 
         this.flyingEnemyArr = [
@@ -110,6 +110,7 @@ class Game{
                 this.move()
                 this.checkCollisions()
                 this.coinsCount()
+                this.checkHealth()
                 
 
             }, FPS)
@@ -168,6 +169,11 @@ class Game{
 
     animate(){
         this.mainSprite.animate
+    }
+
+    checkHealth(){
+        this.mainSprite.healthStatus()
+        this.basicEnemyArr.forEach((enemy) => {enemy.healthStatus()})
     }
 
     generateObject(){
@@ -265,7 +271,7 @@ class Game{
         // Enemy-snowballs
 
         this.basicEnemyArr.forEach((enemy) => {
-            this.mainSprite.snowballs.forEach((snowball) => enemy.collision(snowball))}
+            this.mainSprite.snowballs.forEach((snowball) => enemy.snowBallCollision(snowball))}
         ) 
 
         this.flyingEnemyArr.forEach((enemy) => {
