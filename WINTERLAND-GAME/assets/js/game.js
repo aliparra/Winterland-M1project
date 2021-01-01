@@ -85,7 +85,7 @@ class Game{
         ]
 
         this.spikesArr = [
-            new Spike(this.ctx,1650,470)
+            new Spike(this.ctx,1650,490)
         ]
 
         //COUNTERS
@@ -305,6 +305,5 @@ class Game{
 
    
 }
-   
 
    

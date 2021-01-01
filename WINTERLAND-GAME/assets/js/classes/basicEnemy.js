@@ -15,8 +15,8 @@ class BasicEnemy{
         this.previousY = this.y
 
         
-        this.height = 0
-        this.width = 0
+        this.height = 50
+        this.width = 50
 
         
         
@@ -35,9 +35,7 @@ class BasicEnemy{
             top: false,
             bottom: false, 
             left: false,
-            right: false,
-            canCollision: true
-            
+            right: false,   
         }
 
         //ATTACK
@@ -67,7 +65,7 @@ class BasicEnemy{
             this.sprite.frameHeight = this.sprite.height / this.sprite.verticalFrames //To know the height of every frame
 
             this.width = this.sprite.frameWidth
-            this.height = this.sprite.frameHeight // This give me the option of multiplying the value if I want 
+            this.height = this.sprite.frameHeight  
         }
     }
 
@@ -322,11 +320,6 @@ class BasicEnemy{
     //ENEMY-SPRITE COLLISIONS
   
     collisionEnemy(element){
-      
-    setTimeout(() => {
-        this.collisions.canCollision = true 
-    }, 4000);
-     
        if(!this.status.death){
             //LEFT COLLISION
             if( element.y + element.height >= this.y &&
@@ -336,15 +329,17 @@ class BasicEnemy{
                 element.previousX +  element.width <= this.x)
                 {
 
-                    //console.log('left')
-                    
-                    element.health -=this.attack
-                    if(element.width>=1 && element.height >=1){
-                        element.width /= BEBIG
-                        element.height /= BEBIG
+                    console.log('left')
+                    element.x = this.x - element.width - 50
+
+                    if(!element.inventary.heart){
+                        element.health -= this.attack
+                        
+                    }else{
+                        element.inventary.heart = false
+                        
                     }
-                    
-                    this.collisions.canCollision = false     
+
                 }
             //RIGHT COLLISION
             else if( 
@@ -355,15 +350,16 @@ class BasicEnemy{
                 element.previousX >= this.x + this.width)
                 {
                     //console.log('right')
-                    element.health -= this.attack
-                    if(element.width>=1 && element.height >=1){
-                        element.width /= BEBIG
-                        element.height /= BEBIG
+                    element.x = this.x + this.width + 50
+
+                    if(!element.inventary.heart){
+                        element.health -= this.attack
+                        
+                    }else{
+                        element.inventary.heart = false
+                        
                     }
-        
-                    
-                    this.collisions.canCollision = false
-                    
+ 
             }
             //TOP COLLISION
             else if( 
@@ -396,9 +392,17 @@ class BasicEnemy{
                 element.previousY > this.y + this.height)
                 {
                     //console.log('bottom')
-                    element.health -=this.attack
+
+                    element.y = this.y + this.height + 20
+
+                    if(!element.inventary.heart){
+                        element.health -= this.attack
+                        
+                    }else{
+                        element.inventary.heart = false
+                        
+                    }
                    
-                    this.collisions.canCollision = false  
                 }  
             else{
                 element.collisions.top = false

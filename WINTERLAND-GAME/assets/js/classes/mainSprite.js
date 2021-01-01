@@ -3,8 +3,8 @@ class MainSprite{
     constructor(ctx,x,y){
         this.ctx=ctx
 
-        this.width=0
-        this.height=0
+        this.width = 80
+        this.height = 130
 
         this.initialWidth = this.width
         this.initialHeight = this.height
@@ -34,7 +34,7 @@ class MainSprite{
 
         this.jumpProperties = {
             isJumping: false,
-            jumpMax: -12,
+            jumpMax: -13,
             jumpChrono: 0,
             jumpInterval: undefined
         }
@@ -99,6 +99,7 @@ class MainSprite{
     }
 
     draw(){
+        
         if(this.isReady()){
             this.ctx.drawImage(
                 this.sprite,
@@ -117,6 +118,15 @@ class MainSprite{
          //Let me paint less times than original frames
          this.sprite.drawCount++
         this.animate()
+
+        //Change mainSprite Size with heart
+        if(this.inventary.heart){
+            this.height = this.initialHeight * 1.2
+            this.width = this.initialWidth * 1.2
+        }else{
+            this.height = this.initialHeight
+            this.width = this.initialWidth
+        }
         
         //Snowballs
         this.snowballs.forEach(snowball => snowball.draw())   
@@ -364,11 +374,7 @@ class MainSprite{
             this.snowballs.forEach(snowball => snowball.moveR()) 
         }
         
-
-
     }
-
-
 
     //PLATFORMS COLLISIONS
     collidesWith(element){
@@ -565,7 +571,7 @@ class MainSprite{
             this.y + this.height > element.y + element.height &&
             this.previousY > element.y + element.height)
             {
-                console.log('bottom')
+                //console.log('bottom')
                 this.y = element.y + element.height + 1
                 this.vy = 0   
                 this.vx = 0
@@ -590,13 +596,10 @@ class MainSprite{
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
 
-                
+                this.y -= 30
                 this.inventary.heart= true
                 //console.log(this.inventary.heart)
-                 if(this.inventary.heart){
-                    this.height*=BEBIG
-                    this.width*=BEBIG
-                } 
+                 
                 element.x = undefined
                 
             }
