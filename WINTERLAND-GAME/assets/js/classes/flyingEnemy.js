@@ -48,9 +48,19 @@ class FlyingEnemy extends BasicEnemy{
               this.sprite.frameWidth = this.sprite.width / this.sprite.horizontalFrames //To know the widht of every frame
               this.sprite.frameHeight = this.sprite.height / this.sprite.verticalFrames //To know the height of every frame
   
-              this.width = this.sprite.frameWidth
-              this.height = this.sprite.frameHeight  
+              this.width =100//this.sprite.frameWidth
+              this.height = 100//this.sprite.frameHeight  
           }
+
+        //SOUNDS
+        this.sounds = {
+            die: new Audio('./assets/sounds/killEnemy.wav'),
+            kill: new Audio('./assets/sounds/blades.wav'),
+            hurt: new Audio('./assets/sounds/hurt.mp3')   
+        } 
+        this.sounds.die.volume = 0.1
+        this.sounds.kill.volume = 0.3
+        this.sounds.hurt.volume = 0.3
 
     }
 
@@ -131,9 +141,11 @@ class FlyingEnemy extends BasicEnemy{
  
                      if(!element.inventary.heart){
                          element.health -= this.attack
+                         this.sounds.kill.play()
                          
                      }else{
                          element.inventary.heart = false
+                         this.sounds.hurt.play()
                          
                      }
  
@@ -151,9 +163,11 @@ class FlyingEnemy extends BasicEnemy{
  
                      if(!element.inventary.heart){
                          element.health -= this.attack
+                         this.sounds.kill.play()
                          
                      }else{
                          element.inventary.heart = false
+                         this.sounds.hurt.play()
                          
                      }
   
@@ -172,9 +186,11 @@ class FlyingEnemy extends BasicEnemy{
  
                     if(!element.inventary.heart){
                         element.health -= this.attack
+                        this.sounds.kill.play()
                         
                     }else{
                         element.inventary.heart = false
+                        this.sounds.kill.hurt()
                         
                     }
                      
@@ -194,9 +210,11 @@ class FlyingEnemy extends BasicEnemy{
  
                      if(!element.inventary.heart){
                          element.health -= this.attack
+                         this.sounds.kill.play()
                          
                      }else{
                          element.inventary.heart = false
+                         this.sounds.hurt.play()
                          
                      }
                     
@@ -221,6 +239,7 @@ class FlyingEnemy extends BasicEnemy{
  
              //console.log('enemy was attacked')
              this.health -= element.attack
+             this.sounds.die.play()
            
          }
          

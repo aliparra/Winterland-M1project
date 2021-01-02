@@ -26,6 +26,12 @@ class MisteryBox extends GenericClass{
             this.img2.ready2 = true
         }
 
+        //Sound
+        this.sounds = {
+            misteryBox : new Audio('./assets/sounds/mysterybox.wav')
+        }
+        this.sounds.misteryBox.volume = 0.2
+
     }
 
     isReady(){
@@ -70,6 +76,7 @@ class MisteryBox extends GenericClass{
                 }, 200); 
         //prize.y -=100
         this.prizeOut = true
+        this.sounds.misteryBox.play()
         }
     }
 }

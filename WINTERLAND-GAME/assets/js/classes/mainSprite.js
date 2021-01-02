@@ -74,12 +74,21 @@ class MainSprite{
          //SPRITE SOUND
          //sounds
         this.sounds = {
-            jump: new Audio('./assets/sounds/jump.mp3'),
-            shoot: new Audio('./assets/sounds/snowballShoot.mp3')
+            jump: new Audio('./assets/sounds/jump2.wav'),
+            shoot: new Audio('./assets/sounds/snowballShoot.mp3'),
+            gameOver: new Audio('./assets/sounds/gameOver.wav'),
+            getCoin: new Audio('./assets/sounds/coin.wav'),
+            getHeart: new Audio('./assets/sounds/heart2.wav'),
+           
         } 
 
         this.sounds.jump.volume = 0.1
         this.sounds.shoot.volume = 0.1
+        this.sounds.gameOver.volume = 0.1
+        this.sounds.getCoin.volume = 0.1
+        this.sounds.getHeart.volume = 0.2
+        
+        this.stopSound = false
 
         //SPRITE IMAGES
 
@@ -603,6 +612,7 @@ class MainSprite{
                 element.collisionStatus = true
                 element.move()
                 element.showPrize(prize)
+                
             }  
         else{
             this.collisions.top = false
@@ -623,8 +633,7 @@ class MainSprite{
 
                 this.y -= 30
                 this.inventary.heart= true
-                //console.log(this.inventary.heart)
-                 
+                this.sounds.getHeart.play()
                 element.x = undefined
                 
             }
@@ -632,12 +641,12 @@ class MainSprite{
     }
     //GENERIC COLLISION
 
-    collision(element){
+    coinCollision(element){
         if(this.x < element.x + element.width &&
             this.x + this.width > element.x &&
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
-
+                this.sounds.getCoin.play()
                 return true
             }
         return false
@@ -655,7 +664,9 @@ class MainSprite{
     //DEATH
     death(){
            this.x=undefined
-           
+           if(!this.stopSound){
+           this.sounds.gameOver.play()}
+           this.stopSound = true
            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.5)',
            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
            this.ctx.fillStyle = "rgb(0,0,0)",

@@ -14,6 +14,16 @@ class Spike extends GenericClass{
         this.img.onload = () => {
             this.img.ready = true
         }
+
+        //sounds
+        this.sounds = {
+            appear: new Audio('./assets/sounds/blades.wav'),
+            kill: new Audio('./assets/sounds/blades.wav'),
+            hurt: new Audio('./assets/sounds/hurt.mp3') 
+        } 
+        this.stopSound = false
+        this.sounds.appear.volume = 0.4
+       
     }
 
     isReady(){
@@ -34,6 +44,9 @@ class Spike extends GenericClass{
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
                 this.appears = true
+                if(!this.stopSound){
+                this.sounds.appear.play()
+                this.stopSound = true}
                 
             } 
     }
@@ -75,9 +88,11 @@ class Spike extends GenericClass{
  
                      if(!element.inventary.heart){
                          element.health -= this.attack
+                         this.sounds.kill.play()
                          
                      }else{
                          element.inventary.heart = false
+                         this.sounds.hurt.play()
                          
                      }
  
@@ -95,9 +110,11 @@ class Spike extends GenericClass{
  
                      if(!element.inventary.heart){
                          element.health -= this.attack
+                         this.sounds.kill.play()
                          
                      }else{
                          element.inventary.heart = false
+                         this.sounds.hurt.play()
                          
                      }
   
@@ -116,9 +133,11 @@ class Spike extends GenericClass{
  
                     if(!element.inventary.heart){
                         element.health -= this.attack
+                        this.sounds.kill.play()
                         
                     }else{
                         element.inventary.heart = false
+                        this.sounds.hurt.play()
                         
                     }
                      
@@ -134,6 +153,8 @@ class Spike extends GenericClass{
                  {
                     //console.log('bottom')
                  }  
+
+
          }
         
 }

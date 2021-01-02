@@ -11,6 +11,11 @@ class Game{
         this.drawInterval = undefined
         
 
+        //SOUND
+        this.sounds = {
+        music: new Audio('./assets/sounds/mainMusic.mp3')
+        }
+        this.sounds.music.volume = 0.1
         //INSTANCES
         
         //Characters
@@ -21,9 +26,7 @@ class Game{
         this.platformsArr = []  
         this.backgroundArr = []
         this.snowfallArr = []
-
         
-
         //Enemies
         this.basicEnemyArr = [
             new BasicEnemy(this.ctx,800,200,100), 
@@ -33,7 +36,7 @@ class Game{
         ]
 
         this.flyingEnemyArr = [
-            new FlyingEnemy(this.ctx,150,100,400), 
+            new FlyingEnemy(this.ctx,2800,100,400), 
               
         ]
         //Collectable Objects
@@ -65,7 +68,7 @@ class Game{
         ]
 
         this.bricksArr = [
-         //new Brick(this.ctx, 100, 250),
+         new Brick(this.ctx, 100, 250),
             
         ]
 
@@ -111,6 +114,7 @@ class Game{
                 this.checkCollisions()
                 this.coinsCount()
                 this.checkHealth()
+                this.sounds.music.play()
                 
 
             }, FPS)
@@ -244,9 +248,9 @@ class Game{
             this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
         ) 
         //Sprite-coins
-        this.coinsArr.forEach((coin) =>  this.mainSprite.collision(coin))
+        this.coinsArr.forEach((coin) =>  this.mainSprite.coinCollision(coin))
 
-        this.brickPrizesArr.forEach((prize) => this.mainSprite.collision(prize))
+        this.brickPrizesArr.forEach((prize) => this.mainSprite.coinCollision(prize))
         //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
 
@@ -284,12 +288,12 @@ class Game{
     coinsCount(){
 
         //FREE COINS
-        const restCoins = this.coinsArr.filter( coin => !this.mainSprite.collision(coin))
+        const restCoins = this.coinsArr.filter( coin => !this.mainSprite.coinCollision(coin))
         const newPoints = this.coinsArr.length  - restCoins.length
         
 
         //COINS INSIDE A BRICK
-        const restCoinsBricks = this.brickPrizesArr.filter( coin => !this.mainSprite.collision(coin))
+        const restCoinsBricks = this.brickPrizesArr.filter( coin => !this.mainSprite.coinCollision(coin))
         const newPointsBricks = this.brickPrizesArr.length  - restCoinsBricks.length
 
         //TOTAL COINS

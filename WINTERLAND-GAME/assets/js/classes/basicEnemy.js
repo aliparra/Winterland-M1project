@@ -67,6 +67,17 @@ class BasicEnemy{
             this.width = this.sprite.frameWidth
             this.height = this.sprite.frameHeight  
         }
+
+        //SOUNDS
+
+        this.sounds = {
+            die: new Audio('./assets/sounds/killEnemy.wav'),
+            kill: new Audio('./assets/sounds/blades.wav'),
+            hurt: new Audio('./assets/sounds/hurt.mp3')   
+        } 
+        this.sounds.die.volume = 0.1
+        this.sounds.kill.volume = 0.3
+        this.sounds.hurt.volume = 0.3
     }
 
     isReady(){
@@ -334,9 +345,11 @@ class BasicEnemy{
 
                     if(!element.inventary.heart){
                         element.health -= this.attack
+                        this.sounds.kill.play()
                         
                     }else{
                         element.inventary.heart = false
+                        this.sounds.hurt.play()
                         
                     }
 
@@ -354,10 +367,11 @@ class BasicEnemy{
 
                     if(!element.inventary.heart){
                         element.health -= this.attack
+                        this.sounds.kill.play()
                         
                     }else{
                         element.inventary.heart = false
-                        
+                        this.sounds.hurt.play()
                     }
  
             }
@@ -375,6 +389,7 @@ class BasicEnemy{
                     element.jumpAttackCounter++
                     if(element.jumpAttackCounter === 1){
                         this.health -= element.jumpAttack 
+                        this.sounds.die.play()
                     }
                     element.jumpAttackCounter = 0
                     if(this.health<=0){
@@ -397,9 +412,11 @@ class BasicEnemy{
 
                     if(!element.inventary.heart){
                         element.health -= this.attack
+                        this.sounds.kill.play()
                         
                     }else{
                         element.inventary.heart = false
+                        this.sounds.hurt.play()
                         
                     }
                    
@@ -424,6 +441,7 @@ class BasicEnemy{
 
             //console.log('enemy was attacked')
             this.health -= element.attack
+            this.sounds.die.play()
           
         }
         

@@ -14,7 +14,13 @@ class Brick extends MisteryBox{
         this.img2 = new Image()
         this.img2.src = './assets/img/Platformer/Brick_02.png'
         
+        //Sounds
+        this.sounds = {
+            hit: new Audio('./assets/sounds/brick.wav'),    
+        } 
 
+        this.stopSound = false
+        this.sounds.hit.volume = 0.4
     }
 
     isReady(){
@@ -45,6 +51,10 @@ class Brick extends MisteryBox{
         setTimeout(() => {
            this.y=this.prevY 
         }, 200);
+        if(!this.stopSound){
+            this.sounds.hit.play()
+        }
+
     }
 
     showPrize(prize){
