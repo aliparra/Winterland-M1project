@@ -19,11 +19,13 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,500,0)
+        this.mainSprite = new MainSprite(this.ctx,200,0)
         
         //Enviroment
         
-        this.platformsArr = []  
+        this.platformsArr = [
+            
+        ]  
         this.backgroundArr = []
         this.snowfallArr = []
         
@@ -68,7 +70,7 @@ class Game{
         ]
 
         this.bricksArr = [
-         new Brick(this.ctx, 100, 250),
+         //new Brick(this.ctx, 100, 250),
             
         ]
 
@@ -81,6 +83,11 @@ class Game{
             new AirPlatform(this.ctx,2120,400),
             new AirPlatform(this.ctx,2450,380),
 
+        ]
+
+        this.movePlatformArr = [
+            
+            new MovePlatform(this.ctx,3500,400,3500,3600)
         ]
 
         this.warningSignArr = [
@@ -114,7 +121,7 @@ class Game{
                 this.checkCollisions()
                 this.coinsCount()
                 this.checkHealth()
-                this.sounds.music.play()
+                //this.sounds.music.play()
                 
 
             }, FPS)
@@ -140,6 +147,7 @@ class Game{
         this.snowfallArr.forEach((snowfall) =>  snowfall.draw())
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
+        this.movePlatformArr.forEach((platform) =>  platform.draw())
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
         this.prizesArr.forEach((heart) =>  heart.draw())
@@ -168,6 +176,7 @@ class Game{
         this.mainSprite.move()
         this.basicEnemyArr.forEach((enemy) =>  enemy.move())
         this.flyingEnemyArr.forEach((enemy) =>  enemy.move())
+        this.movePlatformArr.forEach((platform) =>  platform.move())
         
     }
 
@@ -225,6 +234,9 @@ class Game{
     checkCollisions(){
         //Sprite-platforms
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
+
+        //Sprite- Move platforms
+        this.movePlatformArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
         //Sprite-air platforms
         this.airPlatformsArr.forEach((platform) =>  this.mainSprite.collidesWithAp(platform,platform.x))
         this.airPlatformsArr.forEach((platform) =>  this.mainSprite.collidesWithAp(platform,platform.x1))

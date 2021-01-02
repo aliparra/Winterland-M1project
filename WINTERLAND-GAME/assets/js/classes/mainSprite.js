@@ -338,7 +338,6 @@ class MainSprite{
     }
 
     move(){
-        
         //console.log(this.x)
         //GRAVITY AND GRAVITY LIMITS
         this.vy += GRAVITY
@@ -365,9 +364,8 @@ class MainSprite{
             this.movements.run ? this.vx = -SPEED*2 : this.vx = -SPEED 
             this.status.leftSide = true
             this.status.rightSide = false
-        }else{
-            this.vx=0
         }
+
 
         //JUMP
         if(this.movements.up && !this.jumpProperties.isJumping){
@@ -454,7 +452,11 @@ class MainSprite{
                 this.vx = 0
                 this.collisions.top = true
                 this.jumpattackCounter = 0
-        }
+
+                if(element instanceof MovePlatform){ //Only applies to instances of MovePlatform class 
+                    this.vx = element.vx
+                }
+            }
          //BOTTOM COLLISION
         else if(
             this.y <= element.y + element.height && 
@@ -491,7 +493,7 @@ class MainSprite{
                 //console.log('left')
                 this.x = elementx - this.width - 1
                 this.vx = 0
-                this.x = elementx - this.width - 1
+        
                 this.collisions.left = true
        
             }
@@ -546,9 +548,7 @@ class MainSprite{
             this.collisions.right = false
             } 
     }
-
     //MYSTERYBOX COLLISION
-
     boxCollision(element,prize){
         //LEFT COLLISION
         if( this.y + this.height >= element.y &&
