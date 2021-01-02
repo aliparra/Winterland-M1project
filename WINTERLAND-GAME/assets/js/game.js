@@ -33,7 +33,7 @@ class Game{
         ]
 
         this.flyingEnemyArr = [
-            new FlyingEnemy(this.ctx,221,100,400), 
+            new FlyingEnemy(this.ctx,150,100,400), 
               
         ]
         //Collectable Objects
@@ -65,7 +65,7 @@ class Game{
         ]
 
         this.bricksArr = [
-           // new Brick(this.ctx, 100, 250),
+         //new Brick(this.ctx, 100, 250),
             
         ]
 
@@ -174,6 +174,7 @@ class Game{
     checkHealth(){
         this.mainSprite.healthStatus()
         this.basicEnemyArr.forEach((enemy) => {enemy.healthStatus()})
+        this.flyingEnemyArr.forEach((enemy) => {enemy.healthStatus()})
     }
 
     generateObject(){
@@ -250,7 +251,7 @@ class Game{
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
 
         //Fying enemy- sprite
-        this.flyingEnemyArr.forEach((enemy) =>  enemy.spriteCollision(this.mainSprite))
+        this.flyingEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
         
         //Sprite-Mistery Box
 

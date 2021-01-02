@@ -32,6 +32,11 @@ class MainSprite{
             run: false,
         }
 
+        this.status = {
+            leftSide: false,
+            rightSide: true
+        }
+
         this.jumpProperties = {
             isJumping: false,
             jumpMax: -13,
@@ -182,8 +187,10 @@ class MainSprite{
 
     resetAnimation(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
-            
-            this.sprite.verticalFrameIndex = 9
+            if(this.status.rightSide){
+            this.sprite.verticalFrameIndex = 9 }else{
+                this.sprite.verticalFrameIndex = 3
+            }
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -191,6 +198,8 @@ class MainSprite{
             }
         }
     }
+
+   
 
     animateWalkR(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
@@ -340,9 +349,13 @@ class MainSprite{
         //RIGHT-LEFT WALK AND RUN
         if(this.movements.right){
            this.movements.run ? this.vx = SPEED*2 : this.vx = SPEED
+           this.status.leftSide = false
+            this.status.rightSide = true
         }else if(this.movements.left){
             
             this.movements.run ? this.vx = -SPEED*2 : this.vx = -SPEED 
+            this.status.leftSide = true
+            this.status.rightSide = false
         }else{
             this.vx=0
         }
@@ -381,7 +394,7 @@ class MainSprite{
 
         //ATTACK
 
-        if(this.movements.left){
+        if(this.status.leftSide){
         this.snowballs.forEach(snowball => snowball.moveL())}else{
             this.snowballs.forEach(snowball => snowball.moveR()) 
         }
