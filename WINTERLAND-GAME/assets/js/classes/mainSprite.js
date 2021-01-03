@@ -69,8 +69,8 @@ class MainSprite{
          //INVENTARY
 
          this.inventary = {
-             heart: true,
-             apple: true
+             heart: false,
+             apple: false
          }
          //SPRITE SOUND
          //sounds
@@ -80,6 +80,7 @@ class MainSprite{
             gameOver: new Audio('./assets/sounds/gameOver.wav'),
             getCoin: new Audio('./assets/sounds/coin.wav'),
             getHeart: new Audio('./assets/sounds/heart2.wav'),
+            getApple: new Audio('./assets/sounds/heart.mp3')
            
         } 
 
@@ -88,6 +89,7 @@ class MainSprite{
         this.sounds.gameOver.volume = 0.1
         this.sounds.getCoin.volume = 0.1
         this.sounds.getHeart.volume = 0.2
+        this.sounds.getApple.volume = 0.8
         
         this.stopSound = false
 
@@ -627,7 +629,7 @@ class MainSprite{
     }
 
 
-      //HEART COLLISION
+      //HEART, APPLE AND COIN COLLISION
 
       generalCollision(element){
         if(this.x < element.x + element.width &&
@@ -645,8 +647,10 @@ class MainSprite{
                 if(element instanceof Apple){
                     this.y -= 30
                     this.inventary.apple= true
-                    setTimeout(()=> { this.inventary.apple = false},100000)
-                    this.sounds.getHeart.play()
+                    setTimeout(()=> { 
+                        this.inventary.apple = false 
+                    },2000)
+                    this.sounds.getApple.play()
                     element.x = undefined
                 }
 
