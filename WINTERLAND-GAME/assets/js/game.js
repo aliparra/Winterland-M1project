@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,1800,400)
+        this.mainSprite = new MainSprite(this.ctx,1400,300)
         
         //Enviroment
         
@@ -43,11 +43,13 @@ class Game{
 
         this.prizesArr = [
             new Heart(this.ctx, 1330, 250), 
-            //new Heart(this.ctx, 1900, 400)
+            new Apple(this.ctx, 1130, 250)
         ]
 
         this.mysteryBoxArr = [
             new MisteryBox(this.ctx, 1300, 250),
+            new MisteryBox(this.ctx, 1100, 250)
+            
             
         ]
 
@@ -91,9 +93,10 @@ class Game{
 
         this.movePlatformArr = [
             
-            new MovePlatform(this.ctx,1750,300,1400,1750,2),
+            new MovePlatform(this.ctx,1750,200,1400,1750,2),
             new MovePlatform(this.ctx,1900,450,1900,2400,2),
-            new MovePlatform(this.ctx,2200,200,2100,2200,0),
+            new MovePlatform(this.ctx,2200,150,2100,2200,0),
+            new MovePlatform(this.ctx,2100,300,1900,1900,0)
         ]
 
         this.warningSignArr = [
@@ -266,9 +269,9 @@ class Game{
             this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
         ) 
         //Sprite-coins
-        this.coinsArr.forEach((coin) =>  this.mainSprite.coinCollision(coin))
+        this.coinsArr.forEach((coin) =>  this.mainSprite.generalCollision(coin))
 
-        this.brickPrizesArr.forEach((prize) => this.mainSprite.coinCollision(prize))
+        this.brickPrizesArr.forEach((prize) => this.mainSprite.generalCollision(prize))
         //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
 
@@ -284,7 +287,7 @@ class Game{
         this.bricksArr.forEach((brick,i) =>  this.mainSprite.boxCollision(brick,this.brickPrizesArr[i]))
         //Sprite- heart
 
-        this.prizesArr.forEach((heart) => this.mainSprite.heartCollision(heart))
+        this.prizesArr.forEach((prize) => this.mainSprite.generalCollision(prize))
 
 
         //Sprite- spike
@@ -306,12 +309,12 @@ class Game{
     coinsCount(){
 
         //FREE COINS
-        const restCoins = this.coinsArr.filter( coin => !this.mainSprite.coinCollision(coin))
+        const restCoins = this.coinsArr.filter( coin => !this.mainSprite.generalCollision(coin))
         const newPoints = this.coinsArr.length  - restCoins.length
         
 
         //COINS INSIDE A BRICK
-        const restCoinsBricks = this.brickPrizesArr.filter( coin => !this.mainSprite.coinCollision(coin))
+        const restCoinsBricks = this.brickPrizesArr.filter( coin => !this.mainSprite.generalCollision(coin))
         const newPointsBricks = this.brickPrizesArr.length  - restCoinsBricks.length
 
         //TOTAL COINS

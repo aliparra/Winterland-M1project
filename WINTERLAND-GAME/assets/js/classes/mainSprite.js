@@ -69,7 +69,8 @@ class MainSprite{
          //INVENTARY
 
          this.inventary = {
-             heart: false
+             heart: true,
+             apple: true
          }
          //SPRITE SOUND
          //sounds
@@ -144,10 +145,13 @@ class MainSprite{
         this.animate()
 
         //Change mainSprite Size with heart
-        if(this.inventary.heart){
+        if(this.inventary.apple){
+            this.height = this.initialHeight / 1.5
+            this.width = this.initialWidth / 1.5
+        }else if(this.inventary.heart){
             this.height = this.initialHeight * 1.2
             this.width = this.initialWidth * 1.2
-        }else{
+        }else {
             this.height = this.initialHeight
             this.width = this.initialWidth
         }
@@ -625,23 +629,40 @@ class MainSprite{
 
       //HEART COLLISION
 
-      heartCollision(element){
+      generalCollision(element){
         if(this.x < element.x + element.width &&
             this.x + this.width > element.x &&
             this.y < element.y + element.height &&
             this.y + this.height > element.y){
 
-                this.y -= 30
-                this.inventary.heart= true
-                this.sounds.getHeart.play()
-                element.x = undefined
+                if(element instanceof Heart){
+                    this.y -= 30
+                    this.inventary.heart= true
+                    this.sounds.getHeart.play()
+                    element.x = undefined
+                }
+
+                if(element instanceof Apple){
+                    this.y -= 30
+                    this.inventary.apple= true
+                    setTimeout(()=> { this.inventary.apple = false},100000)
+                    this.sounds.getHeart.play()
+                    element.x = undefined
+                }
+
+                if(element instanceof Coin){
+                    this.sounds.getCoin.play()
+                    return true
+                }else{
+                    return false
+                }
                 
             }
         
     }
     //GENERIC COLLISION
 
-    coinCollision(element){
+   /*  coinCollision(element){
         if(this.x < element.x + element.width &&
             this.x + this.width > element.x &&
             this.y < element.y + element.height &&
@@ -650,7 +671,7 @@ class MainSprite{
                 return true
             }
         return false
-    }
+    } */
 
     //CHECK HEALTH 
     healthStatus(){
