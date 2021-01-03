@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,1400,300)
+        this.mainSprite = new MainSprite(this.ctx,3000,300)
         
         //Enviroment
         
@@ -86,8 +86,6 @@ class Game{
             new AirPlatform(this.ctx,400,400,50,50),
             new AirPlatform(this.ctx,600,250,50,50),
             new AirPlatform(this.ctx,800,400,50,50),
-            
-            
 
         ]
 
@@ -97,6 +95,10 @@ class Game{
             new MovePlatform(this.ctx,1900,450,1900,2400,2),
             new MovePlatform(this.ctx,2200,150,2100,2200,0),
             new MovePlatform(this.ctx,2100,300,1900,1900,0)
+        ]
+
+        this.stumpArr = [
+           new Stump(this.ctx,2900,470,100,80) 
         ]
 
         this.warningSignArr = [
@@ -158,6 +160,7 @@ class Game{
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.movePlatformArr.forEach((platform) =>  platform.draw())
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
+        this.stumpArr.forEach((stump) =>  stump.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
         this.prizesArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
@@ -243,7 +246,8 @@ class Game{
     checkCollisions(){
         //Sprite-platforms
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
-
+        //Sprite-stump
+        this.stumpArr.forEach((stump) =>  this.mainSprite.collidesWith(stump))
         //Sprite- Move platforms
         this.movePlatformArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
         //Sprite-air platforms
