@@ -39,7 +39,7 @@ class MainSprite{
 
         this.jumpProperties = {
             isJumping: false,
-            jumpMax: -13,
+            jumpMax: -11,
             jumpChrono: 0,
             jumpInterval: undefined
         }

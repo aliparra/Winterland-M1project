@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,200,0)
+        this.mainSprite = new MainSprite(this.ctx,1800,400)
         
         //Enviroment
         
@@ -29,65 +29,71 @@ class Game{
         this.backgroundArr = []
         this.snowfallArr = []
         
-        //Enemies
-        this.basicEnemyArr = [
-            new BasicEnemy(this.ctx,800,200,100), 
-            new BasicEnemy(this.ctx,450,200,100), 
-            new BasicEnemy(this.ctx,1200,300,30),
-            new BasicEnemy(this.ctx,1500,300,100)   
-        ]
-
-        this.flyingEnemyArr = [
-            new FlyingEnemy(this.ctx,2800,100,400), 
-              
-        ]
+       
         //Collectable Objects
 
         this.coinsArr = [
             
-            new Coin(this.ctx,500,350),
-            new Coin(this.ctx,550,350),
-            new Coin(this.ctx,650,100),
-            new Coin(this.ctx,720,100),
-            new Coin(this.ctx,800,100),
-            new Coin(this.ctx,950,350)
+            
+            new Coin(this.ctx,620,100),
+            new Coin(this.ctx,670,100),
+            new Coin(this.ctx,720,100)
+            
         ]
 
         this.prizesArr = [
-            new Heart(this.ctx,1330,250),
-            new Heart(this.ctx,370,100),
-            new Coin(this.ctx,2530,100)
+            new Heart(this.ctx, 1330, 250), 
+            //new Heart(this.ctx, 1900, 400)
         ]
 
         this.mysteryBoxArr = [
             new MisteryBox(this.ctx, 1300, 250),
-            new MisteryBox(this.ctx, 350, 100),
-            new MisteryBox(this.ctx, 2500, 100)
-        ]
-
-        this.brickPrizesArr = [
-            new Coin(this.ctx,130,250)
-        ]
-
-        this.bricksArr = [
-         //new Brick(this.ctx, 100, 250),
             
         ]
 
+        this.brickPrizesArr = [
+            new Coin(this.ctx,140,270),
+            new Coin(this.ctx,2530,220),
+            new Coin(this.ctx,2630,270),
+            new Coin(this.ctx,2730,370)
+        ]
+
+        this.bricksArr = [
+         new Brick(this.ctx, 100, 250),
+         new Brick(this.ctx, 2500, 150),
+         new Brick(this.ctx, 2600, 250),
+         new Brick(this.ctx, 2700, 350),
+            
+        ]
+
+        //Enemies
+        this.basicEnemyArr = [
+            new BasicEnemy(this.ctx,800,200,100), 
+            new BasicEnemy(this.ctx,600,100,30),
+            new BasicEnemy(this.ctx,1500,300,100)   
+        ]
+
+        this.flyingEnemyArr = [
+            new FlyingEnemy(this.ctx,530,100,400), 
+            
+        ]
         //World tiles
         //this.worldConstructor = new worldConstructor (this.ctx)
         this.airPlatformsArr = [
-            new AirPlatform(this.ctx,400,400),
-            new AirPlatform(this.ctx,600,250),
-            new AirPlatform(this.ctx,800,400),
-            new AirPlatform(this.ctx,2120,400),
-            new AirPlatform(this.ctx,2450,380),
+            new AirPlatform(this.ctx,350,150,30,30),
+            new AirPlatform(this.ctx,400,400,50,50),
+            new AirPlatform(this.ctx,600,250,50,50),
+            new AirPlatform(this.ctx,800,400,50,50),
+            
+            
 
         ]
 
         this.movePlatformArr = [
             
-            new MovePlatform(this.ctx,3500,400,3500,3600)
+            new MovePlatform(this.ctx,1750,300,1400,1750,2),
+            new MovePlatform(this.ctx,1900,450,1900,2400,2),
+            new MovePlatform(this.ctx,2200,200,2100,2200,0),
         ]
 
         this.warningSignArr = [
@@ -121,7 +127,7 @@ class Game{
                 this.checkCollisions()
                 this.coinsCount()
                 this.checkHealth()
-                //this.sounds.music.play()
+                this.sounds.music.play()
                 
 
             }, FPS)

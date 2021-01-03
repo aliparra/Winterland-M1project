@@ -1,5 +1,5 @@
 class MovePlatform{
-    constructor(ctx, x, y, leftLimit, rightLimit){
+    constructor(ctx, x, y, leftLimit, rightLimit,vel){
 
         this.ctx = ctx
 
@@ -15,6 +15,7 @@ class MovePlatform{
         this.y = y
     
         this.vx = 1
+        this.vel = vel
     
         //image
 
@@ -40,12 +41,12 @@ class MovePlatform{
     move(){
 
        if(this.x >= this.rightLimit && this.direction === 'right'){
-            this.vx = -1
+            this.vx = -this.vel
             this.direction = 'left'
             
         }
         else if(this.x <= this.leftLimit && this.direction === 'left'){
-            this.vx = 1  
+            this.vx = this.vel
             this.direction = 'right'
         }
         

@@ -127,6 +127,7 @@ class FlyingEnemy extends BasicEnemy{
 
     //SPRITE - FLYING ENEMY COLLISION
     collisionEnemy(element){
+        
         if(!this.status.death){
              //LEFT COLLISION
              if( element.y + element.height >= this.y &&
@@ -185,6 +186,7 @@ class FlyingEnemy extends BasicEnemy{
                     element.x = this.x + this.width + 50
  
                     if(!element.inventary.heart){
+                        console.log('entered')
                         element.health -= this.attack
                         this.sounds.kill.play()
                         
@@ -204,7 +206,7 @@ class FlyingEnemy extends BasicEnemy{
                  element.y + element.height > this.y + this.height &&
                  element.previousY > this.y + this.height)
                  {
-                     //console.log('bottom')
+                     console.log('bottom')
  
                      element.y = this.y + this.height + 20
  
