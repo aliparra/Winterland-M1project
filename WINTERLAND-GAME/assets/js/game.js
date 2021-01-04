@@ -15,11 +15,11 @@ class Game{
         this.sounds = {
         music: new Audio('./assets/sounds/mainMusic.mp3')
         }
-        this.sounds.music.volume = 0.1
+        this.sounds.music.volume = 0
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,300)
+        this.mainSprite = new MainSprite(this.ctx,4400,300)
         
         //Enviroment
         
@@ -37,18 +37,22 @@ class Game{
             
             new Coin(this.ctx,620,100),
             new Coin(this.ctx,670,100),
-            new Coin(this.ctx,720,100)
+            new Coin(this.ctx,720,100),
+            new Coin(this.ctx,4575,170),
+            new Coin(this.ctx,4575,220),
+            new Coin(this.ctx,4575,270)
             
         ]
 
         this.prizesArr = [
-            new Heart(this.ctx, 1330, 250), 
-            new Apple(this.ctx, 1130, 250)
+            
+            new Apple(this.ctx, 1230, 250),
+            new Heart(this.ctx, 3130, 200), 
         ]
 
         this.mysteryBoxArr = [
-            new MisteryBox(this.ctx, 1300, 250),
-            new MisteryBox(this.ctx, 1100, 250)
+            new MisteryBox(this.ctx, 1200, 250),
+            new MisteryBox(this.ctx, 3100, 200)
             
             
         ]
@@ -72,11 +76,17 @@ class Game{
         this.basicEnemyArr = [
             new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,600,100,30),
-            new BasicEnemy(this.ctx,1500,300,100)   
+            new BasicEnemy(this.ctx,1500,300,100),
+            new BasicEnemy(this.ctx,3010,300,100)   
         ]
 
         this.flyingEnemyArr = [
-            new FlyingEnemy(this.ctx,530,100,400), 
+            new FlyingEnemy(this.ctx,530,100,400,0), 
+            new FlyingEnemy(this.ctx,4550,100,400,0),
+            new FlyingEnemy(this.ctx,4900,100,400,3000),
+            new FlyingEnemy(this.ctx,5350,100,400,0),
+            new FlyingEnemy(this.ctx,5750,100,400,3000),
+            new FlyingEnemy(this.ctx,6200,100,400,0)
             
         ]
         //World tiles
@@ -98,24 +108,43 @@ class Game{
         ]
 
         this.stumpArr = [
-           new Stump(this.ctx,2900,470,100,80) 
+           new Stump(this.ctx,2900,470,100,80),
+           new Stump(this.ctx,4550,470,100,80),
+           new Stump(this.ctx,5750,470,100,80)
+
         ]
 
         this.warningSignArr = [
-            new WarningSign(this.ctx,1450,470)
+            new WarningSign(this.ctx,1450,480,5),
+            new WarningSign(this.ctx,2600,480,3),
+            new WarningSign(this.ctx,3630,480,4)
         ]
 
         this.spikesArr = [
-            new Spike(this.ctx,1650,490)
+            new Spike(this.ctx,1650,490),
+            new Spike(this.ctx,4140,490),
         ]
 
+        //DECORATION
+
+        this.decorationArr = [
+            new Decoration(this.ctx,3200,150,400,400,'tree'),
+            new Decoration(this.ctx,3300,200,350,350,'tree'),
+            new Decoration(this.ctx,3800,200,350,350,'nudeTree'),
+            new Decoration(this.ctx,4200,150,400,400,'nudeTree'),
+            new Decoration(this.ctx,4600,200,350,350,'nudeTree'),
+            new Decoration(this.ctx,5000,150,400,400,'nudeTree'),
+            new Decoration(this.ctx,5400,200,350,350,'nudeTree'),
+            new Decoration(this.ctx,5800,150,400,400,'nudeTree')
+
+        ]
         //COUNTERS
 
         //Coin counter
         this.coinsCounter = 0 
         this.pointsCoin = new Coin(this.ctx, this.mainSprite.x, 20)
         
-        //Health counter
+        
 
         
     }
@@ -155,7 +184,9 @@ class Game{
         }
         
         this.backgroundArr.forEach((background) =>  background.draw())
+        this.decorationArr.forEach((decoration) =>  decoration.draw())
         this.snowfallArr.forEach((snowfall) =>  snowfall.draw())
+        this.warningSignArr.forEach((sign) =>  sign.draw())
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
         this.movePlatformArr.forEach((platform) =>  platform.draw())
@@ -166,7 +197,7 @@ class Game{
         this.mysteryBoxArr.forEach((box) =>  box.draw())
         this.brickPrizesArr.forEach((prize) => prize.draw())
         this.bricksArr.forEach((brick) =>  brick.draw())
-        this.warningSignArr.forEach((sign) =>  sign.draw())
+        
         this.spikesArr.forEach((spike) =>  spike.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
@@ -198,6 +229,9 @@ class Game{
 
     checkHealth(){
         this.mainSprite.healthStatus()
+        if(this.mainSprite.healthStatus()){
+            this.sounds.music.volume = 0
+        }
         this.basicEnemyArr.forEach((enemy) => {enemy.healthStatus()})
         this.flyingEnemyArr.forEach((enemy) => {enemy.healthStatus()})
     }

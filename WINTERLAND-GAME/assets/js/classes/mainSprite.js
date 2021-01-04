@@ -408,7 +408,9 @@ class MainSprite{
         //ATTACK
 
         if(this.status.leftSide){
-        this.snowballs.forEach(snowball => snowball.moveL())}else{
+        this.snowballs.forEach(snowball => snowball.moveL())}
+        else
+        {
             this.snowballs.forEach(snowball => snowball.moveR()) 
         }
         
@@ -649,7 +651,7 @@ class MainSprite{
                     this.inventary.apple= true
                     setTimeout(()=> { 
                         this.inventary.apple = false 
-                    },2000)
+                    },20000)
                     this.sounds.getApple.play()
                     element.x = undefined
                 }
@@ -682,7 +684,9 @@ class MainSprite{
         if(this.health <= 0){
             this.isDead = true
             this.death()
-            
+            return true
+        }else{
+            return false
         }
     }
    

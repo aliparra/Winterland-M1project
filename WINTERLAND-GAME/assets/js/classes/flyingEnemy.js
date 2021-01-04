@@ -1,6 +1,6 @@
 
 class FlyingEnemy extends BasicEnemy{
-    constructor(ctx,x,y,distance){
+    constructor(ctx,x,y,distance,delay){
 
         super(ctx,x,y)
 
@@ -17,6 +17,10 @@ class FlyingEnemy extends BasicEnemy{
 
         this.vx= 0
         this.vy= 2
+
+        //Direction
+
+        this.delay = delay
         //Collisions 
         this.collisions = {
             sprite: false,
@@ -100,6 +104,7 @@ class FlyingEnemy extends BasicEnemy{
     }
     move(){
 
+
         //MOVEMENTS
 
         this.previousX = this.x
@@ -115,12 +120,15 @@ class FlyingEnemy extends BasicEnemy{
             this.status.up = true
             this.status.down = false
         }
+        
         //CHANGE Y POSITION
-        if(this.changeDir){
+
+        setTimeout(() => { if(this.changeDir){
             this.y += this.vy
         }else if(this.changeDir === false){
             this.y -= this.vy
-        }
+        }},this.delay)
+       
         
         
     }
