@@ -15,11 +15,11 @@ class Game{
         this.sounds = {
         music: new Audio('./assets/sounds/mainMusic.mp3')
         }
-        this.sounds.music.volume = 0
+        this.sounds.music.volume = 0.1
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,4400,300)
+        this.mainSprite = new MainSprite(this.ctx,4000,300)
         
         //Enviroment
         
@@ -40,12 +40,15 @@ class Game{
             new Coin(this.ctx,720,100),
             new Coin(this.ctx,4575,170),
             new Coin(this.ctx,4575,220),
-            new Coin(this.ctx,4575,270)
+            new Coin(this.ctx,4575,270),
+            new Coin(this.ctx,5785,170),
+            new Coin(this.ctx,5785,220),
+            new Coin(this.ctx,5785,270)
             
         ]
 
         this.bubbleArr = [
-            new Bubble(this.ctx,3800,300)
+            new Bubble(this.ctx,4030,123)
         ]
 
         this.prizesArr = [
@@ -65,7 +68,8 @@ class Game{
             new Coin(this.ctx,140,270),
             new Coin(this.ctx,2530,220),
             new Coin(this.ctx,2630,270),
-            new Coin(this.ctx,2730,370)
+            new Coin(this.ctx,2730,370),
+            
         ]
 
         this.bricksArr = [
@@ -100,15 +104,20 @@ class Game{
             new AirPlatform(this.ctx,400,400,50,50),
             new AirPlatform(this.ctx,600,250,50,50),
             new AirPlatform(this.ctx,800,400,50,50),
+            
 
         ]
 
         this.movePlatformArr = [
             
-            new MovePlatform(this.ctx,1750,200,1400,1750,2),
-            new MovePlatform(this.ctx,1900,450,1900,2400,2),
-            new MovePlatform(this.ctx,2200,150,2100,2200,0),
-            new MovePlatform(this.ctx,2100,300,1900,1900,0)
+            new MovePlatform(this.ctx,1750,200,150,50,1400,1750,2),
+            new MovePlatform(this.ctx,1900,450,150,50,1900,2400,2),
+            new MovePlatform(this.ctx,2200,150,150,50,2100,2200,0),
+            new MovePlatform(this.ctx,2100,300,150,50,1900,1900,0),
+            new MovePlatform(this.ctx,3800,200,355,50,1900,1900,0),
+            new MovePlatform(this.ctx,3800,200,355,50,1900,1900,0),
+            new MovePlatform(this.ctx,3640,350,50,50,1900,1900,0),
+            new MovePlatform(this.ctx,3700,500,50,50,3700,3800,2)
         ]
 
         this.stumpArr = [
@@ -134,12 +143,13 @@ class Game{
         this.decorationArr = [
             new Decoration(this.ctx,3200,150,400,400,'tree'),
             new Decoration(this.ctx,3300,200,350,350,'tree'),
-            new Decoration(this.ctx,3800,200,350,350,'nudeTree'),
+            new Decoration(this.ctx,3800,200,350,350,'ground3'),
             new Decoration(this.ctx,4200,150,400,400,'nudeTree'),
             new Decoration(this.ctx,4600,200,350,350,'nudeTree'),
             new Decoration(this.ctx,5000,150,400,400,'nudeTree'),
             new Decoration(this.ctx,5400,200,350,350,'nudeTree'),
-            new Decoration(this.ctx,5800,150,400,400,'nudeTree')
+            new Decoration(this.ctx,5800,150,400,400,'nudeTree'),
+            new Decoration(this.ctx,3950,105,100,100,'snowMan')
 
         ]
         //COUNTERS

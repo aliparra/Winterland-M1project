@@ -27,7 +27,9 @@ class Decoration extends Stump{
             case 'fence':
                 this.img.src = './assets/img/Environment/Fence.png'
                 break;
-            
+            case 'ground3':
+                this.img.src = './assets/img/Platformer/Ground-Additional_03.png'
+                break;
           }
         this.ready=false;
         this.img.onload = () => {

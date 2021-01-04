@@ -1,10 +1,10 @@
 class MovePlatform{
-    constructor(ctx, x, y, leftLimit, rightLimit,vel){
+    constructor(ctx, x, y,w,h, leftLimit, rightLimit,vel){
 
         this.ctx = ctx
 
-        this.width = 150
-        this.height = 50
+        this.width = w
+        this.height = h
 
         this.leftLimit = leftLimit
         this.rightLimit = rightLimit
