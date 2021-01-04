@@ -70,7 +70,8 @@ class MainSprite{
 
          this.inventary = {
              heart: false,
-             apple: false
+             apple: false,
+             bubble: false
          }
          //SPRITE SOUND
          //sounds
@@ -329,7 +330,7 @@ class MainSprite{
                 this.movements.run = status
                 break;
             case KEY_ATTACK:
-                if(this.canFire){
+                if(this.canFire && this.inventary.bubble){
                 this.sounds.shoot.play()
                 this.snowballs.push(
                     new Snowball(this.ctx, this.x + this.width/2, this.y+80))
@@ -655,13 +656,22 @@ class MainSprite{
                     this.sounds.getApple.play()
                     element.x = undefined
                 }
-
+                if(element instanceof Bubble){
+                    this.inventary.bubble= true
+                    setTimeout(()=> { 
+                        this.inventary.bubble = false 
+                    },20000)
+                    this.sounds.getApple.play()
+                    element.x = undefined
+                }
                 if(element instanceof Coin){
                     this.sounds.getCoin.play()
                     return true
                 }else{
                     return false
                 }
+
+                
                 
             }
         

@@ -44,6 +44,10 @@ class Game{
             
         ]
 
+        this.bubbleArr = [
+            new Bubble(this.ctx,3800,300)
+        ]
+
         this.prizesArr = [
             
             new Apple(this.ctx, 1230, 250),
@@ -193,6 +197,7 @@ class Game{
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.stumpArr.forEach((stump) =>  stump.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
+        this.bubbleArr.forEach((bubble) =>  bubble.draw())
         this.prizesArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
         this.brickPrizesArr.forEach((prize) => prize.draw())
@@ -308,6 +313,9 @@ class Game{
         ) 
         //Sprite-coins
         this.coinsArr.forEach((coin) =>  this.mainSprite.generalCollision(coin))
+
+        //Sprite-bubbles
+        this.bubbleArr.forEach((bubble) =>  this.mainSprite.generalCollision(bubble))
 
         this.brickPrizesArr.forEach((prize) => this.mainSprite.generalCollision(prize))
         //Enemy-sprite
