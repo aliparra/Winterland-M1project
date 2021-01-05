@@ -19,18 +19,28 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,7040,50)
+        this.mainSprite = new MainSprite(this.ctx,9000,350)
         
         //Enviroment
         
         this.separatePlatformsArr = [
             
-            new BasicPlatform(this.ctx,2100,300,150,50,false),
-            new BasicPlatform(this.ctx,2200,150,150,50,false),
-            new BasicPlatform(this.ctx,3640,300,50,50,false),
-            new BasicPlatform(this.ctx,3800,200,355,75,false), 
-            new BasicPlatform(this.ctx,6570,350,110,50,false),
-            new BasicPlatform(this.ctx,6900,260,1040,50,false),
+            new BasicPlatform(this.ctx,2100,300,150,50,'ice'),
+            new BasicPlatform(this.ctx,2200,150,150,50,'ice'),
+            new BasicPlatform(this.ctx,3640,300,50,50,'ice'),
+            new BasicPlatform(this.ctx,3800,200,355,75,'ice'), 
+            new BasicPlatform(this.ctx,6570,350,110,50,'ice'),
+            new BasicPlatform(this.ctx,6900,260,1040,50,'ice'),
+            new BasicPlatform(this.ctx,7915,250,40,40,'bridge'),
+            new BasicPlatform(this.ctx,7935,280,40,40,'bridge'),
+            new BasicPlatform(this.ctx,7965,300,40,40,'bridge'),
+            new BasicPlatform(this.ctx,8000,310,40,40,'bridge'),
+            new BasicPlatform(this.ctx,8035,310,40,40,'bridge'),
+            new BasicPlatform(this.ctx,8070,300,40,40,'bridge'),
+            new BasicPlatform(this.ctx,8100,290,40,40,'bridge'),
+            new BasicPlatform(this.ctx,8135,300,300,50,'ice'),
+            new BasicPlatform(this.ctx,9620,410,40,40,'bridge'),
+            new BasicPlatform(this.ctx,9650,320,40,40,'bridge')
 
             
         ]  
@@ -54,14 +64,23 @@ class Game{
             new Coin(this.ctx,5785,170),
             new Coin(this.ctx,7600,220),
             new Coin(this.ctx,7670,220),
-            new Coin(this.ctx,7740,220)
+            new Coin(this.ctx,7740,220),
+            new Coin(this.ctx,7000,350),
+            new Coin(this.ctx,7100,350),
+            new Coin(this.ctx,7200,350),
+            new Coin(this.ctx,7300,350),
+            new Coin(this.ctx,7400,350),
+            new Coin(this.ctx,7500,350),
+            new Coin(this.ctx,7600,350),
+            new Coin(this.ctx,7700,350),
 
             
         ]
 
         this.bubbleArr = [
             new Bubble(this.ctx,4030,123),
-            new Heart(this.ctx, 7380, 70)
+            new Heart(this.ctx, 7380, 70),
+            new Bubble(this.ctx,8325,220)
         ]
 
         this.prizesArr = [
@@ -82,16 +101,12 @@ class Game{
             new Coin(this.ctx,2530,220),
             new Coin(this.ctx,2630,270),
             new Coin(this.ctx,2730,370),
-            new Coin(this.ctx,7000,350),
-            new Coin(this.ctx,7100,350),
-            new Coin(this.ctx,7200,350),
-            new Coin(this.ctx,7300,350),
-            new Coin(this.ctx,7400,350),
-            new Coin(this.ctx,7500,350),
-            new Coin(this.ctx,7600,350),
-            new Coin(this.ctx,7700,350),
-            new Coin(this.ctx,7700,350),
-            new Coin(this.ctx,7700,350)
+            new Coin(this.ctx,8990,240),
+            new Coin(this.ctx,9090,240),
+            new Coin(this.ctx,9160,240),
+            new Coin(this.ctx,9290,240),
+            new Coin(this.ctx,9390,240)
+            
 
 
             
@@ -102,6 +117,12 @@ class Game{
          new Brick(this.ctx, 2500, 150),
          new Brick(this.ctx, 2600, 250),
          new Brick(this.ctx, 2700, 350),
+         new Brick(this.ctx, 8960, 230),
+         new Brick(this.ctx, 9060, 230),
+         new Brick(this.ctx, 9160, 230),
+         new Brick(this.ctx, 9260, 230),
+         new Brick(this.ctx, 9360, 230),
+
             
         ]
 
@@ -121,7 +142,10 @@ class Game{
             new FlyingEnemy(this.ctx,4900,100,400,3000),
             new FlyingEnemy(this.ctx,5350,100,400,0),
             new FlyingEnemy(this.ctx,5750,100,400,3000),
-            new FlyingEnemy(this.ctx,6200,100,400,0)
+            new FlyingEnemy(this.ctx,6200,100,400,0),
+            new FlyingEnemy(this.ctx,8167,100,400,0),
+            new FlyingEnemy(this.ctx,9040,100,400,0),
+            new FlyingEnemy(this.ctx,9260,100,400,3000)
             
         ]
         //World tiles
@@ -142,6 +166,7 @@ class Game{
             new MovePlatform(this.ctx,3450,430,50,50,3450,3600,2),
             new MovePlatform(this.ctx,6700,400,50,50,6700,7900,3),
             
+            
         ]
 
         this.stumpArr = [
@@ -149,7 +174,9 @@ class Game{
            new Stump(this.ctx,4550,470,100,80,'stump'),
            new Stump(this.ctx,5750,470,100,80,'stump'),
            new Stump(this.ctx,6480,470,100,80,'stump'),
-           new Stump(this.ctx,7350,180,100,80,'box')
+           new Stump(this.ctx,7350,180,100,80,'box'),
+           new Stump(this.ctx,9530,470,100,80,'stump')
+
 
         ]
 
@@ -157,12 +184,15 @@ class Game{
             new WarningSign(this.ctx,1450,480,5),
             new WarningSign(this.ctx,2600,480,3),
             new WarningSign(this.ctx,3630,480,4),
-            new WarningSign(this.ctx,3860,140,6)
+            new WarningSign(this.ctx,3860,140,6),
+            new WarningSign(this.ctx,8505,480,5),
+            new WarningSign(this.ctx,8365,240,2)
         ]
 
         this.spikesArr = [
             new Spike(this.ctx,1650,490),
             new Spike(this.ctx,4140,490),
+            new Spike(this.ctx,8700,490)
         ]
 
         //DECORATION
@@ -184,7 +214,11 @@ class Game{
             new Decoration(this.ctx,7150,170,100,100,'grass'),
             new Decoration(this.ctx,7570,170,100,100,'bush'),
             new Decoration(this.ctx,7670,170,100,100,'bush'),
-            new Decoration(this.ctx,7770,170,100,100,'bush')
+            new Decoration(this.ctx,7770,170,100,100,'bush'),
+            new Decoration(this.ctx,8135,300,300,250,'ground1'),
+            new Decoration(this.ctx,8250,200,100,100,'snowMan'),
+            new Decoration(this.ctx,7950,450,100,100,'grass'),
+            new Decoration(this.ctx,9615,150,400,400,'tree')
 
         ]
         //COUNTERS
@@ -302,7 +336,7 @@ class Game{
 
 
         for(let i=0; this.platformsArr.length<= NUMFLOOR; i+=100){
-            let auxPlatform = new BasicPlatform(this.ctx,i,545,100,100,true)
+            let auxPlatform = new BasicPlatform(this.ctx,i,545,100,100,'basic')
             this.platformsArr.push(auxPlatform)}
             
             //Base platforms deleted
