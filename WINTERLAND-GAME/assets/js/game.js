@@ -19,13 +19,23 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,4000,300)
+        this.mainSprite = new MainSprite(this.ctx,7040,50)
         
         //Enviroment
         
-        this.platformsArr = [
+        this.separatePlatformsArr = [
+            
+            new BasicPlatform(this.ctx,2100,300,150,50,false),
+            new BasicPlatform(this.ctx,2200,150,150,50,false),
+            new BasicPlatform(this.ctx,3640,300,50,50,false),
+            new BasicPlatform(this.ctx,3800,200,355,75,false), 
+            new BasicPlatform(this.ctx,6570,350,110,50,false),
+            new BasicPlatform(this.ctx,6900,260,1040,50,false),
+
             
         ]  
+
+        this.platformsArr = []
         this.backgroundArr = []
         this.snowfallArr = []
         
@@ -42,13 +52,16 @@ class Game{
             new Coin(this.ctx,4575,220),
             new Coin(this.ctx,4575,270),
             new Coin(this.ctx,5785,170),
-            new Coin(this.ctx,5785,220),
-            new Coin(this.ctx,5785,270)
+            new Coin(this.ctx,7600,220),
+            new Coin(this.ctx,7670,220),
+            new Coin(this.ctx,7740,220)
+
             
         ]
 
         this.bubbleArr = [
-            new Bubble(this.ctx,4030,123)
+            new Bubble(this.ctx,4030,123),
+            new Heart(this.ctx, 7380, 70)
         ]
 
         this.prizesArr = [
@@ -69,6 +82,18 @@ class Game{
             new Coin(this.ctx,2530,220),
             new Coin(this.ctx,2630,270),
             new Coin(this.ctx,2730,370),
+            new Coin(this.ctx,7000,350),
+            new Coin(this.ctx,7100,350),
+            new Coin(this.ctx,7200,350),
+            new Coin(this.ctx,7300,350),
+            new Coin(this.ctx,7400,350),
+            new Coin(this.ctx,7500,350),
+            new Coin(this.ctx,7600,350),
+            new Coin(this.ctx,7700,350),
+            new Coin(this.ctx,7700,350),
+            new Coin(this.ctx,7700,350)
+
+
             
         ]
 
@@ -85,7 +110,9 @@ class Game{
             new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,600,100,30),
             new BasicEnemy(this.ctx,1500,300,100),
-            new BasicEnemy(this.ctx,3010,300,100)   
+            new BasicEnemy(this.ctx,3010,300,100),
+            new BasicEnemy(this.ctx,6930,100,50), 
+            new BasicEnemy(this.ctx,7550,50,50) 
         ]
 
         this.flyingEnemyArr = [
@@ -112,25 +139,25 @@ class Game{
             
             new MovePlatform(this.ctx,1750,200,150,50,1400,1750,2),
             new MovePlatform(this.ctx,1900,450,150,50,1900,2400,2),
-            new MovePlatform(this.ctx,2200,150,150,50,2100,2200,0),
-            new MovePlatform(this.ctx,2100,300,150,50,1900,1900,0),
-            new MovePlatform(this.ctx,3800,200,355,50,1900,1900,0),
-            new MovePlatform(this.ctx,3800,200,355,50,1900,1900,0),
-            new MovePlatform(this.ctx,3640,350,50,50,1900,1900,0),
-            new MovePlatform(this.ctx,3700,500,50,50,3700,3800,2)
+            new MovePlatform(this.ctx,3450,430,50,50,3450,3600,2),
+            new MovePlatform(this.ctx,6700,400,50,50,6700,7900,3),
+            
         ]
 
         this.stumpArr = [
-           new Stump(this.ctx,2900,470,100,80),
-           new Stump(this.ctx,4550,470,100,80),
-           new Stump(this.ctx,5750,470,100,80)
+           new Stump(this.ctx,2900,470,100,80,'stump'),
+           new Stump(this.ctx,4550,470,100,80,'stump'),
+           new Stump(this.ctx,5750,470,100,80,'stump'),
+           new Stump(this.ctx,6480,470,100,80,'stump'),
+           new Stump(this.ctx,7350,180,100,80,'box')
 
         ]
 
         this.warningSignArr = [
             new WarningSign(this.ctx,1450,480,5),
             new WarningSign(this.ctx,2600,480,3),
-            new WarningSign(this.ctx,3630,480,4)
+            new WarningSign(this.ctx,3630,480,4),
+            new WarningSign(this.ctx,3860,140,6)
         ]
 
         this.spikesArr = [
@@ -149,7 +176,15 @@ class Game{
             new Decoration(this.ctx,5000,150,400,400,'nudeTree'),
             new Decoration(this.ctx,5400,200,350,350,'nudeTree'),
             new Decoration(this.ctx,5800,150,400,400,'nudeTree'),
-            new Decoration(this.ctx,3950,105,100,100,'snowMan')
+            new Decoration(this.ctx,3950,105,100,100,'snowMan'),
+            new Decoration(this.ctx,6100,150,400,400,'tree'),
+            new Decoration(this.ctx,6900,250,200,500,'ground5'),
+            new Decoration(this.ctx,7100,250,600,500,'ground7'),
+            new Decoration(this.ctx,7700,250,200,500,'ground6'),
+            new Decoration(this.ctx,7150,170,100,100,'grass'),
+            new Decoration(this.ctx,7570,170,100,100,'bush'),
+            new Decoration(this.ctx,7670,170,100,100,'bush'),
+            new Decoration(this.ctx,7770,170,100,100,'bush')
 
         ]
         //COUNTERS
@@ -203,6 +238,7 @@ class Game{
         this.warningSignArr.forEach((sign) =>  sign.draw())
         this.mainSprite.draw()
         this.platformsArr.forEach((platform) =>  platform.draw())
+        this.separatePlatformsArr.forEach((platform) =>  platform.draw())
         this.movePlatformArr.forEach((platform) =>  platform.draw())
         this.airPlatformsArr.forEach((platform) =>  platform.draw())
         this.stumpArr.forEach((stump) =>  stump.draw())
@@ -266,12 +302,13 @@ class Game{
 
 
         for(let i=0; this.platformsArr.length<= NUMFLOOR; i+=100){
-            let auxPlatform = new BasicPlatform(this.ctx,i,545,100,100)
+            let auxPlatform = new BasicPlatform(this.ctx,i,545,100,100,true)
             this.platformsArr.push(auxPlatform)}
             
             //Base platforms deleted
             this.deletePlatforms(4,10,this.platformsArr)
             this.deletePlatforms(20,25,this.platformsArr)
+            this.deletePlatforms(67,78,this.platformsArr)
             
 
 
@@ -295,6 +332,7 @@ class Game{
     checkCollisions(){
         //Sprite-platforms
         this.platformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
+        this.separatePlatformsArr.forEach((platform) =>  this.mainSprite.collidesWith(platform))
         //Sprite-stump
         this.stumpArr.forEach((stump) =>  this.mainSprite.collidesWith(stump))
         //Sprite- Move platforms
@@ -305,6 +343,9 @@ class Game{
         this.airPlatformsArr.forEach((platform) =>  this.mainSprite.collidesWithAp(platform,platform.x2))
         //Enemy-platforms
          this.platformsArr.forEach((platform) => {
+            this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
+        ) 
+        this.separatePlatformsArr.forEach((platform) => {
             this.basicEnemyArr.forEach((enemy) => enemy.collidesWith(platform))}
         ) 
         //Enemy-air platforms

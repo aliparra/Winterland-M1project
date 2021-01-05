@@ -445,6 +445,7 @@ class MainSprite{
                 this.x  = element.x + element.width + 1
                 this.vx = 0
                 this.collisions.right = true
+                
         }
         //TOP COLLISION
         else if( 

@@ -30,6 +30,21 @@ class Decoration extends Stump{
             case 'ground3':
                 this.img.src = './assets/img/Platformer/Ground-Additional_03.png'
                 break;
+            case 'ground5':
+                this.img.src = './assets/img/Platformer/Ground-Additional_05.png'
+                break;
+            case 'ground6':
+                this.img.src = './assets/img/Platformer/Ground-Additional_06.png'
+                break;   
+            case 'ground7':
+                this.img.src = './assets/img/Platformer/Ground-Additional_07.png'
+                break; 
+            case 'bush':
+                this.img.src = './assets/img/Environment/Bush.png'
+                break; 
+            case 'grass':
+                this.img.src = './assets/img/Environment/Grass.png'
+                break; 
           }
         this.ready=false;
         this.img.onload = () => {
