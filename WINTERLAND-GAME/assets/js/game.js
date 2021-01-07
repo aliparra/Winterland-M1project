@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,14800,30)
+        this.mainSprite = new MainSprite(this.ctx,12800,30)
         
         //Enviroment
         
@@ -60,10 +60,12 @@ class Game{
         this.platformsArr = []
         this.backgroundArr = []
         this.snowfallArr = []
+    
         
        
         //Collectable Objects
 
+        this.finalLight = new Light(this.ctx, 14999,470)
         this.coinsArr = [
             
             
@@ -74,6 +76,8 @@ class Game{
             new Coin(this.ctx,4575,220),
             new Coin(this.ctx,4575,270),
             new Coin(this.ctx,5785,170),
+            new Coin(this.ctx,5785,220),
+            new Coin(this.ctx,5785,270),
             new Coin(this.ctx,7600,220),
             new Coin(this.ctx,7670,220),
             new Coin(this.ctx,7740,220),
@@ -85,21 +89,32 @@ class Game{
             new Coin(this.ctx,7500,350),
             new Coin(this.ctx,7600,350),
             new Coin(this.ctx,7700,350),
-
-            
+            new Coin(this.ctx,13200,200),
+            new Coin(this.ctx,13300,200),
+            new Coin(this.ctx,13400,200),
+            new Coin(this.ctx,13500,200),
+            new Coin(this.ctx,13600,200),
+            new Coin(this.ctx,14400,350),
+           new Coin(this.ctx,14500,350),
+            new Coin(this.ctx,14600,350),
+            new Coin(this.ctx,14700,350),
+            new Coin(this.ctx,14800,350)
         ]
 
         this.bubbleArr = [
+            new Bubble(this.ctx,380,100),
             new Bubble(this.ctx,4030,123),
             new Heart(this.ctx, 7380, 70),
-            new Bubble(this.ctx,8325,220)
+            new Bubble(this.ctx,8325,220),
+            new Bubble(this.ctx,11125,170)
         ]
 
         this.prizesArr = [
             
             new Apple(this.ctx, 1230, 250),
             new Heart(this.ctx, 3130, 200), 
-            new Heart(this.ctx, 10930, 175)
+            new Heart(this.ctx, 10930, 175),
+            new Apple(this.ctx, 9830, 470)
         ]
 
         this.mysteryBoxArr = [
@@ -170,7 +185,8 @@ class Game{
             new FlyingEnemy(this.ctx,6200,100,400,0),
             new FlyingEnemy(this.ctx,8167,100,400,0),
             new FlyingEnemy(this.ctx,9040,100,400,0),
-            new FlyingEnemy(this.ctx,9260,100,400,3000)
+            new FlyingEnemy(this.ctx,9260,100,400,3000),
+            new FlyingEnemy(this.ctx,14140,100,400,0)
             
         ]
         //World tiles
@@ -207,7 +223,7 @@ class Game{
            new Stump(this.ctx,5750,470,100,80,'stump'),
            new Stump(this.ctx,6480,470,100,80,'stump'),
            new Stump(this.ctx,7350,180,100,80,'box'),
-           new Stump(this.ctx,9530,470,100,80,'stump'),
+           new Stump(this.ctx,9570,470,100,80,'stump'),
            
 
 
@@ -221,13 +237,15 @@ class Game{
             new WarningSign(this.ctx,8505,480,5),
             new WarningSign(this.ctx,8365,240,2),
             new WarningSign(this.ctx,10860,490,6),
-            new WarningSign(this.ctx,11850,490,6)
+            new WarningSign(this.ctx,11850,490,6),
+            new WarningSign(this.ctx,12800,385,6)
         ]
 
         this.spikesArr = [
             new Spike(this.ctx,1650,490),
             new Spike(this.ctx,4140,490),
-            new Spike(this.ctx,8700,490)
+            new Spike(this.ctx,8700,490),
+            new Spike(this.ctx,13100,390)
         ]
 
         //DECORATION
@@ -257,6 +275,7 @@ class Game{
             new Decoration(this.ctx,10850,550,100,100,'ground7'),
             new Decoration(this.ctx,10950,550,100,100,'ground7'),
             new Decoration(this.ctx,11050,550,100,100,'ground7'),
+            new Decoration(this.ctx,11050,145,100,100,'snowMan'),
             new Decoration(this.ctx,11800,550,100,100,'ground7'),
             new Decoration(this.ctx,11900,550,100,100,'ground7'),
             new Decoration(this.ctx,12000,550,100,100,'ground7'),
@@ -269,6 +288,14 @@ class Game{
             new Decoration(this.ctx,12780,450,400,200,'ground7'),
             new Decoration(this.ctx,13180,350,400,400,'ground7'),
             new Decoration(this.ctx,13580,550,520,100,'ground06'),
+            new Decoration(this.ctx,13630,370,100,100,'grass'),
+            new Decoration(this.ctx,13800,170,300,300,'tree'),
+            new Decoration(this.ctx,14400,460,100,100,'fence'),
+            new Decoration(this.ctx,14500,460,100,100,'fence'),
+            new Decoration(this.ctx,14600,460,100,100,'fence'),
+            new Decoration(this.ctx,14700,460,100,100,'fence'),
+            new Decoration(this.ctx,14080,200,350,350,'tree'),
+            new Decoration(this.ctx,14900,460,100,100,'bush'),
             new Decoration(this.ctx,15000,47,600,600,'house'),
             new Decoration(this.ctx,15100,430,120,130,'grandma')            
             
@@ -300,8 +327,10 @@ class Game{
                 this.coinsCount()
                 this.checkHealth()
                 this.sounds.music.play()
-                
-
+                if(this.mainSprite.stopSound){
+                    this.sounds.music.volume = 0
+                }
+                this.winScreen(this.mainSprite)
             }, FPS)
         }
     }
@@ -333,11 +362,11 @@ class Game{
         this.stumpArr.forEach((stump) =>  stump.draw())
         this.coinsArr.forEach((coin) =>  coin.draw())
         this.bubbleArr.forEach((bubble) =>  bubble.draw())
+        this.finalLight.draw()
         this.prizesArr.forEach((heart) =>  heart.draw())
         this.mysteryBoxArr.forEach((box) =>  box.draw())
         this.brickPrizesArr.forEach((prize) => prize.draw())
         this.bricksArr.forEach((brick) =>  brick.draw())
-        
         this.spikesArr.forEach((spike) =>  spike.draw())
         this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
@@ -457,8 +486,12 @@ class Game{
 
         //Sprite-bubbles
         this.bubbleArr.forEach((bubble) =>  this.mainSprite.generalCollision(bubble))
-
+        
+        //Sprite - Brick coins
         this.brickPrizesArr.forEach((prize) => this.mainSprite.generalCollision(prize))
+
+        //Sprite-finalLight
+        this.mainSprite.generalCollision(this.finalLight)
         //Enemy-sprite
         this.basicEnemyArr.forEach((enemy) =>  enemy.collisionEnemy(this.mainSprite))
 
@@ -513,6 +546,43 @@ class Game{
         this.brickPrizesArr = restCoinsBricks
 
     } 
+
+    winScreen(sprite){
+        if(sprite.win){
+    
+            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.8)',
+            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
+            this.ctx.fillStyle = "rgb(0,0,0)",
+            this.ctx.font = '100px Arial bold',
+            this.ctx.fillText('You win',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500)
+            this.ctx.font = '30px Arial bold',
+            this.ctx.fillText(`Your score is ${this.coinsCounter}`,this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/1.5 ,500)
+            this.img = new Image()
+            this.img.src = './assets/img/CollectableObject/Star.png'
+            this.ready=false;
+            this.img.onload = () => {
+                this.img.ready = true
+            }
+            
+            if(this.coinsCounter <= 10){
+                if(this.img.ready){
+                    console.log('draw')
+                    this.ctx.drawImage(this.img,100 ,100,300,300)   
+                    }
+            }else if(this.coinsCounter > 10 && this.coinsCounter <= 20){
+                if(this.img.ready){
+                    this.ctx.drawImage(this.img,100 ,100,300,300),
+                    this.ctx.drawImage(this.img,500 ,100,300,300)      
+                    }
+            }else {
+                if(this.img.ready){
+                    this.ctx.drawImage(this.img,100 ,100,300,300),
+                    this.ctx.drawImage(this.img,500 ,100,300,300),
+                    this.ctx.drawImage(this.img,900 ,100,300,300)     
+                    } 
+            }
+        }
+    }
 
    
 

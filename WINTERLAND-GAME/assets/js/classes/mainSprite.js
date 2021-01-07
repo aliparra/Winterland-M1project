@@ -35,6 +35,7 @@ class MainSprite{
         this.status = {
             leftSide: false,
             rightSide: true
+
         }
 
         this.jumpProperties = {
@@ -64,12 +65,15 @@ class MainSprite{
 
         //HEALTH
          this.health = MAINHEALTH
+
+         //WIN OR LOOSE
          this.isDead = false
+         this.win = false
 
          //INVENTARY
 
          this.inventary = {
-             heart: false,
+             heart: true,
              apple: false,
              bubble: true
          }
@@ -81,8 +85,9 @@ class MainSprite{
             gameOver: new Audio('./assets/sounds/gameOver.wav'),
             getCoin: new Audio('./assets/sounds/coin.wav'),
             getHeart: new Audio('./assets/sounds/heart2.wav'),
-            getApple: new Audio('./assets/sounds/heart.mp3')
-           
+            getApple: new Audio('./assets/sounds/heart.mp3'),
+            winSong: new Audio('./assets/sounds/win.wav'),
+            light: new Audio('./assets/sounds/light.mp3')
         } 
 
         this.sounds.jump.volume = 0.1
@@ -91,6 +96,7 @@ class MainSprite{
         this.sounds.getCoin.volume = 0.1
         this.sounds.getHeart.volume = 0.2
         this.sounds.getApple.volume = 0.8
+        this.sounds.winSong.volume = 0.8
         
         this.stopSound = false
 
@@ -193,6 +199,9 @@ class MainSprite{
         }
         else if(this.isDead){
             this.animateDieR()
+        }
+        else if(this.win){
+            this.animateFlowers()
         }
         else{
             this.resetAnimation()  
@@ -303,6 +312,18 @@ class MainSprite{
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
             
             this.sprite.verticalFrameIndex = 11
+            if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    } 
+
+    animateFlowers(){
+        if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
+            
+            this.sprite.verticalFrameIndex = 10
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -631,7 +652,8 @@ class MainSprite{
             this.collisions.right = false
             } 
     }
-
+    
+    
 
       //HEART, APPLE AND COIN COLLISION
 
@@ -665,6 +687,21 @@ class MainSprite{
                     this.sounds.getApple.play()
                     element.x = undefined
                 }
+                if(element instanceof Light){
+                    element.x = undefined
+                    this.sounds.light.play()
+                    this.win = true
+                
+                setTimeout(() => { 
+                    
+                    this.x = 14999
+                    this.vx= 0
+                    this.stopSound = true
+                    this.sounds.winSong.play()
+                },3000)
+                    
+                    console.log('win')
+                }
                 if(element instanceof Coin){
                     this.sounds.getCoin.play()
                     return true
@@ -672,27 +709,17 @@ class MainSprite{
                     return false
                 }
 
-                
+            
                 
             }
         
-    }
-    //GENERIC COLLISION
+        }
 
-   /*  coinCollision(element){
-        if(this.x < element.x + element.width &&
-            this.x + this.width > element.x &&
-            this.y < element.y + element.height &&
-            this.y + this.height > element.y){
-                this.sounds.getCoin.play()
-                return true
-            }
-        return false
-    } */
+
 
     //CHECK HEALTH 
     healthStatus(){
-        if(this.health <= 0){
+        if(this.health <= 0 ){
             this.isDead = true
             this.death()
             return true
@@ -700,9 +727,11 @@ class MainSprite{
             return false
         }
     }
+
    
     //DEATH
     death(){
+        if(!this.win){
            this.x=undefined
            if(!this.stopSound){
            this.sounds.gameOver.play()}
@@ -711,9 +740,11 @@ class MainSprite{
            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
            this.ctx.fillStyle = "rgb(0,0,0)",
            this.ctx.font = '100px Arial bold',
-           this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500)
-           
-    }
+           this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500) 
+           }
+        }
+
+    
 
     spritePosition(){
         this.ctx.save()

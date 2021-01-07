@@ -51,12 +51,19 @@ class Decoration extends Stump{
             case 'grass':
                 this.img.src = './assets/img/Environment/Grass.png'
                 break; 
+            case 'fence':
+                this.img.src = './assets/img/Environment/Fence.png'
+                break;
             case 'house':
                 this.img.src = './assets/img/Environment/finalHouse.png'
                 break;
             case 'grandma':
                 this.img.src = './assets/img/Environment/old-lady.png'
                 break; 
+            
+            case 'star':
+            this.img.src = './assets/img/CollectableObject/Star.png'
+            break; 
             
           }
         this.ready=false;
