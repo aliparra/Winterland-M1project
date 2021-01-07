@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,12800,30)
+        this.mainSprite = new MainSprite(this.ctx,14800,30)
         
         //Enviroment
         
@@ -550,35 +550,30 @@ class Game{
     winScreen(sprite){
         if(sprite.win){
     
-            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.8)',
+            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.9)',
             this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
             this.ctx.fillStyle = "rgb(0,0,0)",
             this.ctx.font = '100px Arial bold',
             this.ctx.fillText('You win',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500)
             this.ctx.font = '30px Arial bold',
-            this.ctx.fillText(`Your score is ${this.coinsCounter}`,this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/1.5 ,500)
+            this.ctx.fillText(`Your score is: ${this.coinsCounter}`,this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/1.5 ,500)
             this.img = new Image()
             this.img.src = './assets/img/CollectableObject/Star.png'
-            this.ready=false;
-            this.img.onload = () => {
-                this.img.ready = true
-            }
             
             if(this.coinsCounter <= 10){
-                if(this.img.ready){
-                    console.log('draw')
-                    this.ctx.drawImage(this.img,100 ,100,300,300)   
-                    }
+                
+                   
+                    this.ctx.drawImage(this.img,630 ,380,70,70)
+                    
             }else if(this.coinsCounter > 10 && this.coinsCounter <= 20){
                 if(this.img.ready){
-                    this.ctx.drawImage(this.img,100 ,100,300,300),
-                    this.ctx.drawImage(this.img,500 ,100,300,300)      
-                    }
-            }else {
-                if(this.img.ready){
-                    this.ctx.drawImage(this.img,100 ,100,300,300),
-                    this.ctx.drawImage(this.img,500 ,100,300,300),
-                    this.ctx.drawImage(this.img,900 ,100,300,300)     
+                    this.ctx.drawImage(this.img,630 ,380,70,70),
+                    this.ctx.drawImage(this.img,730 ,380,70,70)    
+                    
+            }else if(this.img.ready){
+                    this.ctx.drawImage(this.img,630 ,380,70,70),
+                    this.ctx.drawImage(this.img,730 ,380,70,70),
+                    this.ctx.drawImage(this.img,830 ,380,70,70)    
                     } 
             }
         }
