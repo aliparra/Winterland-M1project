@@ -73,9 +73,9 @@ class MainSprite{
          //INVENTARY
 
          this.inventary = {
-             heart: true,
+             heart: false,
              apple: false,
-             bubble: true
+             bubble: false
          }
          //SPRITE SOUND
          //sounds
