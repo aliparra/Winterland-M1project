@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,9000,350)
+        this.mainSprite = new MainSprite(this.ctx,14800,30)
         
         //Enviroment
         
@@ -39,8 +39,20 @@ class Game{
             new BasicPlatform(this.ctx,8070,300,40,40,'bridge'),
             new BasicPlatform(this.ctx,8100,290,40,40,'bridge'),
             new BasicPlatform(this.ctx,8135,300,300,50,'ice'),
-            new BasicPlatform(this.ctx,9620,410,40,40,'bridge'),
-            new BasicPlatform(this.ctx,9650,320,40,40,'bridge')
+            new BasicPlatform(this.ctx,9750,330,80,50,'ice'),
+            new BasicPlatform(this.ctx,9950,280,80,50,'ice'),
+            new BasicPlatform(this.ctx,10200,240,100,50,'ice'),
+            new BasicPlatform(this.ctx,11050,240,100,50,'ice'),
+            new BasicPlatform(this.ctx,11800,560,1000,30,'ice'),
+            new BasicPlatform(this.ctx,12780,460,400,20,'ice'),
+            new BasicPlatform(this.ctx,13170,660,400,30,'ice'),
+            new BasicPlatform(this.ctx,13580,460,120,100,'basic'),
+            new BasicPlatform(this.ctx,13700,460,100,100,'basic'),
+            new BasicPlatform(this.ctx,13800,460,100,100,'basic'),
+            new BasicPlatform(this.ctx,13900,460,100,100,'basic'),
+            new BasicPlatform(this.ctx,14000,460,100,100,'basic'),
+
+            
 
             
         ]  
@@ -87,11 +99,13 @@ class Game{
             
             new Apple(this.ctx, 1230, 250),
             new Heart(this.ctx, 3130, 200), 
+            new Heart(this.ctx, 10930, 175)
         ]
 
         this.mysteryBoxArr = [
             new MisteryBox(this.ctx, 1200, 250),
-            new MisteryBox(this.ctx, 3100, 200)
+            new MisteryBox(this.ctx, 3100, 200),
+            new MisteryBox(this.ctx, 10900, 170)
             
             
         ]
@@ -105,7 +119,11 @@ class Game{
             new Coin(this.ctx,9090,240),
             new Coin(this.ctx,9160,240),
             new Coin(this.ctx,9290,240),
-            new Coin(this.ctx,9390,240)
+            new Coin(this.ctx,9390,240),
+            new Coin(this.ctx,10530,175),
+            new Coin(this.ctx,10630,175),
+            new Coin(this.ctx,10730,175)
+            
             
 
 
@@ -122,18 +140,25 @@ class Game{
          new Brick(this.ctx, 9160, 230),
          new Brick(this.ctx, 9260, 230),
          new Brick(this.ctx, 9360, 230),
+         new Brick(this.ctx, 10500, 170),
+         new Brick(this.ctx, 10600, 170),
+         new Brick(this.ctx, 10700, 170)
 
             
         ]
 
         //Enemies
         this.basicEnemyArr = [
-            new BasicEnemy(this.ctx,800,200,100), 
+             new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,600,100,30),
             new BasicEnemy(this.ctx,1500,300,100),
             new BasicEnemy(this.ctx,3010,300,100),
             new BasicEnemy(this.ctx,6930,100,50), 
-            new BasicEnemy(this.ctx,7550,50,50) 
+            new BasicEnemy(this.ctx,7550,50,50), 
+            new BasicEnemy(this.ctx,12000,50,100),
+            new BasicEnemy(this.ctx,12200,50,100),
+            new BasicEnemy(this.ctx,12400,50,100)
+
         ]
 
         this.flyingEnemyArr = [
@@ -164,7 +189,14 @@ class Game{
             new MovePlatform(this.ctx,1750,200,150,50,1400,1750,2),
             new MovePlatform(this.ctx,1900,450,150,50,1900,2400,2),
             new MovePlatform(this.ctx,3450,430,50,50,3450,3600,2),
-            new MovePlatform(this.ctx,6700,400,50,50,6700,7900,3),
+            new MovePlatform(this.ctx,6700,400,100,50,6700,7900,2),
+            new MovePlatform(this.ctx,10400,500,100,50,10400,10750,2),
+            new MovePlatform(this.ctx,10850,550,300,50,10850,10000,1), // Special movement
+            new MovePlatform(this.ctx,11150,480,100,50,11150,11300,1),
+            new MovePlatform(this.ctx,11400,380,100,50,11400,11600,2),
+            new MovePlatform(this.ctx,11800,550,1000,50,11800,11000,2),// Special movement
+            new MovePlatform(this.ctx,12780,450,400,50,12800,12000,2),
+            new MovePlatform(this.ctx,13170,350,420,50,13180,13000,2)// Special movement
             
             
         ]
@@ -175,7 +207,8 @@ class Game{
            new Stump(this.ctx,5750,470,100,80,'stump'),
            new Stump(this.ctx,6480,470,100,80,'stump'),
            new Stump(this.ctx,7350,180,100,80,'box'),
-           new Stump(this.ctx,9530,470,100,80,'stump')
+           new Stump(this.ctx,9530,470,100,80,'stump'),
+           
 
 
         ]
@@ -186,7 +219,9 @@ class Game{
             new WarningSign(this.ctx,3630,480,4),
             new WarningSign(this.ctx,3860,140,6),
             new WarningSign(this.ctx,8505,480,5),
-            new WarningSign(this.ctx,8365,240,2)
+            new WarningSign(this.ctx,8365,240,2),
+            new WarningSign(this.ctx,10860,490,6),
+            new WarningSign(this.ctx,11850,490,6)
         ]
 
         this.spikesArr = [
@@ -218,7 +253,27 @@ class Game{
             new Decoration(this.ctx,8135,300,300,250,'ground1'),
             new Decoration(this.ctx,8250,200,100,100,'snowMan'),
             new Decoration(this.ctx,7950,450,100,100,'grass'),
-            new Decoration(this.ctx,9615,150,400,400,'tree')
+            new Decoration(this.ctx,9615,150,400,400,'tree'),
+            new Decoration(this.ctx,10850,550,100,100,'ground7'),
+            new Decoration(this.ctx,10950,550,100,100,'ground7'),
+            new Decoration(this.ctx,11050,550,100,100,'ground7'),
+            new Decoration(this.ctx,11800,550,100,100,'ground7'),
+            new Decoration(this.ctx,11900,550,100,100,'ground7'),
+            new Decoration(this.ctx,12000,550,100,100,'ground7'),
+            new Decoration(this.ctx,12100,550,100,100,'ground7'),
+            new Decoration(this.ctx,12200,550,100,100,'ground7'),
+            new Decoration(this.ctx,12300,550,100,100,'ground7'),
+            new Decoration(this.ctx,12400,550,100,100,'ground7'),
+            new Decoration(this.ctx,12500,550,100,100,'ground7'),
+            new Decoration(this.ctx,12600,550,180,100,'ground7'),
+            new Decoration(this.ctx,12780,450,400,200,'ground7'),
+            new Decoration(this.ctx,13180,350,400,400,'ground7'),
+            new Decoration(this.ctx,13580,550,520,100,'ground06'),
+            new Decoration(this.ctx,15000,47,600,600,'house'),
+            new Decoration(this.ctx,15100,430,120,130,'grandma')            
+            
+
+            
 
         ]
         //COUNTERS
@@ -342,7 +397,8 @@ class Game{
             //Base platforms deleted
             this.deletePlatforms(4,10,this.platformsArr)
             this.deletePlatforms(20,25,this.platformsArr)
-            this.deletePlatforms(67,78,this.platformsArr)
+            this.deletePlatforms(67,78,this.platformsArr),
+            this.deletePlatforms(100,140,this.platformsArr)
             
 
 

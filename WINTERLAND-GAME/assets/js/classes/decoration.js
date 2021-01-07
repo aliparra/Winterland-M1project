@@ -27,6 +27,9 @@ class Decoration extends Stump{
             case 'fence':
                 this.img.src = './assets/img/Environment/Fence.png'
                 break;
+            case 'ground06':
+                this.img.src = './assets/img/Platformer/Ground_06.png'
+                break; 
             case 'ground1':
                 this.img.src = './assets/img/Platformer/Ground-Additional_01.png'
                 break;
@@ -48,6 +51,13 @@ class Decoration extends Stump{
             case 'grass':
                 this.img.src = './assets/img/Environment/Grass.png'
                 break; 
+            case 'house':
+                this.img.src = './assets/img/Environment/finalHouse.png'
+                break;
+            case 'grandma':
+                this.img.src = './assets/img/Environment/old-lady.png'
+                break; 
+            
           }
         this.ready=false;
         this.img.onload = () => {
