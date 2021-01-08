@@ -90,13 +90,13 @@ class MainSprite{
             light: new Audio('./assets/sounds/light.mp3')
         } 
 
-        this.sounds.jump.volume = 0.1
-        this.sounds.shoot.volume = 0.1
-        this.sounds.gameOver.volume = 0.1
-        this.sounds.getCoin.volume = 0.1
-        this.sounds.getHeart.volume = 0.2
-        this.sounds.getApple.volume = 0.8
-        this.sounds.winSong.volume = 0.8
+        this.sounds.jump.volume = JUMP_VOLUME
+        this.sounds.shoot.volume = SHOOT_VOLUME
+        this.sounds.gameOver.volume = GAMEOVER_VOLUME
+        this.sounds.getCoin.volume = GETCOIN_VOLUME
+        this.sounds.getHeart.volume = GETHEART_VOLUME
+        this.sounds.getApple.volume = GETAPPLE_VOLUME
+        this.sounds.winSong.volume = WIN_VOLUME
         
         this.stopSound = false
 
@@ -173,7 +173,7 @@ class MainSprite{
     //SOUND
 
     stopSounds(){
-        console.log('hi')
+        
         this.sounds.jump.volume = 0
         this.sounds.shoot.volume = 0
         this.sounds.gameOver.volume = 0
@@ -182,6 +182,17 @@ class MainSprite{
         this.sounds.getApple.volume = 0
         this.sounds.winSong.volume = 0
     }
+
+    startSounds(){
+        this.sounds.jump.volume = JUMP_VOLUME
+        this.sounds.shoot.volume = SHOOT_VOLUME
+        this.sounds.gameOver.volume = GAMEOVER_VOLUME
+        this.sounds.getCoin.volume = GETCOIN_VOLUME
+        this.sounds.getHeart.volume = GETHEART_VOLUME
+        this.sounds.getApple.volume = GETAPPLE_VOLUME
+        this.sounds.winSong.volume = WIN_VOLUME
+    }
+
     //ANIMATIONS
     animate(){
         if(this.movements.run && this.movements.right){

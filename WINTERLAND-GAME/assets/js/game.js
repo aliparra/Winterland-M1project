@@ -15,7 +15,7 @@ class Game{
         this.sounds = {
         music: new Audio('./assets/sounds/mainMusic.mp3')
         }
-        this.sounds.music.volume = 0.1
+        this.sounds.music.volume = MUSIC_VOLUME
         //INSTANCES
         
         //Characters
@@ -175,7 +175,7 @@ class Game{
             new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,1500,300,100),
             new BasicEnemy(this.ctx,3010,300,100),
-            new BasicEnemy(this.ctx,7330,100,50), 
+            new BasicEnemy(this.ctx,7130,100,50), 
             new BasicEnemy(this.ctx,7850,50,50), 
             new BasicEnemy(this.ctx,12000,50,100),
             new BasicEnemy(this.ctx,12200,50,100),
@@ -347,19 +347,33 @@ class Game{
     stop(){
 
         clearInterval(this.drawInterval) 
-    }
-
-    pause(){
+        this.drawInterval = false
         
     }
 
+    reload(){
+            location.reload()
+            this.start()   
+            
+    }
     stopMusic(){
         
         this.sounds.music.volume = 0
+    
+    }
+
+    startMusic(){
+        this.sounds.music.volume = MUSIC_VOLUME
     }
 
     stopSounds(){
         this.mainSprite.stopSounds()
+        console.log('sounds')
+    }
+
+    startSounds(){
+        this.mainSprite.startSounds()
+        console.log('soundsStart')
     }
 
     //Other methods
@@ -647,6 +661,7 @@ class Game{
                     this.ctx.drawImage(this.img,600 ,320,70,70),
                     this.ctx.drawImage(this.img,700 ,320,70,70)
                     
+          
           
         }
     }

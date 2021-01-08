@@ -21,7 +21,8 @@ html, body{
 }
 
  canvas {
-  background: blue;
+  background-image: url('../img/init/controlsImg.png');
+  background-size:contain ;
   position: absolute;
   left: 50%;
   top: 55%;
@@ -50,7 +51,7 @@ html, body{
 
 }
 
-#start-game-btn{
+.start{
     
     
     border: 3px solid white; 
@@ -60,12 +61,12 @@ html, body{
     font-family: 'East Sea Dokdo';
     font-size: 3rem;
     color: white;
-    margin: 3% 0;
+    margin: 2% 0;
     border-radius: 25px;
     
 }
 
-#pause-game-btn{
+.pause{
     
     
     border: 3px solid white; 
@@ -75,7 +76,37 @@ html, body{
     font-family: 'East Sea Dokdo';
     font-size: 3rem;
     color: white;
-    margin: 3% 0;
+    margin: 2% 0;
+    border-radius: 25px;
+    
+}
+
+.resume{
+    
+    
+    border: 3px solid white; 
+    width: 10%;
+    height: 10%;
+    background-color: rgb(115, 164, 187);
+    font-family: 'East Sea Dokdo';
+    font-size: 3rem;
+    color: white;
+    margin: 2% 0;
+    border-radius: 25px;
+    
+}
+
+.reload{
+    
+    
+    border: 3px solid white; 
+    width: 10%;
+    height: 10%;
+    background-color: rgb(115, 164, 187);
+    font-family: 'East Sea Dokdo';
+    font-size: 3rem;
+    color: white;
+    margin: 2% 0;
     border-radius: 25px;
     
 }
@@ -85,21 +116,58 @@ html, body{
 
     width: 10%;
     height: 10%;
-    font-family: 'East Sea Dokdo';
-    color: white;
-    margin: 3% 0
+    margin: 3% 0 1% 0
     
+}
+
+.musicON{
+    width: 10%;
+    height: 10%;
+    background-image: url('../img/Buttons/Music_BTN.png');
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.musicOFF{
+    width: 10%;
+    height: 10%;
+    background-image: url('../img/Buttons/Music_BTN_Off.png');
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.soundsON{
+    width: 10px;
+    height: 10px;
+    background-image: url('../img/Buttons/Sound_BTN.png');
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.soundsOFF{
+    width: 10px;
+    height: 10px;
+    background-image: url('../img/Buttons/Sounds_BTN_Off.png');
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.musicOFF{
+    width: 10%;
+    height: 10%;
+    background-image: url('../img/Buttons/Music_BTN_Off.png');
+    background-repeat: no-repeat
 }
 
 
 #sounds-btn{
     
-
     width: 10%;
     height: 10%;
-    font-family: 'East Sea Dokdo';
-    color: white;
-    margin: 3% 0
+    margin: 1% 0 3% 0
     
 }
 
+.hide{
+    display: none;
+}
