@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,14990,30)
+        this.mainSprite = new MainSprite(this.ctx,100,30)
         
         //Enviroment
         
@@ -333,8 +333,39 @@ class Game{
                     this.sounds.music.volume = 0
                 }
                 this.winScreen(this.mainSprite)
+                this.gameOverScreen(this.mainSprite)
             }, FPS)
+
         }
+    }
+
+    stop(){
+        
+        this.sounds.music.volume = 0
+        this.ctx.fillStyle = 'rgba(120, 120, 120, 0.9)',
+        this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
+
+            this.rectangle = new Image()
+            this.rectangle.src = './assets/img/Buttons/Window.png'
+            this.ctx.drawImage(this.rectangle,0 ,0,this.ctx.canvas.width ,this.ctx.canvas.height )
+
+            this.paused = new Image()
+            this.paused.src = './assets/img/Buttons/HeaderPaused.png'
+            this.ctx.drawImage(this.paused,330 ,180,600,100)
+
+        clearInterval(this.drawInterval)
+        
+        
+            
+    }
+
+    stopMusic(){
+        
+        this.sounds.music.volume = 0
+    }
+
+    stopSounds(){
+        this.mainSprite.stopSounds()
     }
 
     //Other methods
@@ -593,6 +624,36 @@ class Game{
                     this.ctx.drawImage(this.img,830 ,380,70,70)    
                     
             }
+        }
+    }
+
+    gameOverScreen(sprite){
+        if(sprite.healthStatus() ){
+            
+            this.ctx.fillStyle = 'rgba(120, 120, 120, 0.9)',
+            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
+
+            this.rectangle = new Image()
+            this.rectangle.src = './assets/img/Buttons/Window.png'
+            this.ctx.drawImage(this.rectangle,0 ,0,this.ctx.canvas.width ,this.ctx.canvas.height )
+
+            this.levelFailed = new Image()
+            this.levelFailed.src = './assets/img/Buttons/HeaderFailed.png'
+            this.ctx.drawImage(this.levelFailed,330 ,180,600,100)
+
+
+    
+
+            this.img = new Image()
+            this.img.src = './assets/img/CollectableObject/Star_02.png'
+            
+                   
+                    //this.ctx.drawImage(this.img,630 ,380,70,70)
+                    this.ctx.drawImage(this.img,500 ,320,70,70),
+                    this.ctx.drawImage(this.img,600 ,320,70,70),
+                    this.ctx.drawImage(this.img,700 ,320,70,70)
+                    
+          
         }
     }
 

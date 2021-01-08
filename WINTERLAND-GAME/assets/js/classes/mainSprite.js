@@ -170,6 +170,18 @@ class MainSprite{
 
     }
 
+    //SOUND
+
+    stopSounds(){
+        console.log('hi')
+        this.sounds.jump.volume = 0
+        this.sounds.shoot.volume = 0
+        this.sounds.gameOver.volume = 0
+        this.sounds.getCoin.volume = 0
+        this.sounds.getHeart.volume = 0
+        this.sounds.getApple.volume = 0
+        this.sounds.winSong.volume = 0
+    }
     //ANIMATIONS
     animate(){
         if(this.movements.run && this.movements.right){
@@ -423,9 +435,9 @@ class MainSprite{
             this.x = WORLDEND 
         }
 
-         if(this.y >= this.ctx.canvas.height-this.height){
+        /*  if(this.y >= this.ctx.canvas.height-this.height){
             this.death()
-        } 
+        } */ 
 
         //ATTACK
 
@@ -719,7 +731,8 @@ class MainSprite{
 
     //CHECK HEALTH 
     healthStatus(){
-        if(this.health <= 0 ){
+        if(this.health <= 0 || this.y >= this.ctx.canvas.height-this.height){
+            this.x = undefined
             this.isDead = true
             this.death()
             return true
@@ -736,13 +749,9 @@ class MainSprite{
            if(!this.stopSound){
            this.sounds.gameOver.play()}
            this.stopSound = true
-           this.ctx.fillStyle = 'rgba(120, 120, 120, 0.5)',
-           this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
-           this.ctx.fillStyle = "rgb(0,0,0)",
-           this.ctx.font = '100px Arial bold',
-           this.ctx.fillText('You loose',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500) 
+           
            }
-        }
+        } 
 
     
 
