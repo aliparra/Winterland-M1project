@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,6000,30)
+        this.mainSprite = new MainSprite(this.ctx,100,400)
         
         //Enviroment
         

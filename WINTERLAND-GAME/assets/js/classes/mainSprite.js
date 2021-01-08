@@ -152,7 +152,7 @@ class MainSprite{
          //Let me paint less times than original frames
          this.sprite.drawCount++
         this.animate()
-        this.spritePosition()
+        //this.spritePosition()
         //Change mainSprite Size with heart
         if(this.inventary.apple){
             this.height = this.initialHeight / 1.5
@@ -770,13 +770,13 @@ class MainSprite{
 
     
 
-    spritePosition(){
+/*     spritePosition(){
         this.ctx.save()
         this.fillStyle= 'red'
         this.ctx.font = '18px Arial'
         this.ctx.fillText(` ${this.x}`,this.x, this.y + 20)
         this.ctx.restore()
         this.ctx.fillText(` ${Math.floor(this.y)}`,this.x, this.y + 40) 
-    } 
+    }  */
         
 }
