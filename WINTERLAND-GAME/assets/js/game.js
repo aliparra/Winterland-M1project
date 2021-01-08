@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,30)
+        this.mainSprite = new MainSprite(this.ctx,14990,30)
         
         //Enviroment
         
@@ -102,11 +102,13 @@ class Game{
         ]
 
         this.bubbleArr = [
+            new Heart(this.ctx, 860, 290),
             new Bubble(this.ctx,380,100),
             new Bubble(this.ctx,4030,123),
             new Heart(this.ctx, 7380, 70),
             new Bubble(this.ctx,8325,220),
             new Bubble(this.ctx,11125,170)
+            
         ]
 
         this.prizesArr = [
@@ -132,7 +134,7 @@ class Game{
             new Coin(this.ctx,2730,370),
             new Coin(this.ctx,8990,240),
             new Coin(this.ctx,9090,240),
-            new Coin(this.ctx,9160,240),
+            new Coin(this.ctx,9190,240),
             new Coin(this.ctx,9290,240),
             new Coin(this.ctx,9390,240),
             new Coin(this.ctx,10530,175),
@@ -164,12 +166,12 @@ class Game{
 
         //Enemies
         this.basicEnemyArr = [
-             new BasicEnemy(this.ctx,800,200,100), 
-            new BasicEnemy(this.ctx,600,100,30),
+            //new BasicEnemy(this.ctx,600,100,30),
+            new BasicEnemy(this.ctx,800,200,100), 
             new BasicEnemy(this.ctx,1500,300,100),
             new BasicEnemy(this.ctx,3010,300,100),
-            new BasicEnemy(this.ctx,6930,100,50), 
-            new BasicEnemy(this.ctx,7550,50,50), 
+            new BasicEnemy(this.ctx,7330,100,50), 
+            new BasicEnemy(this.ctx,7850,50,50), 
             new BasicEnemy(this.ctx,12000,50,100),
             new BasicEnemy(this.ctx,12200,50,100),
             new BasicEnemy(this.ctx,12400,50,100)
@@ -374,7 +376,7 @@ class Game{
        
 
         //HELPERS
-        this.mainSprite.spritePosition()
+        //this.mainSprite.spritePosition()
 
         
 
@@ -552,29 +554,44 @@ class Game{
     
             this.ctx.fillStyle = 'rgba(120, 120, 120, 0.9)',
             this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
-            this.ctx.fillStyle = "rgb(0,0,0)",
-            this.ctx.font = '100px Arial bold',
-            this.ctx.fillText('You win',this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/2 ,500)
-            this.ctx.font = '30px Arial bold',
-            this.ctx.fillText(`Your score is: ${this.coinsCounter}`,this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/1.5 ,500)
+
+            this.rectangle = new Image()
+            this.rectangle.src = './assets/img/Buttons/Window.png'
+            this.ctx.drawImage(this.rectangle,0 ,0,this.ctx.canvas.width ,this.ctx.canvas.height )
+
+            this.levelCompleted = new Image()
+            this.levelCompleted.src = './assets/img/Buttons/Header.png'
+            this.ctx.drawImage(this.levelCompleted,330 ,180,600,100)
+
+
+            this.ctx.fillStyle = 'rgb(0, 0, 0)',
+            this.ctx.font = '30px Verdana bold',
+            this.ctx.fillText(` SCORE: ${this.coinsCounter}`,this.ctx.canvas.width/2 - 200,this.ctx.canvas.height/1.5 ,500)
             this.img = new Image()
-            this.img.src = './assets/img/CollectableObject/Star.png'
+            this.img.src = './assets/img/CollectableObject/Star_01.png'
+
+            this.img2 = new Image()
+            this.img2.src = './assets/img/CollectableObject/Star_02.png'
             
             if(this.coinsCounter <= 10){
                 
                    
-                    this.ctx.drawImage(this.img,630 ,380,70,70)
+                    //this.ctx.drawImage(this.img,630 ,380,70,70)
+                    this.ctx.drawImage(this.img,630 ,380,70,70),
+                    this.ctx.drawImage(this.img2,730 ,380,70,70),
+                    this.ctx.drawImage(this.img2,830 ,380,70,70)
                     
             }else if(this.coinsCounter > 10 && this.coinsCounter <= 20){
-                if(this.img.ready){
-                    this.ctx.drawImage(this.img,630 ,380,70,70),
-                    this.ctx.drawImage(this.img,730 ,380,70,70)    
+                
+                this.ctx.drawImage(this.img,630 ,380,70,70),
+                this.ctx.drawImage(this.img,730 ,380,70,70),
+                this.ctx.drawImage(this.img2,830 ,380,70,70)    
                     
-            }else if(this.img.ready){
+            }else {
                     this.ctx.drawImage(this.img,630 ,380,70,70),
                     this.ctx.drawImage(this.img,730 ,380,70,70),
                     this.ctx.drawImage(this.img,830 ,380,70,70)    
-                    } 
+                    
             }
         }
     }

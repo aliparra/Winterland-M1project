@@ -64,7 +64,7 @@ class MainSprite{
          this.canFire = true
 
         //HEALTH
-         this.health = MAINHEALTH
+         this.health = MAINSPRITE
 
          //WIN OR LOOSE
          this.isDead = false
@@ -73,9 +73,9 @@ class MainSprite{
          //INVENTARY
 
          this.inventary = {
-             heart: false,
+             heart: true,
              apple: false,
-             bubble: false
+             bubble: true
          }
          //SPRITE SOUND
          //sounds
@@ -152,7 +152,7 @@ class MainSprite{
          //Let me paint less times than original frames
          this.sprite.drawCount++
         this.animate()
-
+        this.spritePosition()
         //Change mainSprite Size with heart
         if(this.inventary.apple){
             this.height = this.initialHeight / 1.5
@@ -753,6 +753,6 @@ class MainSprite{
         this.ctx.fillText(` ${this.x}`,this.x, this.y + 20)
         this.ctx.restore()
         this.ctx.fillText(` ${Math.floor(this.y)}`,this.x, this.y + 40) 
-    }
+    } 
         
 }

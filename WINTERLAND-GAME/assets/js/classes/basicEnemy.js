@@ -15,8 +15,8 @@ class BasicEnemy{
         this.previousY = this.y
 
         
-        this.height = 50
-        this.width = 50
+        this.height = 0
+        this.width = 0
 
         
         
@@ -47,10 +47,10 @@ class BasicEnemy{
 
         //SPRITE SHEET
         this.sprite = new Image()
-        this.sprite.src = './assets/img/enemySprite/enemy_sprite.png'
+        this.sprite.src = './assets/img/enemySprite/enemy-sprite-1.png'
         this.sprite.isReady = false
 
-        this.sprite.horizontalFrames = 12
+        this.sprite.horizontalFrames = 11
         this.sprite.verticalFrames = 4
 
         this.sprite.horizontalFrameIndex = 0
@@ -118,7 +118,7 @@ class BasicEnemy{
     animateWalkR(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 2
+            this.sprite.verticalFrameIndex = 0
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -130,7 +130,7 @@ class BasicEnemy{
     animateWalkL(){
         if(this.sprite.drawCount % MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 0
+            this.sprite.verticalFrameIndex = 1
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -142,7 +142,7 @@ class BasicEnemy{
     animateDeathR(){
         if(this.sprite.drawCount % SLOW_MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 3
+            this.sprite.verticalFrameIndex = 2
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{
@@ -154,7 +154,7 @@ class BasicEnemy{
     animateDeathL(){
         if(this.sprite.drawCount % SLOW_MOVEMENT_FRAMES === 0){
             
-            this.sprite.verticalFrameIndex = 1
+            this.sprite.verticalFrameIndex = 3
             if(this.sprite.horizontalFrameIndex + 1 === this.sprite.horizontalFrames){
                 this.sprite.horizontalFrameIndex = 0
             }else{

@@ -35,10 +35,10 @@ class FlyingEnemy extends BasicEnemy{
 
           //SPRITE SHEET
           this.sprite = new Image()
-          this.sprite.src = './assets/img/enemySprite/enemy_sprite.png'
+          this.sprite.src = './assets/img/enemySprite/fly-enemy-sprite-1.png'
           this.sprite.isReady = false
   
-          this.sprite.horizontalFrames = 12
+          this.sprite.horizontalFrames = 11
           this.sprite.verticalFrames = 4
   
           this.sprite.horizontalFrameIndex = 0
@@ -52,8 +52,8 @@ class FlyingEnemy extends BasicEnemy{
               this.sprite.frameWidth = this.sprite.width / this.sprite.horizontalFrames //To know the widht of every frame
               this.sprite.frameHeight = this.sprite.height / this.sprite.verticalFrames //To know the height of every frame
   
-              this.width =100//this.sprite.frameWidth
-              this.height = 100//this.sprite.frameHeight  
+              this.width =this.sprite.frameWidth
+              this.height = this.sprite.frameHeight  
           }
 
         //SOUNDS

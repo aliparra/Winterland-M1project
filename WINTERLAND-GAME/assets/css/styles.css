@@ -16,13 +16,21 @@ html, body{
     background-size: cover;
     background-position: center center;
 }
-
+#game title{
+    margin: 0px, auto;
+    padding: 10px
+}
 canvas {
   background: white;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%);
   overflow: hidden;
   border: 3px solid white;
 }
+
+#start-game-button{
+    
+}
+
