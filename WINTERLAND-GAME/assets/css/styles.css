@@ -61,8 +61,11 @@ html, body{
     font-family: 'East Sea Dokdo';
     font-size: 3rem;
     color: white;
-    margin: 2% 0;
+    margin: 40% 40%;
     border-radius: 25px;
+    position: absolute;
+    z-index: 100
+    
     
 }
 
@@ -102,7 +105,7 @@ html, body{
     border: 3px solid white; 
     width: 10%;
     height: 10%;
-    background-color: rgb(115, 164, 187);
+    background-color: turquoise;
     font-family: 'East Sea Dokdo';
     font-size: 3rem;
     color: white;
@@ -170,7 +173,10 @@ html, body{
 }
 
 
-
+button:hover{
+    background-color:rgb(115, 164, 187);
+    cursor: pointer
+}
 
 .hide{
     display: none;

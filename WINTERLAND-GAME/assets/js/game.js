@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,30)
+        this.mainSprite = new MainSprite(this.ctx,14000,30)
         
         //Enviroment
         
@@ -304,7 +304,7 @@ class Game{
             new Decoration(this.ctx,14080,200,350,350,'tree'),
             new Decoration(this.ctx,14900,460,100,100,'bush'),
             new Decoration(this.ctx,15000,47,600,600,'house'),
-            new Decoration(this.ctx,15100,430,120,130,'grandma')            
+            new Decoration(this.ctx,15100,420,130,140,'grandma')            
             
 
             
