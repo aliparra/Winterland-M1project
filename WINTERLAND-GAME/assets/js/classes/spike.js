@@ -23,13 +23,25 @@ class Spike extends GenericClass{
         } 
         this.stopSound = false
         this.sounds.appear.volume = 0.4
-       
+        this.sounds.kill.volume = 0.4
+        this.sounds.hurt.volume = 0.4
     }
 
     isReady(){
         return this.img.ready
     }
 
+    stopSounds(){
+        this.sounds.appear.volume = 0
+        this.sounds.kill.volume = 0
+        this.sounds.hurt.volume = 0
+    }
+
+    startSounds(){
+        this.sounds.appear.volume = 0.4
+        this.sounds.kill.volume = 0.4
+        this.sounds.hurt.volume = 0.4  
+    }
 
     draw(){
         

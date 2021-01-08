@@ -34,6 +34,14 @@ class MisteryBox extends GenericClass{
 
     }
 
+    stopSounds(){
+        this.sounds.misteryBox.volume = 0
+        
+    }
+
+    startSounds(){
+        this.sounds.misteryBox.volume = 0.2 
+    }
     isReady(){
         return this.img.ready
     }

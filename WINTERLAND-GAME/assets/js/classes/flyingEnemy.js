@@ -72,6 +72,18 @@ class FlyingEnemy extends BasicEnemy{
         return this.sprite.isReady
     }
 
+    stopSounds(){
+        this.sounds.die.volume = 0
+        this.sounds.kill.volume = 0
+        this.sounds.hurt.volume = 0
+    }
+
+    startSounds(){
+        this.sounds.die.volume = 0.1
+        this.sounds.kill.volume = 0.3
+        this.sounds.hurt.volume = 0.3
+    }
+
     draw(){
         if(this.isReady()){
             this.ctx.drawImage(

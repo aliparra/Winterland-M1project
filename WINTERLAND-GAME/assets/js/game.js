@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,30)
+        this.mainSprite = new MainSprite(this.ctx,6000,30)
         
         //Enviroment
         
@@ -213,6 +213,7 @@ class Game{
             new MovePlatform(this.ctx,1900,450,150,50,1900,2400,2),
             new MovePlatform(this.ctx,3450,430,50,50,3450,3600,2),
             new MovePlatform(this.ctx,6700,400,100,50,6700,7900,2),
+            new MovePlatform(this.ctx,6700,400,120,10,6700,7900,2),
             new MovePlatform(this.ctx,10400,500,100,50,10400,10750,2),
             new MovePlatform(this.ctx,10850,550,300,50,10850,10000,1), // Special movement
             new MovePlatform(this.ctx,11150,480,100,50,11150,11300,1),
@@ -373,12 +374,40 @@ class Game{
 
     stopSounds(){
         this.mainSprite.stopSounds()
-        
+        this.basicEnemyArr.forEach((enemy)=> {
+            enemy.stopSounds()
+        })
+        this.flyingEnemyArr.forEach((enemy)=> {
+            enemy.stopSounds()
+        })
+        this.spikesArr.forEach((spike)=> {
+            spike.stopSounds()
+        })
+        this.mysteryBoxArr.forEach((box)=> {
+            box.stopSounds()
+        })
+        this.bricksArr.forEach((brick)=> {
+            brick.stopSounds()
+        })
     }
 
     startSounds(){
         this.mainSprite.startSounds()
-        
+        this.basicEnemyArr.forEach((enemy)=> {
+            enemy.startSounds()
+        })
+        this.flyingEnemyArr.forEach((enemy)=> {
+            enemy.startSounds()
+        })
+        this.spikesArr.forEach((spike)=> {
+            spike.startSounds()
+        })
+        this.mysteryBoxArr.forEach((box)=> {
+            box.startSounds()
+        })
+        this.bricksArr.forEach((brick)=> {
+            brick.startSounds()
+        })
     }
 
     //Other methods
@@ -414,7 +443,6 @@ class Game{
         this.brickPrizesArr.forEach((prize) => prize.draw())
         this.bricksArr.forEach((brick) =>  brick.draw())
         this.spikesArr.forEach((spike) =>  spike.draw())
-        this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)//Counter Draw
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
         this.flyingEnemyArr.forEach((enemy) =>  enemy.draw())
         

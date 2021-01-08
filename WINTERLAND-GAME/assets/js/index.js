@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
 
         const counterNode = document.getElementById('counter')
         counterNode.focus()
-        console.log(counterNode)
+       
         }
         else if(startBtn.classList.contains('reload'))
         {

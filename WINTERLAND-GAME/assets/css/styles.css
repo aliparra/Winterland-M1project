@@ -185,8 +185,19 @@ button:hover{
 #counter{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    
 }
 
 #counter h1{
-    align-self: flex-start;
+    position: absolute;
+    left: 10%;
+    top: 17%;
+    font-size: 4em;
+}
+
+#counter img{
+    position: absolute;
+    left: 5%;
+    top: 25%;
 }

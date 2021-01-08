@@ -26,7 +26,14 @@ class Brick extends MisteryBox{
     isReady(){
         return this.img.ready
     }
+    stopSounds(){
+        this.sounds.hit.volume = 0
+        
+    }
 
+    startSounds(){
+        this.sounds.hit.volume = 0.4
+    }
     
 
     draw(){
