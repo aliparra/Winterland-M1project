@@ -13,6 +13,8 @@ window.addEventListener('load', () => {
         
       })
 
+    
+
     document.getElementById('volume-btn').addEventListener('click', (event) => {
         game.stopMusic()
     

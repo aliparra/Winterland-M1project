@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,30)
+        this.mainSprite = new MainSprite(this.ctx,6500,30)
         
         //Enviroment
         
@@ -29,6 +29,8 @@ class Game{
             new BasicPlatform(this.ctx,2200,150,150,50,'ice'),
             new BasicPlatform(this.ctx,3640,300,50,50,'ice'),
             new BasicPlatform(this.ctx,3800,200,355,75,'ice'), 
+            new BasicPlatform(this.ctx,5300,200,100,20,'ice'),
+            new BasicPlatform(this.ctx,5500,350,100,20,'ice'),
             new BasicPlatform(this.ctx,6570,350,110,50,'ice'),
             new BasicPlatform(this.ctx,6900,260,1040,50,'ice'),
             new BasicPlatform(this.ctx,7915,250,40,40,'bridge'),
@@ -115,13 +117,16 @@ class Game{
             
             new Apple(this.ctx, 1230, 250),
             new Heart(this.ctx, 3130, 200), 
+            new Apple(this.ctx, 5130, 205),
             new Heart(this.ctx, 10930, 175),
-            new Apple(this.ctx, 9830, 470)
+            new Apple(this.ctx, 9830, 470),
+
         ]
 
         this.mysteryBoxArr = [
             new MisteryBox(this.ctx, 1200, 250),
             new MisteryBox(this.ctx, 3100, 200),
+            new MisteryBox(this.ctx, 5110, 200),
             new MisteryBox(this.ctx, 10900, 170)
             
             
@@ -340,23 +345,12 @@ class Game{
     }
 
     stop(){
-        
-        this.sounds.music.volume = 0
-        this.ctx.fillStyle = 'rgba(120, 120, 120, 0.9)',
-        this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height),
 
-            this.rectangle = new Image()
-            this.rectangle.src = './assets/img/Buttons/Window.png'
-            this.ctx.drawImage(this.rectangle,0 ,0,this.ctx.canvas.width ,this.ctx.canvas.height )
+        clearInterval(this.drawInterval) 
+    }
 
-            this.paused = new Image()
-            this.paused.src = './assets/img/Buttons/HeaderPaused.png'
-            this.ctx.drawImage(this.paused,330 ,180,600,100)
-
-        clearInterval(this.drawInterval)
+    pause(){
         
-        
-            
     }
 
     stopMusic(){
