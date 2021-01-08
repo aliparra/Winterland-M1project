@@ -43,8 +43,8 @@ const WORLDEND = 15000
 
 //VOLUME
 
-const MUSIC_VOLUME = 0.1
-const JUMP_VOLUME = 0.1
+const MUSIC_VOLUME = 0.02
+const JUMP_VOLUME = 0.08
 const SHOOT_VOLUME = 0.1
 const GAMEOVER_VOLUME = 0.1
 const GETCOIN_VOLUME = 0.1

@@ -73,7 +73,7 @@ class MainSprite{
          //INVENTARY
 
          this.inventary = {
-             heart: true,
+             heart: false,
              apple: false,
              bubble: false
          }
@@ -173,7 +173,7 @@ class MainSprite{
     //SOUND
 
     stopSounds(){
-        
+        console.log('stop')
         this.sounds.jump.volume = 0
         this.sounds.shoot.volume = 0
         this.sounds.gameOver.volume = 0
@@ -184,7 +184,8 @@ class MainSprite{
     }
 
     startSounds(){
-        this.sounds.jump.volume = JUMP_VOLUME
+        console.log('start')
+        this.sounds.jump.volume = 1
         this.sounds.shoot.volume = SHOOT_VOLUME
         this.sounds.gameOver.volume = GAMEOVER_VOLUME
         this.sounds.getCoin.volume = GETCOIN_VOLUME
@@ -359,6 +360,7 @@ class MainSprite{
 
     //KEY EVENTS - MOVEMENTS
     onKeyEvent(event){
+        
         const status= event.type === 'keydown'
         switch(event.keyCode){
             case KEY_UP:
@@ -374,6 +376,7 @@ class MainSprite{
                 this.movements.run = status
                 break;
             case KEY_ATTACK:
+                event.preventDefault()
                 if(this.canFire && this.inventary.bubble){
                 this.sounds.shoot.play()
                 this.snowballs.push(

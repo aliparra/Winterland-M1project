@@ -14,6 +14,8 @@ class Coin extends GenericClass{
         this.ready=false;
         this.img.onload = () => {
             this.img.ready = true
+
+        
         }
 
        
@@ -31,8 +33,9 @@ class Coin extends GenericClass{
 
    counterDraw(sprite, counter){
        if(this.isReady()){
+           
         if(sprite.x <= this.ctx.canvas.width/2){
-            this.ctx.drawImage(this.img, this.ctx.canvas.width - 200 ,this.y,this.width,this.height)
+            this.ctx.drawImage(this.img, this.ctx.canvas.width - 120 ,this.y,this.width,this.height)
             this.ctx.save()
             this.ctx.font = '18px Arial'
             this.ctx.fillText(` ${counter}`, this.ctx.canvas.width - 170, this.y + 20)
@@ -43,6 +46,7 @@ class Coin extends GenericClass{
             this.ctx.font = '18px Arial'
             this.ctx.fillText(` ${counter}`, sprite.x + 430, this.y + 20)
         }
+        console.log()
         }
     }
 

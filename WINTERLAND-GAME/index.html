@@ -13,12 +13,18 @@
       winterland Game
     </div>
     <div id='controls'>
-    <button id='start-game-btn' class='start'>Start</button>
-    <button id='pause-game-btn' class='pause'> Pause </button>
-    <button id='volume-btn' class='musicON' ></button>
-    <button id='sounds-btn' class='soundsON' ></button>  
-  </div>
-    <canvas id="game-winterland" width="1200" height="640"></canvas>
+    <div id='counter'>
+      <img src='./assets/img/CollectableObject/Coin_01.png' width="40" height="40">
+      <h1 id='countNum'>0</h1>
+    </div>
+    <button id='start-game-btn' class='start' tabindex="-1">Start</button>
+    <button id='pause-game-btn' class='pause' tabindex="-1"> Pause </button>
+    <button id='volume-btn' class='musicON' tabindex="-1"></button>
+    <button id='sounds-btn' class='soundsON' tabindex="-1"></button>  
+  </div id='wrapper'>
+    <canvas id="game-winterland" width="1200" height="640">
+    </canvas>
+    
   </div>
 
  <!--  Licenses
@@ -39,7 +45,6 @@
   <script src="./assets/js/classes/warningSign.js"></script>
   <script src="./assets/js/classes/spike.js"></script>
   <script src="./assets/js/classes/snowball.js"></script>
-  <script src="./assets/js/classes/worldConstructor.js"></script>
   <script src="./assets/js/classes/movePlatform.js"></script>
   <script src="./assets/js/classes/basicPlatform.js"></script>
   <script src="./assets/js/classes/airPlatform.js"></script>

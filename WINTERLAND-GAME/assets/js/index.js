@@ -4,9 +4,13 @@ window.addEventListener('load', () => {
     const pauseBtn =  document.getElementById('pause-game-btn')
     const music = document.getElementById('volume-btn')
     const sounds = document.getElementById('sounds-btn')
-   
+    
 
-    const game= new Game('game-winterland')
+    
+    const game = new Game('game-winterland')
+    const myInterval = setInterval(() => {game.coinsCounter},FPS)
+   
+    
     
     startBtn.addEventListener('click', () => {
         if(startBtn.classList.contains('start')){
@@ -14,6 +18,10 @@ window.addEventListener('load', () => {
         startBtn.classList.remove('start')
         startBtn.classList.add('reload')
         startBtn.innerHTML = 'Reload'
+
+        const counterNode = document.getElementById('counter')
+        counterNode.focus()
+        console.log(counterNode)
         }
         else if(startBtn.classList.contains('reload'))
         {
@@ -25,12 +33,13 @@ window.addEventListener('load', () => {
     })
 
    pauseBtn.addEventListener('click', (event) => {
-       if(pauseBtn.classList.contains('pause')){
+       if(pauseBtn.classList.contains('pause') && game.isStarted){
         game.stop()
         pauseBtn.classList.remove('pause')
         pauseBtn.classList.add('resume')
         pauseBtn.innerHTML = 'Resume'}
-        else if(pauseBtn.classList.contains('resume')){
+        else if(pauseBtn.classList.contains('resume') && game.isStarted){
+            
             game.start()
             pauseBtn.classList.remove('resume')
             pauseBtn.classList.add('pause')
@@ -59,21 +68,20 @@ window.addEventListener('load', () => {
             game.stopSounds()
             sounds.classList.remove('soundsON')
             sounds.classList.add('soundsOFF')
-            //pauseBtn.innerHTML = 'Resume'
+            
+            
         }
             else if(sounds.classList.contains('soundsOFF')){
                 game.startSounds()
                 sounds.classList.remove('soundsOFF')
                 sounds.classList.add('soundsON')
                 //pauseBtn.innerHTML = 'Pause'
+                
             }    
         })
     
     
-    sounds.addEventListener('click', (event) => {
-        game.stopSounds()
     
-    })
 
     document.addEventListener('keydown', (event) => {
         game.onKeyEvent(event)

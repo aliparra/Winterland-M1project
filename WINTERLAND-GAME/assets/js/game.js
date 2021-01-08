@@ -9,8 +9,8 @@ class Game{
         this.canvas.height= 640
 
         this.drawInterval = undefined
-        
-
+        this.isStarted = false
+        this.coinsC = 0
         //SOUND
         this.sounds = {
         music: new Audio('./assets/sounds/mainMusic.mp3')
@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,14000,30)
+        this.mainSprite = new MainSprite(this.ctx,100,30)
         
         //Enviroment
         
@@ -339,6 +339,7 @@ class Game{
                 }
                 this.winScreen(this.mainSprite)
                 this.gameOverScreen(this.mainSprite)
+                this.isStarted = true
             }, FPS)
 
         }
@@ -346,13 +347,17 @@ class Game{
 
     stop(){
 
+        this.img = new Image()
+        this.img.src = './assets/img/Buttons/HeaderPaused.png'
+
+        this.ctx.drawImage(this.img,330 ,180,600,100)
         clearInterval(this.drawInterval) 
         this.drawInterval = false
         
     }
 
     reload(){
-            location.reload()
+           location.reload()
             this.start()   
             
     }
@@ -368,12 +373,12 @@ class Game{
 
     stopSounds(){
         this.mainSprite.stopSounds()
-        console.log('sounds')
+        
     }
 
     startSounds(){
         this.mainSprite.startSounds()
-        console.log('soundsStart')
+        
     }
 
     //Other methods
@@ -409,10 +414,11 @@ class Game{
         this.brickPrizesArr.forEach((prize) => prize.draw())
         this.bricksArr.forEach((brick) =>  brick.draw())
         this.spikesArr.forEach((spike) =>  spike.draw())
-        this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)
+        this.pointsCoin.counterDraw(this.mainSprite, this.coinsCounter)//Counter Draw
         this.basicEnemyArr.forEach((enemy) =>  enemy.draw())
         this.flyingEnemyArr.forEach((enemy) =>  enemy.draw())
-       
+        
+        
 
         //HELPERS
         //this.mainSprite.spritePosition()
@@ -581,10 +587,17 @@ class Game{
         //TOTAL COINS
         this.coinsCounter += newPoints
         this.coinsCounter += newPointsBricks
-
+        
+        
         //UPDATE COINS ARRAYS
         this.coinsArr = restCoins
         this.brickPrizesArr = restCoinsBricks
+
+        if(newPoints > 0 || newPointsBricks > 0){
+        const coinsC = document.getElementById('countNum')
+        coinsC.innerText = this.coinsCounter
+        }
+
 
     } 
 

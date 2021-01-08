@@ -200,7 +200,7 @@ class FlyingEnemy extends BasicEnemy{
                         
                     }else{
                         element.inventary.heart = false
-                        this.sounds.kill.hurt()
+                        this.sounds.hurt.play()
                         
                     }
                      
