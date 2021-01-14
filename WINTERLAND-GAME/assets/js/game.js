@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,400)
+        this.mainSprite = new MainSprite(this.ctx,100,300)
         
         //Enviroment
         
@@ -134,7 +134,7 @@ class Game{
 
         this.brickPrizesArr = [
             new Coin(this.ctx,140,270),
-            new Coin(this.ctx,2530,220),
+            new Coin(this.ctx,2530,170),
             new Coin(this.ctx,2630,270),
             new Coin(this.ctx,2730,370),
             new Coin(this.ctx,8990,240),
@@ -146,9 +146,6 @@ class Game{
             new Coin(this.ctx,10630,175),
             new Coin(this.ctx,10730,175)
             
-            
-
-
             
         ]
 
@@ -212,8 +209,7 @@ class Game{
             new MovePlatform(this.ctx,1750,200,150,50,1400,1750,2),
             new MovePlatform(this.ctx,1900,450,150,50,1900,2400,2),
             new MovePlatform(this.ctx,3450,430,50,50,3450,3600,2),
-            new MovePlatform(this.ctx,6700,400,100,50,6700,7900,2),
-            new MovePlatform(this.ctx,6700,400,120,10,6700,7900,2),
+            new MovePlatform(this.ctx,6700,400,100,50,6700,7900,3),
             new MovePlatform(this.ctx,10400,500,100,50,10400,10750,2),
             new MovePlatform(this.ctx,10850,550,300,50,10850,10000,1), // Special movement
             new MovePlatform(this.ctx,11150,480,100,50,11150,11300,1),
@@ -631,7 +627,10 @@ class Game{
     heartsCount(sprite){
 
         //TOTAL COINS
-        this.heartsCounter = sprite.health/100
+        if(sprite.inventary.light && this.heartsCounter<=0){
+            this.heartsCounter = 0
+        }else{
+        this.heartsCounter = sprite.health/100}
         
         
         //UPDATE COINS ARRAYS

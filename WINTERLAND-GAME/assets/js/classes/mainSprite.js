@@ -75,7 +75,8 @@ class MainSprite{
          this.inventary = {
              heart: false,
              apple: false,
-             bubble: false
+             bubble: false,
+             light: false
          }
          //SPRITE SOUND
          //sounds
@@ -717,6 +718,7 @@ class MainSprite{
                 }
                 if(element instanceof Light){
                     element.x = undefined
+                    this.inventary.light = true
                     this.sounds.light.play()
                     this.win = true
                 
@@ -747,7 +749,7 @@ class MainSprite{
 
     //CHECK HEALTH 
     healthStatus(){
-        if(this.health <= 0 || this.y >= this.ctx.canvas.height-this.height){
+        if(this.health <= 0 && !this.inventary.light || this.y >= this.ctx.canvas.height-this.height && !this.inventary.light){
             this.x = undefined
             this.isDead = true
             this.death()
