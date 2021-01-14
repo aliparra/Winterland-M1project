@@ -78,6 +78,10 @@ class MainSprite{
              bubble: false,
              light: false
          }
+
+         //COINS COUNTER
+
+         this.coinsCounter= 0
          //SPRITE SOUND
          //sounds
         this.sounds = {
@@ -680,7 +684,9 @@ class MainSprite{
             } 
     }
     
-    
+   
+
+   
 
       //HEART, APPLE AND COIN COLLISION
 
@@ -734,6 +740,8 @@ class MainSprite{
                 }
                 if(element instanceof Coin){
                     this.sounds.getCoin.play()
+                    this.coinsCounter +=1
+                    element.x = undefined
                     return true
                 }else{
                     return false

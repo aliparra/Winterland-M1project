@@ -12,7 +12,7 @@ class Heart extends GenericClass{
 
         //Image
         this.img = new Image()
-        this.img.src = './assets/img/CollectableObject/life.png'
+        this.img.src = './assets/img/CollectableObject/Life.png'
         this.ready=false;
         this.img.onload = () => {
             this.img.ready = true

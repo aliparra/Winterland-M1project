@@ -19,7 +19,7 @@ class Game{
         //INSTANCES
         
         //Characters
-        this.mainSprite = new MainSprite(this.ctx,100,300)
+        this.mainSprite = new MainSprite(this.ctx,14000,300)
         
         //Enviroment
         
@@ -142,9 +142,9 @@ class Game{
             new Coin(this.ctx,9190,240),
             new Coin(this.ctx,9290,240),
             new Coin(this.ctx,9390,240),
-            new Coin(this.ctx,10530,175),
-            new Coin(this.ctx,10630,175),
-            new Coin(this.ctx,10730,175)
+            new Coin(this.ctx,10530,185),
+            new Coin(this.ctx,10630,185),
+            new Coin(this.ctx,10730,185)
             
             
         ]
@@ -311,7 +311,7 @@ class Game{
 
         //Coin counter
         this.coinsCounter = 0 
-        this.pointsCoin = new Coin(this.ctx, this.mainSprite.x, 20)
+        this.heartsCounter = 0
         
         
     }
@@ -326,7 +326,7 @@ class Game{
                 this.draw()
                 this.move()
                 this.checkCollisions()
-                this.coinsCount()
+                this.coinsCount(this.mainSprite)
                 this.heartsCount(this.mainSprite)
                 this.checkHealth()
                 this.sounds.music.play()
@@ -596,31 +596,11 @@ class Game{
        
     }
 
-    coinsCount(){
+    coinsCount(sprite){
 
-        //FREE COINS
-        const restCoins = this.coinsArr.filter( coin => !this.mainSprite.generalCollision(coin))
-        const newPoints = this.coinsArr.length  - restCoins.length
-        
-
-        //COINS INSIDE A BRICK
-        const restCoinsBricks = this.brickPrizesArr.filter( coin => !this.mainSprite.generalCollision(coin))
-        const newPointsBricks = this.brickPrizesArr.length  - restCoinsBricks.length
-
-        //TOTAL COINS
-        this.coinsCounter += newPoints
-        this.coinsCounter += newPointsBricks
-        
-        
-        //UPDATE COINS ARRAYS
-        this.coinsArr = restCoins
-        this.brickPrizesArr = restCoinsBricks
-
-        if(newPoints > 0 || newPointsBricks > 0){
+    
         const coinsC = document.getElementById('countNum')
-        coinsC.innerText = this.coinsCounter
-        }
-
+        coinsC.innerText = sprite.coinsCounter
 
     } 
 
@@ -666,7 +646,7 @@ class Game{
             this.img2 = new Image()
             this.img2.src = './assets/img/CollectableObject/Star_02.png'
             
-            if(this.coinsCounter <= 10){
+            if(sprite.coinsCounter <= 10){
                 
                    
                     //this.ctx.drawImage(this.img,630 ,380,70,70)
@@ -674,7 +654,7 @@ class Game{
                     this.ctx.drawImage(this.img2,730 ,380,70,70),
                     this.ctx.drawImage(this.img2,830 ,380,70,70)
                     
-            }else if(this.coinsCounter > 10 && this.coinsCounter <= 20){
+            }else if(sprite.coinsCounter > 10 && this.coinsCounter <= 20){
                 
                 this.ctx.drawImage(this.img,630 ,380,70,70),
                 this.ctx.drawImage(this.img,730 ,380,70,70),
