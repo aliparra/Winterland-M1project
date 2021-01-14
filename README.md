@@ -6,8 +6,8 @@
 <img src='https://github.com/aliparra/Winterland-M1project/blob/master/WINTERLAND-GAME/assets/img/init/winterland.png?raw=true'>
   </br>
  <div align="center" >
-  <a href='https://aliparra.github.io/Winterland-M1project/WINTERLAND-GAME' target='_blank'>
-  <img height='60px' src='https://github.com/aliparra/Winterland-M1project/blob/master/WINTERLAND-GAME/assets/img/Buttons/start_BTN.png?raw=true'>
+  <a href='https://aliparra.github.io/Winterland-M1project/WINTERLAND-GAME' target="_blank">
+  <img height='90px' src='https://github.com/aliparra/Winterland-M1project/blob/master/WINTERLAND-GAME/assets/img/Buttons/start_BTN.png?raw=true'>
 </div>
 
 # ENGLISH README</br>
