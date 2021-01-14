@@ -702,8 +702,8 @@ class MainSprite{
                     this.inventary.apple= true
                     setTimeout(()=> { 
                         this.inventary.apple = false 
-                        this.y -= 50
-                    },25000)
+                        this.y -= 100
+                    },20000)
                     this.sounds.getApple.play()
                     element.x = undefined
                 }

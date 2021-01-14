@@ -114,12 +114,12 @@ class Game{
         ]
 
         this.prizesArr = [
-            
+           
             new Apple(this.ctx, 1230, 250),
             new Heart(this.ctx, 3130, 200), 
             new Apple(this.ctx, 5130, 205),
             new Heart(this.ctx, 10930, 175),
-            new Apple(this.ctx, 9830, 470),
+            new Apple(this.ctx, 9830, 470)
 
         ]
 

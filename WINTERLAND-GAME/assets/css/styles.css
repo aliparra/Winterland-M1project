@@ -34,13 +34,16 @@ html, body{
 
 
 #title{
-    text-align: center;
+    
+     text-align: center;
     font-size: 6rem;
     color: white;
     height: 20%;
     padding-top: 2%;
-    padding-bottom: 2%;
+    padding-bottom: 2%; 
 }
+
+
 #controls{
     display: flex;
     flex-direction: column;
