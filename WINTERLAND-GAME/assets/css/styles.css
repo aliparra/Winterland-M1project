@@ -39,6 +39,7 @@ html, body{
     color: white;
     height: 20%;
     padding-top: 2%;
+    padding-bottom: 2%;
 }
 #controls{
     display: flex;
@@ -186,18 +187,24 @@ button:hover{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    height:auto
+}
+
+#h-counter{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height:auto
     
 }
-
-#counter h1{
-    position: absolute;
-    left: 10%;
-    top: 17%;
-    font-size: 4em;
+#counter img{
+    margin: 20px 0px 0px; 
 }
 
-#counter img{
-    position: absolute;
-    left: 5%;
-    top: 25%;
+#h-counter img{
+    margin: 20px 0px 0px;
+}
+
+.counterh1{
+    padding: 0px 30px 0px;
 }

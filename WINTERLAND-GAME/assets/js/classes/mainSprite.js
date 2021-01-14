@@ -185,7 +185,7 @@ class MainSprite{
 
     startSounds(){
         console.log('start')
-        this.sounds.jump.volume = 1
+        this.sounds.jump.volume = JUMP_VOLUME
         this.sounds.shoot.volume = SHOOT_VOLUME
         this.sounds.gameOver.volume = GAMEOVER_VOLUME
         this.sounds.getCoin.volume = GETCOIN_VOLUME
@@ -692,6 +692,7 @@ class MainSprite{
                 if(element instanceof Heart){
                     this.y -= 30
                     this.inventary.heart= true
+                    this.health += 100
                     this.sounds.getHeart.play()
                     element.x = undefined
                 }

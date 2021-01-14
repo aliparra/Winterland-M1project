@@ -318,8 +318,6 @@ class Game{
         this.pointsCoin = new Coin(this.ctx, this.mainSprite.x, 20)
         
         
-
-        
     }
 
     
@@ -333,6 +331,7 @@ class Game{
                 this.move()
                 this.checkCollisions()
                 this.coinsCount()
+                this.heartsCount(this.mainSprite)
                 this.checkHealth()
                 this.sounds.music.play()
                 if(this.mainSprite.stopSound){
@@ -628,6 +627,21 @@ class Game{
 
 
     } 
+
+    heartsCount(sprite){
+
+        //TOTAL COINS
+        this.heartsCounter = sprite.health/100
+        
+        
+        //UPDATE COINS ARRAYS
+    
+        const heartsC = document.getElementById('countHeart')
+        heartsC.innerText = this.heartsCounter
+    }          
+
+
+
 
     winScreen(sprite){
         if(sprite.win){
